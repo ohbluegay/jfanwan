@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img src="images/none@3x.png" style="width: 100%;margin-top:100px;"/>
+		<script type="text/javascript">
+			var u = navigator.userAgent;
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+			var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+			alert('是否是Android：'+isAndroid);
+			alert('是否是iOS：'+isiOS);
+        </script>
+	</body>
+</html>

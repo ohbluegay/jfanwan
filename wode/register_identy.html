@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>身份认证</title>
+		<link rel="stylesheet" href="../css/register.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="register_name">身份认证</span>
+			</div>
+		</header>
+		<div class="register_line top2">
+			<ul class="register_item">
+				<li class="item_name register_item_active">
+					<span>1输入信息</span>
+				</li>
+				<li class="next_tap active_tap">
+					<div></div>
+				</li>
+				<li class="item_name register_item_active">
+					<span>2身份认证</span>
+				</li>
+				<li class="next_tap active_tap">
+					<div></div>
+				</li>
+				<li class="item_name">
+					<span>3注册成功</span>
+				</li>
+			</ul>
+		</div>
+		<div class="form_group">
+			<form>
+				<div class="form_item">
+					<input type="text" placeholder="请输入真实姓名" name="real_name" id="real_name" />
+				</div>
+				<div class="form_item">
+					<input type="text" placeholder="请输入身份证号码" name="id_card" id="id_card" />
+				</div>
+				<div class="attention_tips">
+					<p class="scalefont">(请输入正确信息以免影响
+						<font class="atten_orange" style="position: relative;top: .2px;">资金托管账户申请</font>
+						<font>等功能)</font>
+					</p>
+				</div>
+				<div class="form_item form_submit">
+					<div class="register_submit">提交</div>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/layer.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(function() {
+
+				var user_id = window.localStorage.getItem('user_id');
+				var identy = false;
+				/*判断是否已认证*/
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/choose_bank.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var name = data.real_name;
+							var arr = new Array(name.length)
+							name = name.substr(0, 1) + arr.join("*");
+							$('#real_name').val(name);
+							$('#real_name').attr('readonly', true);
+							var id_card = data.idno;
+							id_card = id_card.substr(0, 6) + '********' + id_card.substr(14);
+							$('#id_card').val(id_card)
+							$('#id_card').attr('readonly', true);
+						} else {
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/check_idno_passed.php"+ dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var st;
+							if(data.idcard_passed == 1) {
+								identy = true;
+								st = '已通过'
+							}
+							if(data.idcard_credit == 0) {
+								st = '待审核'
+							}
+							if(data.idcard_credit == 2) {
+								st = '未通过'
+								$('#real_name').removeAttr('readonly');
+							    $('#id_card').removeAttr('readonly');
+							}
+							$('.register_submit').text(st);
+						} else {
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+				/*点击认证*/
+				$('.register_submit').click(function() {
+					if(identy) {
+						return false
+					}
+					var name = $.trim($('#real_name').val());
+					var id_card = $.trim($('#id_card').val());
+					if(!name || !id_card) {
+						mui.toast('请填写完整');
+						return false;
+					}
+					if(!/^[1-9](\d{16}|\d{13})[0-9xX]$/.test(id_card)) {
+						mui.toast('身份证格式不正确');
+						return false;
+					}
+					$.ajax({
+						type: "post",
+						url: "https://api.jfwlicai.com/mobile/register_idno.php" + dateKey,
+						data: {
+							'real_name': name,
+							'id_card': id_card,
+							'user_id': user_id
+						},
+						dataType: 'json',
+						async: true,
+						success: function(data) {
+							if(data.response_code == 1) {
+								mui.toast(data.show_err);
+								var target = "../wode/center.html";
+								switch_child(target);
+							} else {
+								mui.toast(data.show_err);
+							}
+						},
+						error: function(e) {
+							mui.toast('提交失败');
+						}
+					});
+				})
+			})
+		</script>
+	</body>
+
+</html>

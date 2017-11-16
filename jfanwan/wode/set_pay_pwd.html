@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>设置支付密码</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">设置支付密码</span>
+			</div>
+		</header>
+		<section class="forg_sec top2">
+			<form>
+				<div class="forg_item">
+					<input type="number" placeholder="请输入手机号" name="phone" id="phone" />
+				</div>
+				<div class="forg_item">
+					<input type="number" placeholder="请输入验证码" name="code" class="input_code" id="code" />
+					<span class="getcode">获取验证码</span>
+				</div>
+				<div class="forg_item">
+					<input type="password" placeholder="请设置新支付密码" name="pwd" id="pwd" />
+				</div>
+				<div class="forg_item">
+					<div class="s_button" onclick="pwd_submit()">确认</div>
+				</div>
+			</form>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			 dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				/*点击获取验证码*/
+				var repet = false;
+				$('.getcode').click(function() {
+					var phone = $.trim($('#phone').val());
+					if(!rep_phone(phone)) {
+						return false;
+					}
+					if(repet) {
+						mui.toast('正在发送中');
+						return false;
+					}
+					var tm = 60;
+					$.ajax({
+						type: "post",
+						url: "https://api.jfwlicai.com/mobile/send_reset_pwd_code.php"+dateKey,
+						data: {
+							'mobile': phone
+						},
+						dataType: 'json',
+						async: true,
+						success: function(data) {
+							if(data.response_code == 1) {
+								mui.toast(data.show_err);
+								repet = true;
+								var t = setInterval(function() {
+									tm--;
+									$('.getcode').text('' + tm + 's后重发');
+									if(tm == 0) {
+										$('.getcode').text('发送验证码');
+										clearInterval(t);
+										repet = false;
+									}
+								}, 1000);
+							} else {
+								mui.toast(data.show_err);
+							}
+						},
+						error: function(e) {
+
+						}
+					});
+				})
+
+			})
+
+			/*验证手机号*/
+			function rep_phone(phone) {
+				if(!phone) {
+					mui.toast('请输入手机号');
+					return false;
+				}
+				if(!/^((1[3,5,8][0-9])|(14[5,7])|(17[0,1,6,7,8]))\d{8}$/.test(phone)) {
+					mui.toast('手机号格式不正确');
+					return false;
+				}
+				return true;
+			}
+
+			function pwd_submit() {
+				var phone = $.trim($('#phone').val());
+				if(!rep_phone(phone)) {
+					return false;
+				}
+				var code = $.trim($('#code').val());
+				if(!code) {
+					mui.toast('请输入验证码');
+					return false;
+				}
+				var pwd = $.trim($('#pwd').val());
+				if(!/^\d{6}$/.test(pwd)) {
+					mui.toast('支付密码为6位数字');
+					return false;
+				}
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/reset_pay_password.php"+dateKey,
+					data: {
+						'user_id':user_id,
+						'mobile': phone,
+						'mobile_code': code,
+						'pay_password': pwd
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							mui.toast(data.show_err)
+							window.history.go(-1)
+						} else {
+							mui.toast(data.show_err)
+						}
+					},
+					error: function(e) {
+						mui.toast('修改失败')
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

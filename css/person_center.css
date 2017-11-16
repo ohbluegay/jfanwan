@@ -1,0 +1,157 @@
+.header_bg{
+	width: 100%;
+	background-image: url(../images/center/index@2x.png);
+	background-size:100% 100%;
+	overflow: hidden;
+}
+.center_top{
+	width: 100%;
+	padding-top: 10px;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+.center_top_item:nth-of-type(2){
+	width: 50%;
+}
+.center_top_item:nth-of-type(1),.center_top_item:nth-of-type(3){
+	width: 25%;
+}
+.center_top_item{
+	float: left;
+}
+.center_top_item:first-of-type span{
+	margin-left: 12px;
+}
+.center_top_item:nth-of-type(2){
+	text-align: center;
+}
+.center_top_item:nth-of-type(3){
+	text-align: right;
+}
+.center_top_item:nth-of-type(3) span{
+	margin-right: 16px;
+}
+.center_top_item:nth-of-type(3) span img{
+	width: 20px;
+	height: 20px;
+}
+.center_man{
+	padding: 5px 12px;
+}
+.center_man_item{
+	width:33%;
+	float: left;
+	height: 80px;
+}
+.center_man_logo img{
+	height: 75px;
+	height: 75px;
+}
+.center_man_item:nth-of-type(2){
+	text-align: center;
+}
+.center_man_item:nth-of-type(3){
+	font-size: 10px;
+	text-align: right;
+	color: #FFFFFF;
+}
+.center_man_item span{
+	display: block;
+}
+.sign{
+	padding: 15px 0;
+}
+.count_income{
+	width: 100%;
+	padding: 5px 0 20px 0;
+	text-align: center;
+	color:#FFFFFF;
+}
+.count_income span{
+	display: block;
+}
+.income_name{
+	font-size: 12px;
+}
+.income_numb{
+	font-size: 32px;
+}
+.numb_classity .cla_item{
+	float: left;
+}
+.numb_item{
+	width: 31.5%;
+	text-align: center;
+	color: #FFFFFF;
+}
+.numb_item span{
+	display: block;
+}
+.numb_line{
+	right: 0px;
+	margin-top:20px;
+	width: 1.5%;
+	height: 30px;
+	border-left: 1px solid #FFFFFF;
+}
+.classity_name{
+	font-size: 10px;
+	padding-top: 10px;
+}
+.classity_numb{
+	font-size: 16px;
+	padding: 10px 0;
+}
+.bottom_line{
+	margin: 0 12px;
+	border-bottom: 1px solid #F8F8F8;
+}
+.exchange_item{
+	width: 24.6%;
+	text-align: center;
+	float: left;
+	border-right: 1px solid #F0F0F0;
+	margin: 20px 0;
+}
+.exchange_item:nth-of-type(4){
+	border: none;
+}
+.exchange_item a{
+	text-decoration: none;
+}
+.exchange_item span{
+	display: block;
+}
+.size_icon1{
+	width: 15px;
+	height: 20px;
+}
+.size_icon2{
+	width: 18px;
+	height: 20px;
+}
+.size_icon3{
+	width: 20px;
+	height: 20px;
+}
+.size_icon4{
+	width: 25px;
+	height: 20px;
+}
+.size_icon5{
+	width: 30px;
+	height: 20px;
+	margin-left: 15px;
+}
+.exchange_name{
+	color: #666;
+	padding-top: 5px;
+	font-size: 12px;
+}
+.sign_icon{
+	position: absolute;
+}
+.sign_icon img{
+	width: 38px;
+	height:38px;
+}

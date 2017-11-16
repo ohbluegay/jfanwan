@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>分享</title>
+		<link rel="stylesheet" href="../css/zhuanqian.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">分享</span>
+				<!--<a href="javascript:void(0)"><span class="header_tips">我的邀请</span></a>-->
+			</div>
+		</header>
+		<div class="share_friend top2">
+			<div class="share_to_friend">了解更多规则></div>
+			<div class="to_share" onclick="share()">邀请好友一起赚钱</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var phone = localStorage.getItem('phone');
+			mui.init();
+			// 关闭当前webview
+			$('.back').click(function() {
+				window.history.go(-1)
+			})
+			$(function() {
+				var height = document.documentElement.clientHeight;
+				$('.share_friend').css('height', height - 60 + 'px');
+			})
+
+			mui.init({
+				swipeBack: true //启用右滑关闭功能 
+			});
+
+			var Intent = null,
+				File = null,
+				Uri = null,
+				main = null;
+			var shares = null;
+			var shareImageUrl = '';
+			mui.plusReady(function() {
+					updateSerivces();
+					if(plus.os.name == "Android") {
+						Intent = plus.android.importClass("android.content.Intent");
+						File = plus.android.importClass("java.io.File");
+						Uri = plus.android.importClass("android.net.Uri");
+						main = plus.android.runtimeMainActivity();
+					}
+				})
+				/** 
+				 * 更新分享服务 
+				 */
+			function updateSerivces() {
+				plus.share.getServices(function(s) {
+					shares = {};
+					for(var i in s) {
+						var t = s[i];
+						shares[t.id] = t;
+					}
+					outSet("获取分享服务列表成功");
+				}, function(e) {
+					outSet("获取分享服务列表失败：" + e.message);
+				});
+			}
+			/** 
+			 * 分享操作 
+			 */
+			function shareAction(id, ex) {
+				var s = null;
+				if(!id || !(s = shares[id])) {
+					outLine("无效的分享服务！");
+					return;
+				}
+				if(s.authenticated) {
+					outSet("---已授权---");
+					shareMessage(s, ex);
+				} else {
+					outSet("---未授权---");
+					s.authorize(function() {
+						shareMessage(s, ex);
+					}, function(e) {
+						outLine("认证授权失败");
+					});
+				}
+			}
+			/** 
+			 * 发送分享消息 
+			 */
+			function shareMessage(s, ex) {
+				var msg = {
+					content: '分享-详情',
+					href: 'http://www.jfwlicai.com/wap/index.php?ctl=activity_register&referer=' + phone,
+					title: '金饭碗理财',
+					content: '金饭碗理财-活动',
+					thumbs: ['../images/share_logo@2x.png'],
+					pictures: ['../images/share_logo@2x.png'],
+					extra: {
+						scene: ex
+					}
+				};
+				s.send(msg, function() {
+					outLine("分享成功!");
+				}, function(e) {
+					outLine("分享失败!");
+				});
+			}
+			/** 
+			 * 分享按钮点击事件 
+			 */
+			function share() {
+				var ids = [{
+							id: "weixin",
+							ex: "WXSceneSession" /*微信好友*/
+						}, {
+							id: "weixin",
+							ex: "WXSceneTimeline" /*微信朋友圈*/
+						}, {
+							id: "qq" /*QQ好友*/
+						}
+						/*, {
+												id: "sinaweibo" 新浪微博
+											}*/
+					],
+					bts = [{
+							title: "发送给微信好友"
+						}, {
+							title: "分享到微信朋友圈"
+						}, {
+							title: "分享到QQ"
+						}
+						/*, {
+												title: "分享到新浪微博"
+											}*/
+					];
+				plus.nativeUI.actionSheet({
+						cancel: "取消",
+						buttons: bts
+					},
+					function(e) {
+						var i = e.index;
+						if(i > 0) {
+							shareAction(ids[i - 1].id, ids[i - 1].ex);
+						}
+					}
+				);
+			}
+			// 控制台输出日志 
+			function outSet(msg) {
+				console.log(msg);
+			}
+			// 界面弹出吐司提示 
+			function outLine(msg) {
+				mui.toast(msg);
+			}
+		</script>
+	</body>
+
+</html>

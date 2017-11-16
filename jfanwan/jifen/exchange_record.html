@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>兑换记录</title>
+		<link rel="stylesheet" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/exchange_record.css" />
+	</head>
+
+	<body class="re">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="register_name">兑换记录</span>
+			</div>
+		</header>
+		<section class="exchange_content top2">
+			<ul>
+				
+			</ul>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			 dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/goods_order.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var result = data.order_info;
+							if(result == null){
+								mui.toast('暂无记录')
+								return false
+							}
+							$('.exchange_content ul').html('');
+							$.each(result, function(index, item) {
+								var listArr = [];
+								listArr.push("<li class='ex_item' id='" + item.id + "'>");
+								listArr.push("<div class='ex_left'>");
+								listArr.push("<img src='" + item.img + "' />");
+								listArr.push("</div>");
+								listArr.push("<div class='ex_right'>");
+								listArr.push("<div class='ex_right_top'>");
+								listArr.push("<span class='top_span font1'>" + item.goods_name + "</span>");
+								listArr.push("<span class='top_span'>");
+								listArr.push("<span class='orange font1'>" + item.score + "</span>");
+								listArr.push("<span class='gray2 font2'>积分</span>");
+								listArr.push("</span>");
+								listArr.push("</div>");
+								listArr.push("<div class='ex_right_bottom'>");
+								if(item.order_status == 0) {
+									listArr.push("<span class='orange_red font2 left'>" + item.order_status_format + "</span>");
+								}
+								if(item.order_status == 1) {
+									listArr.push("<span class='blue font2 left slide_down can_slide'>" + item.order_status_format + "</span>");
+								}
+								if(item.order_status == 2 || item.order_status == 3) {
+									listArr.push("<span class='gray font2 left'>" + item.order_status_format + "</span>");
+								}
+								listArr.push("<span class='gray font2 right'>" + item.ex_time + "</span>");
+								listArr.push("</div>");
+								listArr.push("</div>");
+								listArr.push("<div class='blank'></div>");
+								if(item.order_status == 1) {
+									/*listArr.push("<div class='slides'>");
+									listArr.push("<ul class='slide_content'>");
+									listArr.push("<li><p>快递公司</p><p>顺丰快递</p><div class='blank'></div></li>");
+									listArr.push("<li><p>快递单号</p><p>123456789123</p><div class='blank'></div></li>");
+									listArr.push("<li><p>发货时间</p><p>2016-09-29 14:33</p><div class='blank'></div></li>");
+									listArr.push("<li><p>收货地址</p><p>上海市徐家汇肇嘉浜路1033号徐汇国际大厦10楼</p><div class='blank'></div></li>");
+									listArr.push("<li><p>收货电话</p><p>13765122505</p><div class='blank'></div></li>");
+									listArr.push("<li><p>收货人</p><p>施先生</p><div class='blank'></div></li>");
+									listArr.push("<li><span class='slide_up'></span></li>");
+									listArr.push("</ul>");
+									listArr.push("</div>");*/
+								}
+								listArr.push("</li>");
+								listArr = listArr.join("");
+								$('.exchange_content ul').append(listArr);
+							})
+							slide();
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+				slide();
+			})
+
+			/*下拉上拉*/
+			function slide() {
+				$('.slide_down').click(function() {
+					$(this).removeClass('slide_down').closest('li').children('.slides').slideDown();
+				})
+				$('.slide_up').click(function() {
+					$(this).closest('.slides').slideUp();
+					$(this).closest('.ex_item').find('.can_slide').addClass('slide_down');
+				})
+			}
+		</script>
+	</body>
+
+</html>

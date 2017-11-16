@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>交易记录</title>
+		<link rel="stylesheet" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/recharge.css" />
+	</head>
+
+	<body class="re">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="register_name">交易记录</span>
+			</div>
+		</header>
+		<section class="record top2">
+
+			<!--没有交易记录显示此div-->
+			<div class="no_address"><img src="../images/mine/address_no.png" alt="暂无交易记录" /></div>
+			<!--没有交易记录end-->
+			<ul>
+				
+			</ul>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+                   getList();
+			})
+
+			function getList() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/account_log.php"+dateKey,
+					data: {'user_id':user_id},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.record ul').html("");
+							if(data.length == 0) {
+								$(".no_address").show();
+							} else {
+								var result = data.data;
+								$.each(result, function(index, item) {
+									var liArr = [];
+									liArr.push("<li class='record_item'>");
+									liArr.push("<div class='record_left'>");
+									liArr.push("<span class='apply'>"+item.memo+"</span>");
+									liArr.push("<span class='apply_time'>"+item.create_time_format+"</span>");
+									liArr.push("</div>");
+									liArr.push("<div class='record_right'>");
+									if(item.money > 0){
+										liArr.push("<span class='add'>+"+item.money+"</span>");
+									}else{
+										liArr.push("<span class='reduce'>"+item.money+"</span>");
+									}
+									liArr.push("</div>");
+									liArr.push("<div class='blank'></div>");
+									liArr.push("</li>");
+									liArr = liArr.join("");
+									$('.record ul').append(liArr);
+								});
+							}
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

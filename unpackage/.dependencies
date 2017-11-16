@@ -1,0 +1,954 @@
+{
+  "wode/bank_manage.html": {
+    "href": "wode/bank_manage.html",
+    "resources": [
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/right.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/add_bank.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/share_bg.png",
+      "images/pull_icon@2x.png"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "jifen/exchange_record.html": {
+    "href": "jifen/exchange_record.html",
+    "resources": [
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png",
+      "images/integrate/slide_up.png",
+      "images/make_money/right.png"
+    ],
+    "priority": 4
+  },
+  "wode/receipt_address.html": {
+    "href": "wode/receipt_address.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 7
+  },
+  "wode/getAddress.html": {
+    "href": "wode/getAddress.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 9
+  },
+  "wode/write_receipt_address.html": {
+    "href": "wode/write_receipt_address.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/right.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/add_bank.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/share_bg.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [
+      "jifen/inte_address.html"
+    ],
+    "priority": 7
+  },
+  "jifen/inte_address.html": {
+    "href": "jifen/inte_address.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [
+      "jifen/exchange.html"
+    ],
+    "priority": 6
+  },
+  "jifen/exchange.html": {
+    "href": "jifen/exchange.html",
+    "resources": [
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png",
+      "images/integrate/slide_down.png",
+      "images/integrate/slide_up.png"
+    ],
+    "refer": [
+      "jifen/integrate_detail.html"
+    ],
+    "priority": 5
+  },
+  "jifen/integrate_detail.html": {
+    "href": "jifen/integrate_detail.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png",
+      "images/integrate/menu@2x.png"
+    ],
+    "refer": [],
+    "priority": 5
+  },
+  "jifen/integrate.html": {
+    "href": "jifen/integrate.html",
+    "resources": [
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png"
+    ],
+    "refer": [],
+    "priority": 4
+  },
+  "wode/forget_pay_pwd.html": {
+    "href": "wode/forget_pay_pwd.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "priority": 10
+  },
+  "wode/withdrawal.html": {
+    "href": "wode/withdrawal.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/address@2x.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 8
+  },
+  "wode/trans_record.html": {
+    "href": "wode/trans_record.html",
+    "resources": [
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png",
+      "images/pull_icon@2x.png",
+      "images/mine/goright@2x.png"
+    ],
+    "priority": 9
+  },
+  "zhuanqian/my_red_envelope.html": {
+    "href": "zhuanqian/my_red_envelope.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [
+      "zhuanqian/pay_get.html"
+    ],
+    "priority": 10
+  },
+  "wode/invest_record_detail.html": {
+    "href": "wode/invest_record_detail.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png",
+      "js/jQuery.md5.js"
+    ],
+    "priority": 11
+  },
+  "wode/invest_record_1.html": {
+    "href": "wode/invest_record_1.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 11
+  },
+  "wode/ex_invest.html": {
+    "href": "wode/ex_invest.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "priority": 12
+  },
+  "wode/my_points.html": {
+    "href": "wode/my_points.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 13
+  },
+  "wode/promote_center.html": {
+    "href": "wode/promote_center.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png",
+      "images/share_logo@2x.png"
+    ],
+    "priority": 14
+  },
+  "wode/update_bound_phone.html": {
+    "href": "wode/update_bound_phone.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png",
+      "js/jQuery.md5.js",
+      "js/lockpage.js"
+    ],
+    "refer": [],
+    "priority": 16
+  },
+  "wode/bound_phone.html": {
+    "href": "wode/bound_phone.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 16
+  },
+  "wode/modify_pay_password.html": {
+    "href": "wode/modify_pay_password.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 17
+  },
+  "wode/forget_pwd.html": {
+    "href": "wode/forget_pwd.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "priority": 18
+  },
+  "wode/modify_login_password.html": {
+    "href": "wode/modify_login_password.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 18
+  },
+  "wode/set_pay_pwd.html": {
+    "href": "wode/set_pay_pwd.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "priority": 19
+  },
+  "wode/account_safe.html": {
+    "href": "wode/account_safe.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 17
+  },
+  "wode/ac_center.html": {
+    "href": "wode/ac_center.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "priority": 20
+  },
+  "wode/help_intro.html": {
+    "href": "wode/help_intro.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "priority": 21
+  },
+  "wode/help_center.html": {
+    "href": "wode/help_center.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png"
+    ],
+    "refer": [],
+    "priority": 21
+  },
+  "wode/center.html": {
+    "href": "wode/center.html",
+    "resources": [
+      "images/pull_icon@2x.png"
+    ],
+    "refer": [],
+    "priority": 3
+  },
+  "wode/register_identy.html": {
+    "href": "wode/register_identy.html",
+    "resources": [
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png"
+    ],
+    "refer": [],
+    "priority": 3
+  },
+  "zhuanqian/pay_method_choose.html": {
+    "href": "zhuanqian/pay_method_choose.html",
+    "resources": [
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/right.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/share_bg.png",
+      "js/jQuery.md5.js"
+    ],
+    "refer": [],
+    "priority": 1
+  },
+  "wode/bank_list.html": {
+    "href": "wode/bank_list.html",
+    "resources": [
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/right.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/add_bank.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/share_bg.png",
+      "images/pull_icon@2x.png"
+    ],
+    "refer": [
+      "wode/bound_card.html"
+    ],
+    "priority": 2
+  },
+  "wode/bound_card.html": {
+    "href": "wode/bound_card.html",
+    "resources": [
+      "images/pull_icon@2x.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/goright@2x.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [
+      "wode/bank_manage.html",
+      "zhuanqian/pay_method_choose.html"
+    ],
+    "priority": 0
+  },
+  "wode/my_bank.html": {
+    "href": "wode/my_bank.html",
+    "resources": [
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/right.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/add_bank.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/share_bg.png",
+      "images/pull_icon@2x.png",
+      "js/jQuery.md5.js"
+    ],
+    "refer": [
+      "wode/withdrawal.html"
+    ],
+    "priority": 0
+  },
+  "wode/recharge_under.html": {
+    "href": "wode/recharge_under.html",
+    "resources": [
+      "css/register.css",
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png",
+      "css/index.css",
+      "images/pull_icon@2x.png",
+      "css/recharge.css",
+      "images/mine/goright@2x.png",
+      "js/jquery-1.11.1.min.js",
+      "js/jQuery.md5.js",
+      "js/mui.min.js",
+      "js/go_back.js",
+      "images/register/back-icon@2x.png"
+    ],
+    "refer": [
+      "wode/recharge_under.html"
+    ],
+    "priority": 2
+  },
+  "wode/recharge_up.html": {
+    "href": "wode/recharge_up.html",
+    "resources": [
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png",
+      "images/register/show@2x.png",
+      "images/register/hidden@2x.png",
+      "images/pull_icon@2x.png",
+      "images/make_money/right.png",
+      "images/mine/update.png",
+      "images/mine/delete.png",
+      "images/mine/address@2x.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/promote_bg@2x.png",
+      "images/mine/m_s@2x.png",
+      "images/mine/m_d@2x.png",
+      "images/mine/pro_icon@2x.png",
+      "images/mine/pro_data_icon@2x.png",
+      "images/mine/mb_1@2x.png",
+      "images/mine/mb_2@2x.png",
+      "images/mine/cash_bg.png",
+      "images/mine/ecperience_bg.png",
+      "images/mine/coupon_bg.png",
+      "images/mine/ev_disabled.png",
+      "images/mine/invest_icon.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [
+      "wode/recharge_up.html"
+    ],
+    "priority": 0
+  },
+  "zhuanqian/pay_get.html": {
+    "href": "zhuanqian/pay_get.html",
+    "resources": [
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/add_bank.png",
+      "images/mine/share_bg.png"
+    ],
+    "refer": [
+      "wode/center.html"
+    ],
+    "priority": 0
+  },
+  "chanping/intro_product_data.html": {
+    "href": "chanping/intro_product_data.html",
+    "resources": [
+      "css/index.css",
+      "images/pull_icon@2x.png",
+      "css/common_header.css",
+      "css/intro_product.css",
+      "js/jquery-1.11.1.min.js",
+      "js/mui.min.js",
+      "js/go_back.js",
+      "images/register/back-icon@2x.png"
+    ],
+    "refer": [],
+    "priority": 2
+  },
+  "chanping/intro_product_borrower.html": {
+    "href": "chanping/intro_product_borrower.html",
+    "resources": [
+      "css/index.css",
+      "images/pull_icon@2x.png",
+      "css/common_header.css",
+      "css/intro_product.css",
+      "js/jquery-1.11.1.min.js",
+      "js/mui.min.js",
+      "js/go_back.js",
+      "images/register/back-icon@2x.png"
+    ],
+    "refer": [],
+    "priority": 1
+  },
+  "chanping/intro_product.html": {
+    "href": "chanping/intro_product.html",
+    "resources": [
+      "images/pull_icon@2x.png"
+    ],
+    "refer": [],
+    "priority": 1
+  },
+  "zhuanqian/make_money.html": {
+    "href": "zhuanqian/make_money.html",
+    "resources": [
+      "images/make_money/add_bank.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/mine/share_bg.png"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "chanping/invest_finac.html": {
+    "href": "chanping/invest_finac.html",
+    "resources": [
+      "images/pull_icon@2x.png"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "zhuanqian/share.html": {
+    "href": "zhuanqian/share.html",
+    "resources": [
+      "images/make_money/make_money.png",
+      "images/make_money/profit.png",
+      "images/make_money/intro_pt.png",
+      "images/make_money/right.png",
+      "images/make_money/reduce.png",
+      "images/make_money/add.png",
+      "images/make_money/add_bank.png",
+      "images/make_money/tips_icon.png",
+      "images/make_money/close_pwd.png",
+      "images/share_logo@2x.png"
+    ],
+    "priority": 2
+  },
+  "zhuanqian/index.html": {
+    "href": "zhuanqian/index.html",
+    "resources": [
+      "fonts/mui.ttf",
+      "css/pullToRefresh.css",
+      "js/iscroll.js",
+      "js/pullToRefresh.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "wode/register.html": {
+    "href": "wode/register.html",
+    "resources": [],
+    "refer": [
+      "wode/register_identy.html"
+    ],
+    "priority": 2
+  },
+  "login.html": {
+    "href": "login.html",
+    "resources": [
+      "images/register/active-tap2@2x.png",
+      "images/register/no-tap@3x.png"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "startup.html": {
+    "href": "startup.html",
+    "resources": [
+      "fonts/mui.ttf"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}

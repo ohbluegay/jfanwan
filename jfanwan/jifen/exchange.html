@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>积分兑换</title>
+		<link rel="stylesheet" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/exchange_record.css" />
+	</head>
+
+	<body style="background: #F0F0F0;">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="register_name">积分兑换</span>
+			</div>
+		</header>
+		<div class="exchange_main top2">
+			<div class="ex_title">商品详情</div>
+			<div class="ex_detail">
+				<ul>
+					<li>
+						<span>商品</span><span id="name"></span>
+					</li>
+					<li>
+						<span>数量</span><span id="count">1</span>
+					</li>
+					<li><span>积分</span><span style="color:#FF6C00;" id="point"></span>积分</li>
+				</ul>
+			</div>
+		</div>
+		<div class="receipt_address">
+			<span>收货地址</span>
+			<span id="address">&nbsp;</span>
+		</div>
+		<div style="position: fixed;bottom: 0;background: #FFFFFF;width: 100%;height:50px;">
+			<div style="margin: 0 15px;background: #FFC000;text-align: center;padding: 10px 0;border-radius: 5px;margin-top: 5px;" onclick="submit_d()">确认提交</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			var goods_id = window.localStorage.getItem('goods_id');
+			var address_id;
+			 dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				getsouce();
+			})
+
+			/*点击选择收货地址*/
+			mui.plusReady(function() {
+				$('.receipt_address').click(function() {
+					var target = "../jifen/inte_address.html";
+					switch_child(target);
+				})
+			})
+			
+			function getsouce(){
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/goods_exchange.php"+dateKey,
+					data: {
+						'user_id': user_id,
+						'goods_id': goods_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							if(data.goods.is_delivery == '0'){
+								$('.receipt_address').hide();
+								address_id = 0;
+							}
+							$('#name').text(data.goods.name);
+							$('#count').text(data.number);
+							$('#point').text(data.needscore);
+							$('.receipt_address').attr('id', data.user_address.id);
+							$('#address').text(data.user_address.address);
+						}
+						address_id = localStorage.getItem('address_id');
+						var address = localStorage.getItem('address');
+						if(address_id) {
+							$('.receipt_address').attr('id', address.id);
+						}
+						if(address) {
+							$('#address').text(address);
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			/*提交*/
+			function submit_d() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/do_exchange.php"+dateKey,
+					data: {
+						'user_id': user_id,
+						'address_id': address_id,
+						'goods_id': goods_id,
+						'number': 1
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1 && data.status == 1) {
+							mui.toast('提交成功');
+							window.history.go(-1)
+						} else {
+							mui.toast('提交失败');
+						}
+					},
+					error: function(e) {
+						mui.toast('提交失败');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

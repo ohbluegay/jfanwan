@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>产品介绍</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/intro_product.css" />
+		<style>
+			.image_text {
+				padding: 20px;
+			}
+			
+			.image_text img {
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">产品介绍</span>
+			</div>
+		</header>
+		<section class="top2">
+			<nav class="nav_menu">
+				<div class="menu_item">
+					<a href="javascript:void(0)" class="menu_active" onclick="toTab(1)">
+						<span>投资描述</span>
+					</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" onclick="toTab(2)">
+						<span>借款者信息</span>
+					</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" onclick="toTab(3)">
+						<span>投资记录</span>
+					</a>
+				</div>
+				<div class="blank"></div>
+			</nav>
+			<div class="break"></div>
+			<div class="tab">
+				<div class="tab_item" tabindex="1">
+					<div class="describe" id="inv">
+						<ul>
+							<li>
+								<span class="dec_name">购买期限</span>
+								<span class="dec_cont">2016-09-22至2016-09-25</span>
+							</li>
+							<li>
+								<span class="dec_name">锁定期限</span>
+								<span class="dec_cont">2016-09-25至2016-10-10</span>
+							</li>
+							<li>
+								<span class="dec_name">加入条件</span>
+								<span class="dec_cont">加入金额100元起，且以100元的倍数递增</span>
+							</li>
+							<li>
+								<span class="dec_name">购买限制</span>
+								<span class="dec_cont">100元起投，单次投资上限2万元</span>
+							</li>
+							<li>
+								<span class="dec_name">还款方式</span>
+								<span class="dec_cont">到期还本付息</span>
+							</li>
+							<li>
+								<span class="dec_name">提前赎回</span>
+								<span class="dec_cont">不支持提前赎回</span>
+							</li>
+						</ul>
+					</div>
+					<div class="break"></div>
+					<div class="image_text">
+
+					</div>
+				</div>
+				<div class="tab_item" tabindex="2" style="display: none;">
+					<div class="describe" id="bro">
+						<ul>
+							<li>
+								<span class="dec_name">融资方</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">性别</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">年龄</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">是否结婚</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">工作城市</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">公司行业</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">公司规模</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">工作收入</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">学历</span>
+								<span class="dec_cont"></span>
+							</li>
+							<li>
+								<span class="dec_name">有无购房</span>
+								<span class="dec_cont"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tab_item" tabindex="3" style="display: none;">
+					<div class="intro_data">
+						<ul>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function() {
+
+				/*投资描述*/
+				var list = JSON.parse(window.localStorage.getItem('list'));
+				$('.describe#inv li:nth-of-type(1) .dec_cont').text(list.buy_date);
+				var limitTime = formatLimit(list.repay_time, list.repay_time_type);
+				$('.describe#inv li:nth-of-type(2) .dec_cont').text(limitTime);
+				$('.describe#inv li:nth-of-type(3) .dec_cont').text("加入金额" + list.min_loan_money + "元起,且以100元的倍数递增");
+				$('.describe#inv li:nth-of-type(4) .dec_cont').text(list.min_loan_money + "元起投，单次投资上限" + list.max_loan_money + "万元");
+				$('.describe#inv li:nth-of-type(5) .dec_cont').text(list.loantype_format);
+				$('.image_text').html(list.description)
+				
+				/*借款者信息*/
+				var list = JSON.parse(window.localStorage.getItem('list'));
+				var user = list.user;
+				$('.describe li:nth-of-type(1) .dec_cont').text(user.real_name.substr(0, 1) + '**');
+				var sex;
+				if(user.sex == 0) {
+					sex = '未知';
+				}
+				if(user.sex == 1) {
+					sex = '男';
+				}
+				if(user.sex == 2) {
+					sex = '女';
+				}
+				$('.describe li:nth-of-type(2) .dec_cont').text(sex);
+				$('.describe li:nth-of-type(3) .dec_cont').text(user.age);
+				$('.describe li:nth-of-type(4) .dec_cont').text(user.marriage);
+				$('.describe li:nth-of-type(5) .dec_cont').text(user.region_province + '  ' + user.region_city);
+				if(!user.workinfo) {
+					$('.describe li:nth-of-type(6),.describe li:nth-of-type(7),.describe li:nth-of-type(8)').css('display', 'none');
+				} else {
+					$('.describe li:nth-of-type(6) .dec_cont').text(user.workinfo.officedomain);
+					$('.describe li:nth-of-type(7) .dec_cont').text(user.workinfo.officecale);
+					$('.describe li:nth-of-type(8) .dec_cont').text(user.workinfo.salary);
+				}
+				$('.describe li:nth-of-type(9) .dec_cont').text(user.graduation);
+				var house = user.hashouse == 1?'有':'无';
+				$('.describe li:nth-of-type(10) .dec_cont').text(house);
+
+				/*投资记录*/
+				var list_id = window.localStorage.getItem('list_id');
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/deal_investor.php" + dateKey,
+					data: {
+						'deal_id': list_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var result = data.data;
+							$('.intro_data ul').html('');
+							$.each(result, function(index, item) {
+								var listArr = [];
+								listArr.push("<li>");
+								listArr.push("<div class='data_item'>");
+								var phone = (item.user_name + '').substr(0, 3) + '****' + (item.user_name + '').substr(8);
+								listArr.push("<span class='data_phone'>" + phone + "</span>");
+								listArr.push("<span class='data_time'>" + item.create_time_format + "</span>");
+								listArr.push("</div>");
+								listArr.push("<div class='data_item right'>");
+								listArr.push("<span class='data_money'>￥" + item.money + "</span>");
+								listArr.push("</div>");
+								listArr.push("<div class='blank'></div>");
+								listArr.push("</li>");
+								listArr = listArr.join("");
+								$('.intro_data ul').append(listArr);
+							})
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			})
+			
+			function toTab(index){
+				$('.menu_item a').removeClass('menu_active');
+				$('.menu_item:nth-of-type('+index+') a').addClass('menu_active');
+				$('.tab_item:nth-of-type('+index+')').show().siblings().hide()
+			}
+		</script>
+	</body>
+
+</html>

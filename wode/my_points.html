@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>我的积分</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">我的积分</span>
+			</div>
+		</header>
+		<section class="top2">
+			<div style="visibility: hidden;">111</div>
+			<div class="count_points">
+				<div class="count_top">
+					<span>总积分</span>
+					<a href="javascript:void(0)">
+						积分说明
+					</a>
+					<div class="blank"></div>
+				</div>
+				<div class="points">
+					<span class="number"></span><span class="fen">分</span>
+				</div>
+				<div class="point_goods">积分兑换商品</div>
+			</div>
+			<div class="point_record">
+				<div class="record_title">最近30天积分记录</div>
+				<div class="record">
+					<ul>
+						<!--<li class="record_item">
+							<div class="record_left">
+								<span class="apply">投资积分</span>
+								<span class="apply_time">2015.11.26 11.00</span>
+							</div>
+							<div class="record_right">
+								<span class="add">+263</span>
+							</div>
+							<div class="blank"></div>
+						</li>
+						<li class="record_item">
+							<div class="record_left">
+								<span class="apply">推广积分</span>
+								<span class="apply_time">2015.11.26 11.00</span>
+							</div>
+							<div class="record_right">
+								<span class="add">+263</span>
+							</div>
+							<div class="blank"></div>
+						</li>
+						<li class="record_item">
+							<div class="record_left">
+								<span class="apply">体验金积分</span>
+								<span class="apply_time">2015.11.26 11.00</span>
+							</div>
+							<div class="record_right">
+								<span class="reduce">-100</span>
+							</div>
+							<div class="blank"></div>
+						</li>
+						<li class="record_item">
+							<div class="record_left">
+								<span class="apply">签到积分</span>
+								<span class="apply_time">2015.11.26 11.00</span>
+							</div>
+							<div class="record_right">
+								<span class="add">+263</span>
+							</div>
+							<div class="blank"></div>
+						</li>
+						<li class="record_item">
+							<div class="record_left">
+								<span class="apply">投资积分</span>
+								<span class="apply_time">2015.11.26 11.00</span>
+							</div>
+							<div class="record_right">
+								<span class="reduce">-150</span>
+							</div>
+							<div class="blank"></div>
+						</li>
+						<li class="record_item">
+							<div class="record_left">
+								<span class="apply">投资积分</span>
+								<span class="apply_time">2015.11.26 11.00</span>
+							</div>
+							<div class="record_right">
+								<span class="add">+263</span>
+							</div>
+							<div class="blank"></div>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				getPoint();
+			})
+
+			/*获取30天积分记录*/
+			function getPoint() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/account_point.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.number').html(data.score);
+							$('.record ul').html("");
+							$.each(data.data, function(index, item) {
+								var liArr = [];
+								liArr.push("<li class='record_item'>");
+								liArr.push("<div class='record_left'>");
+								liArr.push("<span class='apply'>" + item.title + "</span>");
+								liArr.push("<span class='apply_time'>" + item.create_time_format + "</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='record_right'>");
+								if(item.score >= 0) {
+									liArr.push("<span class='add'>+" + item.score + "</span>");
+								} else {
+									liArr.push("<span class='reduce'>" + item.score + "</span>");
+								}
+								liArr.push("</div>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</li>");
+								liArr = liArr.join("");
+								$('.record ul').append(liArr);
+							})
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			/*积分兑换商品*/
+			$('.point_goods').click(function() {
+				var target = "../jifen/integrate.html";
+				switch_child(target)
+			})
+		</script>
+	</body>
+
+</html>

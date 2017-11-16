@@ -1,0 +1,73 @@
+.nav_menu{
+	background-color: #FFFFFF;
+}
+.menu_item{
+	width: 33%;
+	float: left;
+	text-align: center;
+	height: 50px;
+	font-size: 14px;
+}
+.menu_item span{
+	color: #999999;
+	line-height: 50px;
+}
+.menu_active span{
+	color: #FFC000 !important;
+}
+.describe{
+	background-color: #FFFFFF;
+}
+.describe ul{
+	list-style: none;
+	padding: 10px 15px;
+	font-size: 12px;
+}
+.describe ul li{
+	padding: 3px 0;
+}
+.dec_name{
+	color: #999999;
+	width: 70px;
+	display: inline-block;
+}
+.dec_cont{
+	color: #333333;
+	display: inline-block;
+}
+.image_text{
+	padding-top: 20px;
+}
+.title{
+	text-align: center;
+	font-size: 12px;
+}
+.intro_data ul{
+	list-style: none;
+	padding-left: 15px;
+}
+.intro_data ul li{
+	padding-right: 15px;
+	border-bottom: 1px solid #F0F0F0;
+	font-size: 12px;
+}
+.data_item{
+	width: 50%;
+	float: left;
+	padding: 15px 0;
+	height: 40px;
+}
+.data_item span{
+	display: block;
+	padding: 3px 0;
+}
+.data_time{
+	color: #999999;
+}
+.right{
+	text-align: right;
+}
+.data_money{
+	line-height: 40px;
+	color: #ff6c00;
+}

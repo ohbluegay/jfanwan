@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>绑定银行卡</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+		<style>
+			#bank_img {
+				float: right;
+				height: 20px;
+			}
+			
+			body {
+				position: relative;
+			}
+		</style>
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">绑定银行卡</span>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="mine_content">
+				<form>
+					<div class="input_type">
+						姓名<span class="input_right" id="name"></span>
+					</div>
+					<div class="input_type">
+						身份证号<span class="input_right" id="id_card"></span>
+					</div>
+					<span class="tp">认证后不可修改</span>
+					<div class="input_type" id="choose_bank">
+						请选择您的银行<span class="bank_li"></span><img src="" id="bank_img" /><span class="right"></span>
+						<div class="blank"></div>
+					</div>
+					<input type="number" class="input_card" placeholder="输入银行卡号" id="bank_numb" />
+					<span class="tp">不支持信用卡</span>
+					<div class="b_submit" onclick="submit_d()">
+						<div class="bound">确认</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			var _body = document.querySelector("body");
+			var bank_numb = $('#bank_numb').offset().top;
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$('#bank_numb').focus(function() {
+				_body.style.top = ($(document).height() / 2 - 120 - bank_numb - $(this).height()) + 'px';
+			})
+			$('#bank_numb').blur(function() {
+				_body.style.top = '0px';
+			})
+			$(function() {
+				initbank();
+			})
+
+			function initbank() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/choose_bank.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var name = data.real_name;
+							var arr = new Array(name.length)
+							name = name.substr(0, 1) + arr.join("*");
+							$('#name').text(name);
+							var id_card = data.idno;
+							id_card = id_card.substr(0, 6) + '********' + id_card.substr(14);
+							$('#id_card').text(id_card)
+
+							/*银行*/
+							if(localStorage.getItem('p_bank_name')) {
+								getItem();
+								return false;
+							}
+							var bank = data.bank_list[0];
+							$('#choose_bank').attr('bank_id', bank.id);
+							$('#bank_img').attr('src', bank.icon);
+							$('.bank_li').html(bank.name);
+						} else {
+							mui.toast(data.show_err)
+							$('#choose_bank img').remove()
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+			$('#choose_bank').click(function() {
+				var target = "bank_list.html";
+				switch_child(target)
+			})
+
+			/*获取选择的银行信息*/
+			function getItem() {
+				var p_bank_id = localStorage.getItem('p_bank_id');
+				var p_bank_name = localStorage.getItem('p_bank_name');
+				var p_bank_img = localStorage.getItem('p_bank_img');
+				$('#choose_bank').attr('bank_id', p_bank_id);
+				$('#bank_img').attr('src', p_bank_img);
+				$('.bank_li').html(p_bank_name);
+				localStorage.removeItem('p_bank_id');
+				localStorage.removeItem('p_bank_name');
+				localStorage.removeItem('p_bank_img');
+			}
+
+			function submit_d() {
+				var bank_id = $('#choose_bank').attr('bank_id');
+				if(!bank_id) {
+					return false
+				}
+				var bank_number = $.trim($('#bank_numb').val());
+				if(bank_number == '') {
+					mui.toast('请输入银行卡号')
+					return false;
+				}
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/add_bank.php" + dateKey,
+					data: {
+						'user_id': user_id,
+						'bank_id': bank_id,
+						'bankcard': bank_number
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							mui.toast(data.show_err);
+							window.history.go(-1);
+						} else {
+							mui.toast(data.show_err)
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

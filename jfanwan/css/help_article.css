@@ -1,0 +1,30 @@
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+#article{
+	font-size: 14px;
+}
+.article_show {
+    background: #fff;
+    padding: 10px 10px 40px 10px;
+    overflow: hidden;
+}
+.article_show h2 {
+    font-size: 18px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bolder;
+    margin: 0px 20px;
+}
+.article_show .show_detail {
+    line-height: 25px;
+    text-indent: 30px;
+    padding: 10px 0;
+    color: #b6b6b6;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100% !important;
+}

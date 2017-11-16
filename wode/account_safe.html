@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>账户安全</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">账户安全</span>
+			</div>
+		</header>
+		<div class="ac_safe top2">
+			<ul>
+				<li class="ac_item" url="modify_login_password.html">
+					<a href="javascript:void(0)">
+						<span class="ac_name">
+							登录密码
+						</span>
+						<span class="go_right"></span>
+					</a>
+				</li>
+				<li class="ac_item" url="set_pay_pwd.html" id="update_pwd">
+					<a href="javascript:void(0)">
+						<span class="ac_name">
+							支付密码
+						</span>
+						<span class="go_right"></span>
+					</a>
+				</li>
+				<!--<li class="ac_item">
+					<a href="javascript:void(0)">
+						<span class="ac_name">
+							手势密码
+						</span>
+						<div class="slide_bar">
+							<div class="slide_menu">
+								<span class="slide"></span>
+							</div>
+						</div>
+					</a>
+				</li>-->
+				<li class="ac_item" id="go_pwd" onclick="showGraphical()">
+					<a href="javascript:void(0)">
+						<span class="ac_name">
+							设置手势密码
+						</span>
+						<span class="go_right"></span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+		    /*判断是否已经设置登录密码*/
+		   var user_id = localStorage.getItem('user_id');
+		   dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+		    $(function(){
+		    	$.ajax({
+		    		type:'post',
+		    		url:'https://api.jfwlicai.com/mobile/isset_pay_password.php'+dateKey,
+		    		data:{'user_id':user_id},
+		    		dataType:'json',
+		    		async:true,
+		    		success:function(data){
+		    			if(data.response_code==1 && data.status==1){
+		    				$('#update_pwd').attr('url','modify_pay_password.html');
+		    			}
+		    		},
+		    		error:function(e){}
+		    	})
+		    })
+			$(".slide_menu").click(function() {
+				if($('.slide').hasClass('slide_active')) {
+					$('.slide').removeClass('slide_active');
+					$(".slide_menu").removeClass('border_active');
+					$('#go_pwd').hide();
+				} else {
+					$('.slide').addClass('slide_active');
+					$(".slide_menu").addClass('border_active');
+					$('#go_pwd').show();
+				}
+			})
+
+			$(".ac_item").click(function() {
+				var target = $(this).attr('url');
+				if(target) {
+					switch_child(target)
+				}
+			})
+			
+			/*图形解锁*/
+			function showGraphical(){
+				window.webkit.messageHandlers.OOXX.postMessage({'type':'NeedhandPass','data':{'userID':user_id}});
+			}
+			
+			function setupHandPass(use,pass){
+				$.ajax({
+					type:"post",
+					url:"https://api.jfwlicai.com/mobile/set_pattern_lock.php",
+					data:{'user_id':user_id,'lock_pwd':msg},
+					dataType:'json',
+					async:true,
+					success:function(data){
+						if(data.response_code == 1){
+							mui.toast(data.show_err)
+						}else{
+							mui.toast('设置失败')
+						}
+					},
+					error:function(e){
+						mui.toast('网络错误');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

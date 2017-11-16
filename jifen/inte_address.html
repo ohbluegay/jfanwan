@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>设置支付密码</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+		<link rel="stylesheet" href="../css/mui.min.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">收货地址</span>
+				<a href="javascript:void(0)" class="adm">
+					确认
+				</a>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="mine_address">
+				<form>
+					<ul class="address_ul">
+						<li>
+							<div class="mui-input-row mui-radio mui-left rd">
+								<label></label>
+								<input name="radio1" type="radio">
+							</div>
+							<div class="address_content gray3">
+								<!--<span class="ad1">上海市</span>-->
+								<span class="ad2">徐汇区肇嘉浜路1033号徐汇国际大厦10楼</span>
+							</div>
+							<div class="custom gray3">
+								<span class="ad1">施先生</span>
+								<span class="ad2">13856524142</span>
+							</div>
+						</li>
+						<li>
+							<div class="mui-input-row mui-radio mui-left rd">
+								<label></label>
+								<input name="radio1" type="radio">
+							</div>
+							<div class="address_content gray3">
+								<!--<span class="ad1">上海市</span>-->
+								<span class="ad2">徐汇区肇嘉浜路1033号徐汇国际大厦10楼</span>
+							</div>
+							<div class="custom gray3">
+								<span class="ad1">施先生</span>
+								<span class="ad2">13556524142</span>
+							</div>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<a href="javascript:void(0)" id="add_address">
+				<div class="replace_address gray3">
+					添加地址
+				</div>
+			</a>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			mui.init()
+			var user_id = window.localStorage.getItem('user_id');
+			localStorage.removeItem('ch_ad');
+			var address_id;
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(function() {
+				get_address_list();
+			})
+
+			/*获取地址列表*/
+			function get_address_list() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/address.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.address_ul').html('');
+							var result = data.data;
+							$.each(result, function(index, item) {
+								var liArr = [];
+								liArr.push("<li id='" + item.id + "'>");
+								liArr.push("<div class='mui-input-row mui-radio mui-left rd'><label></label><input name='radio1' type='radio'></div>")
+								liArr.push("<div class='address_content gray3'>");
+								liArr.push("<span class='ad2'>" + item.address + "</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='custom gray3'>");
+								liArr.push("<span class='ad1'>" + item.name + "</span>");
+								liArr.push("<span class='ad2'>" + item.phone + "</span>");
+								liArr.push("</div>");
+								liArr.push("</div>");
+								liArr.push("<div class='choose_update'>");
+								liArr.push("<span class='address_update'></span>");
+								liArr.push("<span class='address_delete'></span>");
+								liArr.push("</li>");
+								liArr = liArr.join("");
+								$('.address_ul').append(liArr);
+							})
+							sure()
+						}
+						$('.address_ul li').click(function() {
+							//$("input[type='radio']").prop('checked', false)
+							$(this).find("input[type='radio']").prop('checked', true)
+						})
+					},
+					error: function(e) {
+						mui.toast('获取地址失败');
+					}
+				});
+			}
+
+			/*点击确认*/
+			function sure() {
+				$('.adm').click(function() {
+					var radio = $(".rd input[type='radio']:checked");
+					var id = radio.closest('li').attr('id');
+					if(!id) {
+						mui.toast('请选择收货地址')
+						return false
+					}
+					var name = radio.closest('li').find('.address_content').find('.ad2').text();
+					localStorage.setItem('address_id', id);
+					localStorage.setItem('address', name);
+					window.history.go(-1)
+				})
+			}
+
+			mui.plusReady(function() {
+				$('#add_address').click(function() {
+					var target = "../wode/write_receipt_address.html";
+					switch_child(target);
+				})
+			})
+		</script>
+	</body>
+
+</html>

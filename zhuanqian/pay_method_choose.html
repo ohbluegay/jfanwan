@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>选择支付方式</title>
+		<link rel="stylesheet" href="../css/zhuanqian.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">选择支付方式</span>
+				<a href="#"><span class="header_tips">限额说明</span></a>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="account_balance" type='0'>账户余额支付(可用余额<span class="account_money">0.00</span>元)</div>
+			<div class="bank_group">
+				<!--<div class="bank_item bank">
+					<span class="bank_icon"><img src="../images/make_money/gongshang_bank.png"/></span>
+					<dl class="bank_tips">
+						<dd>中国工商银行(2506)</dd>
+					</dl>
+				</div>-->
+			</div>
+			<div class="add_bank">
+				<span class="bank_add_icon"></span>
+				<span class="add_click">添加银行卡</span>
+			</div>
+		</section>
+		<!--是否已经实名认证-->
+		<div class="sure_quit" style="display: none;">
+			<div class="sure_authentic">您尚未进行实名认证请先进行实名认证</div>
+			<div class="quit_bottom">
+				<div class="quit_item" id="quit">放弃</div>
+				<div class="quit_item next" id="continue">继续</div>
+				<div class="blank"></div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				getBank();
+			})
+			$('.add_click').click(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/check_idcard_passed.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1 && data.user_login_status) {
+							/*去绑卡*/
+							var target = "../wode/bound_card.html";
+							switch_child(target)
+						} else {
+							/*去实名认证*/
+							$('.sure_quit').show();
+							$('.bg').show();
+							$('#quit').click(function() {
+								$('.sure_quit').hide();
+								$('.bg').hide();
+							})
+							$('#continue').click(function() {
+								$('.sure_quit').hide();
+								$('.bg').hide();
+								var target = "../wode/register_identy.html";
+								switch_child(target)
+							})
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			})
+
+			function getBank() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/bank.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.bank_group').html('');
+							var list = data.data;
+							$.each(list, function(index, item) {
+								if(item.is_bank) {
+									$('.account_money').html(item.user_money);
+								}
+								if(item.is_bank != 0) {
+									var bank = [];
+									bank.push("<div class='bank_item' bank_id='" + item.id + "' type='1'>");
+									bank.push("<span class='bank_icon'><img src='" + item.img + "'/></span>");
+									bank.push("<dl class='bank_tips'>");
+									var length = (item.bankcard + '').length;
+									bank.push("<dd>" + item.bank_name + "(" + (item.bankcard + '').substr(length - 4) + ")</dd>");
+									bank.push("</dl>");
+									bank.push("</div>");
+									bank = bank.join("");
+									$('.bank_group').append(bank);
+								}
+							})
+							get_invest_type();
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			/*点击选择付款方式*/
+			function get_invest_type() {
+				$('.account_balance').click(function() {
+					window.localStorage.setItem('type', 0);
+					eva()
+				})
+
+				$('.bank_item').click(function() {
+					var bank_id = $(this).attr('bank_id');
+					var img = $(this).find('img').attr('src');
+					var bank_name = $(this).find('.bank_tips dd').html();
+					window.localStorage.setItem('type', 1);
+					window.localStorage.setItem('bank_id', bank_id);
+					window.localStorage.setItem('img', img);
+					window.localStorage.setItem('bank_name', bank_name);
+					eva()
+				})
+			}
+
+			function eva() {
+				window.history.go(-1)
+			}
+		</script>
+	</body>
+
+</html>

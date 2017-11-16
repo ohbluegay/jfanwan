@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>绑定手机</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">绑定手机</span>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="mine_content">
+				<form>
+					<div class="b_phone">
+						<span class="gray1">当前绑定手机</span>
+						<span class="orange" id="phone">13603572505</span>
+					</div>
+					<div class="login_password">
+						<input type="password" name="password" placeholder="请输入登录密码" id="pwd"/>
+					</div>
+					<div class="b_submit" onclick="confirm()">
+						<div style="text-align: center;">更换绑定</div>
+					</div>
+					<div class="tips">
+						<p class="gray1">温馨提示：</p>
+						<p class="gray2">更换绑定手机号后，您的原来手机号码将被重置到未认证状态，再次登录请使用新手机号码，密码不变。</p>
+					</div>
+				</form>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js" ></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../js/go_back.js" ></script>
+		<script type="text/javascript" src="../js/lockpage.js" ></script>
+		<script>
+		    var user_id = window.localStorage.getItem('user_id');
+		    var phone = window.localStorage.getItem('phone');
+		      dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function(){
+				$('#phone').text(phone);
+			})
+			
+			function confirm(){
+				var pwd = $.trim($('#pwd').val());
+				if(pwd == ''){
+					mui.toast('请输入登录密码')
+					return false
+				}
+				$.ajax({
+					type:"post",
+					url:"https://api.jfwlicai.com/mobile/check_mobile.php"+dateKey,
+					data:{
+						'user_id':user_id,
+						'mobile':phone,
+						'password':pwd
+					},
+					dataType:'json',
+					async:true,
+					success:function(data){
+						if(data.response_code == 1 && data.status == 1){
+							mui.toast('密码验证成功');
+							var target = "update_bound_phone.html";
+							switch_child(target)
+						}else{
+							mui.toast('密码验证失败');
+						}
+					},
+					error:function(e){
+						mui.toast('密码验证失败');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

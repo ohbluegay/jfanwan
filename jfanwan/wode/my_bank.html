@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>选择银行卡</title>
+		<link rel="stylesheet" href="../css/zhuanqian.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/layer.css" />
+		<style>
+			ul {
+				list-style: none;
+			}
+			
+			li {
+				padding: 5px 10px;
+				position: relative;
+				border-bottom: 1px solid #F0F0F0;
+				position: relative;
+			}
+			
+			li:last-of-type {
+				border-bottom: none;
+			}
+			
+			li img {
+				width: 120px;
+				height: 30px;
+			}
+			
+			.li_left {
+				position: absolute;
+				left: 10px;
+				top: 11px;
+			}
+			
+			.li_right {
+				padding: 10px 0 10px 130px;
+				width: 50%;
+			}
+			
+			.li_right p {
+				font-size: 12px;
+				word-break: break-word;
+				color: #999999;
+				padding: 2px 0;
+			}
+			
+			.delete {
+				position: absolute;
+				top: 5px;
+				right: 10px;
+			}
+			
+			.delete img {
+				width: 20px;
+				height: 20px;
+				display: block;
+				margin-top: 10px;
+				margin-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">选择银行卡</span>
+				<a href="javascript:void(0)" id="addBank" style="position: absolute;top: 35px;right: 15px;font-size: 14px;">
+					添加银行卡
+				</a>
+			</div>
+		</header>
+		<section style="background: #FFFFFF;" class="top2">
+			<ul>
+				<!--<li>
+					<div class="li_left">
+						<img src="" />
+					</div>
+					<div class="li_right">
+						<span>中国银行</span>
+						<p>单笔满5万</p>
+					</div>
+				</li>-->
+			</ul>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/layer.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(function() {
+				initBank();
+			})
+
+			function initBank() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/bank.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('ul').html('');
+							var list = data.data;
+							$.each(list, function(index, item) {
+								if(item.is_bank != 0) {
+									var liArr = [];
+									liArr.push("<li id='" + item.id + "'>");
+									liArr.push("<div class='li_right'><div class='li_left'>");
+									liArr.push("<img src='" + item.img + "' class='my_bank_img'/>");
+									liArr.push("</div>");0
+									liArr.push("<span class='my_bank_name'>" + item.bank_name + "</span>");
+									//liArr.push("<p>单笔满5万</p>");
+									liArr.push("</div>");
+									liArr.push("<div style='width: 40px;height: 40px;' class='delete'>");
+									//liArr.push("<img src='../images/delete@2x.png' />");
+									liArr.push("</div></li>");
+									liArr = liArr.join("");
+									$('ul').append(liArr)
+								}
+							});
+							getBank()
+							delete_bank()
+						}
+					},
+					error: function(e) {
+
+					}
+
+				});
+			}
+
+			function getBank() {
+				$('.li_right').bind('click', function() {
+					var b = $(this).closest('li');
+					var my_bank_id = b.attr('id');
+					var my_bank_name = b.find('.my_bank_name').text();
+					var my_bank_img = b.find('.my_bank_img').attr('src');
+					localStorage.setItem('my_bank_id', my_bank_id);
+					localStorage.setItem('my_bank_name', my_bank_name);
+					localStorage.setItem('my_bank_img', my_bank_img);
+					window.history.go(-1)
+				})
+			}
+
+			function delete_bank() {
+				$('.delete').click(function() {
+					layer.open({
+						content: '确定删除？',
+						btn: ['删除', '取消'],
+						yes: function(index) {
+							layer.close(index);
+							var bank_id = $(this).closest('li').attr('id');
+							$.ajax({
+								type: "post",
+								url: "https://api.jfwlicai.com/mobile/del_bank.php"+dateKey,
+								data: {
+									'user_id': user_id,
+									'bankcard_id': bank_id
+								},
+								dataType: 'json',
+								async: true,
+								success: function(data) {
+									if(data.response_code == 1) {
+										initBank()
+										mui.toast(data.show_err)
+									} else {
+										mui.toast(data.show_err)
+									}
+								},
+								error: function(e) {
+
+								}
+							});
+						}
+					});
+
+				})
+			}
+			
+			$('#addBank').click(function(){
+				var target = "../wode/bound_card.html"
+				switch_child(target)
+			})
+		</script>
+	</body>
+
+</html>

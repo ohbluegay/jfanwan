@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>投资记录</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+		<style>
+			.loan_rate span:first-of-type {
+				color: #FFC000;
+				font-size: 15px;
+			}
+			
+			.loan_rate span {
+				padding: 2px 0;
+			}
+			
+			.money_loan {
+				padding: 0 10px;
+				border-bottom: 1px solid #F0F0F0;
+			}
+			
+			.money_loan:nth-last-of-type {
+				border: none;
+			}
+		</style>
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">投资记录</span>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="ev_menu">
+				<div class="menu_item ev_active" status="0">
+					<a href="javascript:void(0)">全部</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" status="1">进行中</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" status="2">还款中</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" status="3">已还清</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" status="4">满标</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)" status="5">流标</a>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="loan" style="margin-top: 10px;">
+				<div class="load_main">
+					<!--<div class="money_loan">
+						<a href="javascript:void(0)">
+							<div class="loan_content">
+								<div class="loan_top">
+									<span>月月贷</span>
+									<span>持有中</span>
+									<div class="blank"></div>
+								</div>
+								<div class="loan_middle">
+									<div class="loan_rate loan_active">
+										<span>1000元</span>
+										<span>订单金额</span>
+									</div>
+									<div class="loan_rate">
+										<span>3个月</span>
+										<span>投资期限</span>
+									</div>
+									<div class="loan_rate">
+										<span>0/223.00</span>
+										<span>已获/预期收益(元)</span>
+									</div>
+									<div class="blank"></div>
+								</div>
+							</div>
+						</a>
+					</div>-->
+				</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js" ></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			localStorage.removeItem('deal_id');
+			$(document).ready(function() {
+				getSouce(0);
+				choose_type();
+			})
+
+			function getSouce(index) {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/personal_invest.php"+dateKey,
+					data: {
+						'user_id': user_id,
+						'status': index
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						$('.load_main').html("");
+						if(data.response_code == 1) {
+							var result = data.data;
+							$.each(result, function(index, item) {
+								var liArr = [];
+								liArr.push("<div class='money_loan' id='" + item.id + "'>");
+								liArr.push("<a href='javascript:void(0)'>");
+								liArr.push("<div class='loan_content'>");
+								liArr.push("<div class='loan_top'>");
+								liArr.push("<span>" + item.name + "</span>");
+								var status;
+								if(item.deal_status == 1 && item.remain_time > 0) {
+									status = '进行中';
+								}
+								if(item.deal_status == 4) {
+									status = '还款中';
+								}
+								if(item.deal_status == 5) {
+									status = '已还清';
+								}
+								if(item.deal_status == 2) {
+									status = '满标';
+								}
+								if(item.deal_status == 3) {
+									status = '流标';
+								}
+								if(item.deal_status == 1 && item.remain_time <= 0) {
+									status = '已过期';
+								}
+								liArr.push("<span>" + status + "</span>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</div>");
+								liArr.push("<div class='loan_middle'>");
+								liArr.push("<div class='loan_rate loan_active'>");
+								liArr.push("<span>" + item.u_sum_load_money + "元</span>");
+								liArr.push("<span>订单金额</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='loan_rate'>");
+								var limit = formatLimit(item.repay_time, item.repay_time_type);
+								liArr.push("<span>" + limit + "</span>");
+								liArr.push("<span>投资期限</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='loan_rate'>");
+//								liArr.push("<span>0/223.00</span>");
+//								liArr.push("<span>已获/预期收益(元)</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</div>");
+								liArr.push("</div>");
+								liArr.push("</a>");
+								liArr.push("</div>");
+								liArr = liArr.join("");
+								$('.load_main').append(liArr);
+							});
+							getDetail();
+						}
+					},
+					error: function(e) {
+						mui.toast('获取数据失败');
+					}
+				});
+			}
+
+			function choose_type() {
+				$('.menu_item').click(function() {
+					var index = $(this).find('a').attr('status');
+					$(this).addClass('ev_active').siblings().removeClass('ev_active');
+					getSouce(index);
+				})
+			}
+
+			function getDetail() {
+				$('.money_loan').click(function() {
+					var id = $(this).attr('id');
+					window.localStorage.setItem('deal_id',id);
+					var target = "invest_record_detail.html";
+					switch_child(target)
+				})
+
+			}
+		</script>
+	</body>
+
+</html>

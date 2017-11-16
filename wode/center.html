@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>个人中心</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/person_center.css" />
+		<link rel="stylesheet" href="../css/layer.css" />
+	</head>
+
+	<body style="background: #F8F8F8;">
+		<div class="bar fixed_bar"></div>
+		<header class="top1">
+			<div class="header_bg">
+				<div class="center_top">
+					<div class="center_top_item" id="logOut"><span>注销</span></div>
+					<div class="center_top_item"><span>你好, 13000569874</span></div>
+					<div class="center_top_item">
+						<span>
+							<img src="../images/center/news@2x.png" alt="消息"/>
+						</span>
+					</div>
+					<div class="blank"></div>
+				</div>
+				<div class="center_man">
+					<div class="center_man_item hidden">
+						1
+					</div>
+					<div class="center_man_item center_man_logo">
+						<img src="../images/center/human@2x.png" />
+					</div>
+					<div class="center_man_item">
+						<div class="sign">
+							<span class="icon_sign">
+								<img src="../images/center/sign@2x.png" class="size_icon3" alt="签到" id="sign_in"/>
+							</span>
+							<span class="icon_sign_name">签到</span>
+						</div>
+					</div>
+					<div class="blank"></div>
+				</div>
+				<div class="count_income">
+					<span class="income_name">累计总收入(元)</span>
+					<span class="income_numb">0.00</span>
+				</div>
+				<div class="numb_classity">
+					<div class="numb_item cla_item">
+						<span class="classity_name">总资产(元)</span>
+						<span class="classity_numb">0.00</span>
+					</div>
+					<div class="numb_line cla_item"></div>
+					<div class="numb_item cla_item">
+						<span class="classity_name">可提现金(元)</span>
+						<span class="classity_numb">0.00</span>
+					</div>
+					<div class="numb_line cla_item"></div>
+					<div class="numb_item cla_item">
+						<span class="classity_name">投资冻结(元)</span>
+						<span class="classity_numb">0.00</span>
+					</div>
+					<div class="blank"></div>
+				</div>
+			</div>
+		</header>
+		<div class="content" style="background: #FFFFFF;">
+			<div class="content_item">
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="recharge">
+						<span class="exchange_icon">
+							<img src="../images/center/recharge@2x.png" class="size_icon4" alt="充值"/>
+						</span>
+						<span class="exchange_name">充值</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="withdrawal">
+						<span class="exchange_icon">
+							<img src="../images/center/withdraw@2x.png" class="size_icon4" alt="提现"/>
+						</span>
+						<span class="exchange_name">提现</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/trans_record.html">
+						<span class="exchange_icon">
+							<img  src="../images/center/exchange@2x.png" class="size_icon4" alt="交易记录"/>
+						</span>
+						<span class="exchange_name">交易记录</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../zhuanqian/my_red_envelope.html">
+						<span class="exchange_icon">
+							<abbr style="position: relative;">
+							<img src="../images/center/red_bag@2x.png" class="size_icon2" alt="现金红包"/>
+							<b id="red_bag_count" style="border-radius:2px;position: absolute;background: #FF6C00;font-size: 6px;color: #FFFFFF;width: 20px;top: -5px;padding: 1px 2px;left: 12px;">0个</b>
+							</abbr>
+						</span>
+						<span class="exchange_name">现金红包</span>
+					</a>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="break"></div>
+			<div class="content_item">
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/invest_record_1.html">
+						<span class="exchange_icon">
+							<img src="../images/center/invest_data@2x.png" class="size_icon3" alt="投资记录"/>
+						</span>
+						<span class="exchange_name">投资记录</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/ex_invest.html">
+						<span class="exchange_icon">
+							<img  src="../images/center/n_invest@2x.png" class="size_icon3" alt="体验金投资"/>
+						</span>
+						<span class="exchange_name">体验金投资</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/my_points.html">
+						<span class="exchange_icon">
+							<img src="../images/center/mine_data@2x.png" class="size_icon3" alt="我的积分"/>
+						</span>
+						<span class="exchange_name">我的积分</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/promote_center.html">
+						<span class="exchange_icon">
+							<img src="../images/center/invest_share@2x.png" class="size_icon3" alt="邀请分享"/>
+						</span>
+						<span class="exchange_name">邀请分享</span>
+					</a>
+				</div>
+				<div class="sign_icon">
+					<img src="../images/center/invest_real@2x.png" alt="投资详情" title="投资详情" />
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="bottom_line"></div>
+			<div class="content_item">
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/register_identy.html">
+						<span class="exchange_icon">
+							<img src="../images/center/certification@2x.png" class="size_icon3" alt="实名认证"/>
+						</span>
+						<span class="exchange_name">实名认证</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/bound_phone.html">
+						<span class="exchange_icon">
+							<img src="../images/center/con_phone@2x.png" class="size_icon2" alt="绑定手机号"/>
+						</span>
+						<span class="exchange_name">绑定手机号</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/account_safe.html">
+						<span class="exchange_icon">
+							<img src="../images/center/account_safe@2x.png" class="size_icon1" alt="账户安全"/>
+						</span>
+						<span class="exchange_name">账户安全</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/receipt_address.html">
+						<span class="exchange_icon">
+							<img src="../images/center/address@2x.png" class="size_icon3" alt="收货地址"/>
+						</span>
+						<span class="exchange_name">收货地址</span>
+					</a>
+				</div>
+				<div class="sign_icon">
+					<img src="../images/center/account_setting@2x.png" alt="账户设置" title="账户设置" />
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="bottom_line"></div>
+			<div class="content_item">
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/bank_manage.html">
+						<span class="exchange_icon">
+							<img src="../images/center/card_manage@2x.png" class="size_icon3" alt="银行卡管理"/>
+						</span>
+						<span class="exchange_name">银行卡管理</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="../wode/ac_center.html" id="active">
+						<span class="exchange_icon">
+							<img src="../images/center/active_center@2x.png" class="size_icon3" alt="活动中心"/>
+						</span>
+						<span class="exchange_name">活动中心</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="javascript:void(0)" url="help_center.html">
+						<span class="exchange_icon">
+							<img src="../images/center/help@2x.png" class="size_icon3" alt="帮助中心"/>
+						</span>
+						<span class="exchange_name">帮助中心</span>
+					</a>
+				</div>
+				<div class="exchange_item">
+					<a href="tel:400-720-8808">
+						<span class="exchange_icon">
+							<img src="../images/center/service@2x.png" class="size_icon3" alt="客服"/>
+						</span>
+						<span class="exchange_name">我的客服</span>
+					</a>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="break"></div>
+		</div>
+		<div class="fixed_help"></div>
+		<footer>
+			<div class="footer_navigate">
+				<div class="nav_bar" url="../zhuanqian/index.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/home@2x.png" alt="首页"></span>
+						<span class="nav_name">首页</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../chanping/invest_finac.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/moneybag@2x.png" alt="赚钱"/></span>
+						<span class="nav_name">赚钱</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../jifen/integrate.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/integra@2x.png" alt="积分"/></span>
+						<span class="nav_name">积分</span>
+					</a>
+				</div>
+				<div class="nav_bar">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/mine_active@2x.png" alt="我的"/></span>
+						<span class="nav_name nav_active">我的</span>
+					</a>
+				</div>
+			</div>
+		</footer>
+		<div class="signUp">
+			<div class="sing_head">恭喜您,斩获
+				<font class="orange" id="sign_code">1</font>积分</div>
+			<div class="sign_middle_img">
+				<img src="../images/mine/gift.png" alt="礼盒" />
+				<p>积分赚得多，商城趣味多多</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/layer.js"></script>
+		<script type="text/javascript" src="../js/index_go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/bottom_switch.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			var phone = window.localStorage.getItem('phone');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$('.center_top_item:nth-of-type(2) span').html('你好，' + phone);
+			var sign_status;
+			$(function() {
+				/*点击签到*/
+				$('#sign_in').click(function() {
+					if(sign_status) {
+						mui.toast('您已签到');
+					} else {
+						signUp();
+					}
+				})
+				$('.bg').click(function() {
+					$('.bg').hide();
+					$('.signUp').hide();
+				})
+
+				/*获取用户进本账户信息*/
+				getUserMsg();
+
+				/*可用红包数量*/
+				get_envelope_count()
+			})
+
+			function getUserMsg() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/personal_center.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							/*累计总收入*/
+							$('.count_income .income_numb').html(data.total_income);
+							/*总资产*/
+							$('.cla_item:nth-of-type(1) .classity_numb').html(data.total_money_format);
+							window.localStorage.setItem('account', data.total_money_format);
+							/*可提现金额*/
+							$('.cla_item:nth-of-type(3) .classity_numb').html(data.money_format);
+							/*投资冻结*/
+							$('.cla_item:nth-of-type(5) .classity_numb').html('￥' + data.lock_invest_money);
+							/*是否签到*/
+							if(data.t_sign_data) {
+								sign_status = true;
+								$('.icon_sign_name').html('已签');
+							}
+						} else {
+							mui.toast(data.show_err);
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			function signUp() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/signin.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						var result = data.result;
+						if(data.response_code == 1) {
+							$('#sign_code').text(data.result.score);
+							mui.toast(result.info);
+							$('.bg').show();
+							$('.signUp').show();
+							$('.icon_sign_name').html('已签');
+							setTimeout(function() {
+								$('.bg').hide();
+								$('.signUp').hide();
+							}, 2000)
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			function dialTest() {
+				layer.open({
+					content: '拨打客服电话400-720-8808？',
+					btn: ['拨打', '取消'],
+					yes: function(index) {
+						layer.close(index);
+						plus.device.dial("4007208808", false);
+					}
+				});
+			}
+
+			/*退出*/
+			$('#logOut').click(function() {
+				layer.open({
+					content: '确定退出？',
+					btn: ['退出', '取消'],
+					yes: function(index) {
+						layer.close(index);
+						localStorage.removeItem('user_id');
+						localStorage.removeItem('phone');
+						var target = "../login.html";
+						goHref(target)
+					}
+				});
+			})
+
+			function get_envelope_count() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/voucher.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var result = data.data,
+								i = 0;
+							$.each(result, function(index, item) {
+								if(item.status == 0) {
+									i++;
+								}
+								$('#red_bag_count').html(i + '个');
+							})
+						}
+					}
+				})
+			}
+			/*切换导航*/
+			$('.exchange_item a').click(function() {
+				var url = $(this).attr('url');
+				var id = $(this).attr('id');
+				if(url) {
+					if(id) {
+						goHref('ac_center.html')
+					} else {
+					    if(url == 'recharge'){
+                             recharge.loadRecharge("recharge");
+                             return
+						}
+						if(url == 'withdrawal'){
+						     recharge.loadRecharge("withdrawal");
+                             return
+						}
+						switch_child(url);
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

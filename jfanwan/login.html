@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>登陆</title>
+		<link rel="stylesheet" href="css/register.css" />
+	</head>
+	<body style="position: relative;">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<span class="register_name">登陆</span>
+			</div>
+		</header>
+		<div class="login_logo top2">
+			<div class="logo_gold">
+				<img src="images/register/logo@2x.png" alt="金饭碗理财" />
+			</div>
+			<div class="logo_name">
+				<img src="images/register/licai@2x.png" alt="logo名" />
+			</div>
+		</div>
+		<div class="form_group">
+			<form>
+				<div class="form_item">
+					<input type="number" placeholder="请输入手机号码" id="phone" name="phone" value="" />
+					<!--17195253346-->
+				</div>
+				<div class="form_item">
+					<input type="password" placeholder="请输入密码" id="pwd" name="pwd" value="" />
+					<span class="icon_hide eye">
+				    </span>
+				</div>
+				<div class="form_item">
+					<div type="submit" class="register_submit  form_submit">登录</div>
+				</div>
+			</form>
+			<div class="login_operate">
+				<a href="javascript:void(0)" url="wode/forget_pwd.html">忘记密码</a>
+				<a href="javascript:void(0)" url="wode/register.html">立即注册</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/index_go_back.js"></script>
+		<script type="text/javascript" src="js/lock_out.js"></script>
+		<script type="text/javascript" src="js/bottom_switch.js"></script>
+		<script>
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			var _body = document.querySelector("body");
+			var phone_top = $('#phone').offset().top;
+			var pwd_top = $('#pwd').offset().top;
+			$('#phone').focus(function() {
+				_body.style.top = ($(document).height() / 2 - 100 - phone_top - $(this).height()) + 'px';
+			})
+			$('#phone').blur(function() {
+				_body.style.top = '0px';
+			})
+			$('#pwd').focus(function() {
+				_body.style.top = ($(document).height() / 2 - 100 - pwd_top - $(this).height()) + 'px';
+			})
+			$('#pwd').blur(function() {
+					_body.style.top = '0px';
+				})
+			$(function() {
+				$('.register_submit').click(function() {
+					var phone = $.trim($('#phone').val());
+					var pwd = $.trim($('#pwd').val());
+					if(!phone || !pwd) {
+						mui.toast('请填写完整');
+						return false;
+					}
+					if(!phone) {
+						mui.toast('请输入手机号');
+						return false;
+					}
+					if(!/^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$/i.test(phone)) {
+						mui.toast('手机号格式不正确');
+						return false;
+					}
+					$.ajax({
+						type: "post",
+						url: "https://api.jfwlicai.com/mobile/login.php" + dateKey,
+						data: $('form').serialize(),
+						dataType: 'json',
+						async: true,
+						success: function(data) {
+							if(data.user_login_status == 1) {
+								mui.toast(data.show_err);
+								var user_id = data.id;
+								window.localStorage.setItem('user_id', user_id);
+								window.localStorage.setItem("phone", phone);
+								var sub = "zhuanqian/index.html"
+								switch_child(sub);
+							} else {
+								mui.toast(data.show_err);
+							}
+						},
+						error: function(e) {
+							mui.toast('登录失败');
+						}
+					});
+				})
+			})
+
+			/*忘记密码，立即注册*/
+			$('.login_operate a').click(function() {
+				var target = $(this).attr('url');
+				switch_child(target);
+			})
+			
+			function show(e,text){
+				
+			}
+		</script>
+	</body>
+
+</html>

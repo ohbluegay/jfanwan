@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<title>首页</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/idangerous.swiper.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/layer.css" />
+		<style>
+			.swiper-container {
+				height: 200px;
+				overflow: hidden;
+				margin-top: 56px;
+			}
+			
+			.swiper-slide img {
+				width: 100%;
+				height: 200px;
+			}
+			
+			@media only screen and (min-width: 280px) {
+				.swiper-container {
+					height: 150px;
+				}
+				.swiper-slide img {
+					height: 150px;
+				}
+			}
+			
+			@media only screen and (min-width: 320px) {
+				.swiper-container {
+					height: 170px;
+				}
+				.swiper-slide img {
+					height: 170px;
+				}
+			}
+			
+			@media only screen and (min-width: 360px) {
+				.swiper-container {
+					height: 190px;
+				}
+				.swiper-slide img {
+					height: 190px;
+				}
+			}
+			
+			@media only screen and (min-width: 375px) {
+				.swiper-container {
+					height: 200px;
+				}
+				.swiper-slide img {
+					height: 200px;
+				}
+			}
+			
+			@media only screen and (min-width: 414px) {
+				.swiper-container {
+					height: 220px;
+				}
+				.swiper-slide img {
+					height: 220px;
+				}
+			}
+			
+			.wrap {
+				position: absolute;
+				top: 20px;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				overflow-y: scroll;
+				-webkit-overflow-scrolling: touch;
+			}
+			
+			.latest {
+				position: relative;
+				width: 100%;
+				background: #F0F0F0;
+			}
+			
+			.more {
+				position: relative;
+				width: 100%;
+			}
+			
+			.latest div,
+			.more div {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 40px;
+				text-align: center;
+				font-size: 12px;
+				line-height: 40px;
+			}
+			
+			.more div {
+				top: 0;
+				bottom: auto;
+			}
+			
+			.money_loan {
+				padding: 0 15px;
+			}
+		</style>
+	</head>
+
+	<body style="background: #F8F8F8;">
+		<header style="position: fixed;top: 0; width:100%;z-index: 100000;">
+			<div class="top_lide">
+				<img src="../images/index/top_lide@2x.png" title="投资更放心" alt="投资更放心" style="vertical-align: bottom;" />
+			</div>
+		</header>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="#"><img src="../images/index/slide_icon@2x.png" class="banner" /></a>
+						</div>
+					</div>
+					<div class="pagination"></div>
+				</div>
+				<div class="mainblock">
+					<div class="block_li" id="to_invest">
+						<a href="javascript:void(0)">
+							<span class="menu_icon">
+						<img src="../images/index/invest@3x.png" alt="投资理财"/>
+					</span>
+							<span class="menu_name yellow">投资理财</span>
+						</a>
+					</div>
+					<div class="inner_line"></div>
+					<div class="block_li" id="share" style="width: 32.5%;">
+						<a href="javascript:void(0)">
+							<span class="menu_icon">
+						<img src="../images/index/share@2x.png" alt="分享送礼"/>
+					</span>
+							<span class="menu_name orange">分享送礼</span>
+						</a>
+					</div>
+					<div class="inner_line"></div>
+					<div class="block_li">
+						<a href="#">
+							<span class="menu_icon">
+						<img src="../images/index/protect@2x.png" alt="保障无忧"/>
+					</span>
+							<span class="menu_name blue">保障无忧</span>
+						</a>
+					</div>
+					<div class="blank"></div>
+				</div>
+				<div class="break"></div>
+				<div class="main_rate">
+					<div class="top_tips">
+						<div class="top_news">
+							<span></span>
+						</div>
+						<!--<div class="fresh_icon">
+						<span>
+						<img src="../images/index/fresh@2x.png" alt="新手专享"/>
+					</span>
+					</div>-->
+						<div class="blank"></div>
+					</div>
+					<div class="rate_circle">
+						<div class="circle">
+							<canvas width="184px" height="184px" id="myCanvas"></canvas>
+							<div class="income">
+								<div class="year_income">
+									<span class="year_name">年化收益</span>
+									<span class="year_rate"></span>
+								</div>
+							</div>
+							<div class="rate_invest">
+								<div class="invest_bottom">
+									<div id="limit">
+										<span class="invest_name">投资期限</span>
+										<span class="invest_numb"></span>
+									</div>
+									<div id="total">
+										<span class="invest_name">投资总额</span>
+										<span class="invest_numb"></span>
+									</div>
+									<div class="blank"></div>
+								</div>
+							</div>
+							<div class="rate_bottom">
+								<div class="invest_money">
+									<span class="rate1"><span>0</span>0%<span>00</span></span>
+									<span class="ca_money">可投金额<font></font>元</span>
+									<span class="rate2">100%</span>
+								</div>
+								<div class="invest_button">
+									<span id="min_invest"></span>
+								</div>
+								<div class="invest_stop">
+									<span><img src="../images/index/clock@2x.png" alt="时钟" style="width: 18px;vertical-align: middle;"></span>
+									<span>投资倒计时</span>
+									<span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="break"></div>
+				<div class="loan">
+					<div class="load_main">
+					</div>
+				</div>
+				<div class="break bt_help"></div>
+				<div class="fixed_help"></div>
+				<div id="pullUp">
+					<span class="pullUpLabel">上拉加载更多</span>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer_navigate">
+				<div class="nav_bar">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/home_active@2x.png" alt="首页"></span>
+						<span class="nav_name nav_active">首页</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../chanping/invest_finac.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/moneybag@2x.png" alt="赚钱"/></span>
+						<span class="nav_name">赚钱</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../jifen/integrate.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/integra@2x.png" alt="积分"/></span>
+						<span class="nav_name">积分</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../wode/center.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/mine@2x.png" alt="我的"/></span>
+						<span class="nav_name">我的</span>
+					</a>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/idangerous.swiper.min.js"></script>
+		<script type="text/javascript" src="../js/layer.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/index_go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/bottom_switch.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function(e) {
+				//initSwiper();
+				progress();
+				getSouce();
+				//unlockPage()
+			});
+
+			/*初始化轮播图插件*/
+			function initSwiper() {
+				var mySwiper = new Swiper('.swiper-container', {
+					pagination: '.pagination',
+					grabCursor: true,
+					loop: true,
+					paginationClickable: true,
+					autoplayDisableOnInteraction: false,
+					autoplay: 4000,
+					autoHeight: true
+				})
+			}
+
+			/*圆环*/
+			function drawProcess() {
+				$('canvas#myCanvas').each(function() {
+					var text = $('#myCanvas').html();
+					var process = text.substring(0, text.length - 1);
+					var canvas = this;
+					var context = canvas.getContext('2d');
+					context.clearRect(0, 0, 48, 48);
+					context.beginPath();
+					context.moveTo(92, 92);
+					context.arc(92, 92, 92, 0, Math.PI * 2, false);
+					context.closePath();
+					context.fillStyle = '#ddd';
+					context.fill();
+					context.beginPath();
+					context.moveTo(92, 92);
+					if(process == 100) {
+						context.arc(92, 92, 92, Math.PI * 2 * (15 / 36), (Math.PI * 2 - Math.PI * 2 * (1 / 3)) * process / 100 + Math.PI * 2 * (15 / 36) + 2, false);
+					} else {
+						context.arc(92, 92, 92, Math.PI * 2 * (15 / 36), (Math.PI * 2 - Math.PI * 2 * (1 / 3)) * process / 100 + Math.PI * 2 * (15 / 36), false);
+					}
+					context.closePath();
+					context.fillStyle = '#FFD700';
+					context.fill();
+					context.beginPath();
+					context.moveTo(92, 92);
+					context.arc(92, 92, 85, 0, Math.PI * 2, true);
+					context.closePath();
+					context.fillStyle = 'rgba(255,255,255,1)';
+					context.fill();
+				})
+			}
+			//drawProcess();
+
+			/*获取所有数据*/
+			function getSouce() {
+				$.ajax({
+					type: 'post',
+					url: 'https://api.jfwlicai.com/mobile/init.php' + dateKey,
+					dataType: 'json',
+					success: function(rt) {
+						if(rt.response_code == 1) {
+							data = rt.data;
+							/*1.渲染上面的圆环内容*/
+							var circle_data = data[0];
+							$('.top_news span').html(circle_data.name);
+							$('.rate_circle').attr('list_id', circle_data.id);
+							$('#myCanvas').html(circle_data.progress_point + '%');
+							if(circle_data.deal_status >= 4) {
+								$('#myCanvas').html('100%');
+							}
+							$('.income .year_rate').html(circle_data.rate + '%');
+							$('#min_invest').html(circle_data.min_loan_money + '元起投,' + circle_data.loantype_format)
+							var c_repay_time;
+							if(circle_data.repay_time_type == 0) {
+								c_repay_time = circle_data.repay_time + '天';
+							} else {
+								c_repay_time = circle_data.repay_time + '月';
+							}
+							$('#limit .invest_numb').html(c_repay_time);
+							$('#total .invest_numb').html(circle_data.borrow_amount_format);
+							/*可投金额*/
+							$('.ca_money font').html(circle_data.need_money);
+							/*投资倒计时*/
+							$('.invest_stop span:nth-of-type(3)').html(circle_data.remain_time_format);
+							/*画圆环*/
+							drawProcess();
+							/*banner*/
+							$('.swiper-wrapper').html('');
+							$.each(rt.adv_list, function(index, item) {
+								var imgArr = [];
+								imgArr.push("<div class='swiper-slide'>");
+								imgArr.push("<a href='javascript:void(0)' url='" + item.data + "'><img src='" + item.img + "' class='banner' /></a>");
+								imgArr.push("</div>");
+								imgArr = imgArr.join("");
+								$('.swiper-wrapper').append(imgArr);
+							});
+							initSwiper()
+							/*遍历主数据*/
+							$('.load_main').html('');
+							$.each(data, function(index, item) {
+								if(index > 0) {
+									var listArr = [];
+									var status = null;
+									if(item.deal_status == 4) {
+										status = '还款中';
+									}
+									if(item.deal_status == 5) {
+										status = '已还清';
+									}
+									if(item.deal_status == 2) {
+										status = '满标';
+									}
+									if(item.deal_status == 3) {
+										status = '流标';
+									}
+									if(item.deal_status == 1 && item.remain_time <= 0) {
+										status = '已过期';
+									}
+									listArr.push("<div class='money_loan' list_id='" + item.id + "'>");
+									listArr.push("<div class='loan_top'>");
+									listArr.push("<div class='loan_left'>");
+									if(item.name.length > 11) {
+										var list_name = item.name.substr(0, 11) + '...';
+									} else {
+										var list_name = item.name;
+									}
+									listArr.push("<span>" + list_name + "</span>");
+									//								listArr.push("<span>新手专享</span>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_right'>");
+									if(status == null) {
+										listArr.push("<span>投资倒计时</span>");
+										listArr.push("<span>" + item.remain_time_format + "</span>");
+									} else {
+										listArr.push("<span>" + status + "</span>");
+									}
+									listArr.push("</div>");
+									listArr.push("<div class='blank'></div>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_middle'>");
+									listArr.push("<div class='loan_rate loan_active'>");
+									listArr.push("<span>" + item.rate + "%</span>");
+									listArr.push("<span>年化收益</span>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_rate'>");
+									var repay_time;
+									if(item.repay_time_type == 0) {
+										repay_time = item.repay_time + '天';
+									} else {
+										repay_time = item.repay_time + '月';
+									}
+									listArr.push("<span>" + repay_time + "</span>");
+									listArr.push("<span>投资期限</span>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_rate'>");
+									listArr.push("<span>" + item.borrow_amount_format + "</span>");
+									listArr.push("<span>投资总额</span>");
+									listArr.push("</div>");
+									listArr.push("<div class='blank'></div>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_progress'>");
+									listArr.push("<div class='progress_bag'>");
+									if(item.deal_status >= 4) {
+										listArr.push("<div class='progress' rate='100'></div>");
+									} else {
+										listArr.push("<div class='progress' rate='" + item.progress_point + "'></div>");
+									}
+									listArr.push("</div>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_bottom'>");
+									listArr.push("<div class='loan_bottom_left'>");
+									listArr.push("<span><img src='../images/index/moneybag@2x.png'/></span>");
+									listArr.push("<span>" + item.min_loan_money + "元起投</span>");
+									listArr.push("</div>");
+									listArr.push("<div class='loan_bottom_right'>");
+									listArr.push("<span>" + item.loantype_format + "</span>");
+									listArr.push("</div>");
+									listArr.push("<div class='blank'></div>");
+									listArr.push("</div>");
+									listArr.push("</div>");
+									listArr = listArr.join("");
+									/*将list数据append到界面上*/
+									$('.load_main').append(listArr);
+								}
+							})
+
+							getList_id();
+							progress();
+							toPage()
+						}
+					},
+					error: function(e) {
+						mui.toast('网络无连接')
+					}
+				})
+			}
+
+			/*填充progress长度*/
+			function progress() {
+				$('.progress').each(function(i) {
+					$(this).css('width', $(this).attr('rate') + '%');
+				})
+			}
+			/*跳转到外部链接*/
+			function toPage() {
+				$('.swiper-slide a').click(function() {
+					var t = $(this).attr('url');
+					localStorage.setItem('foreUlr', t);
+					goHref('fore_url.html')
+				})
+			}
+
+			/*点击标获取标id并跳转*/
+			function getList_id() {
+				$('.money_loan').click(function() {
+					var list_id = $(this).attr('list_id');
+					window.localStorage.setItem('list_id', list_id);
+					var target = "../zhuanqian/make_money.html";
+					switch_child(target)
+				})
+			}
+			/*投资理财*/
+			document.getElementsByClassName('rate_circle')[0].onclick = function() {
+				var list_id = $(this).attr('list_id');
+				window.localStorage.setItem('list_id', list_id);
+				var target = "../zhuanqian/make_money.html";
+				switch_child(target)
+			}
+			/*投资理财*/
+			document.getElementById('to_invest').onclick = function() {
+				var target = "../chanping/invest_finac.html"
+				switch_child(target);
+			}
+
+			/*分享送礼*/
+			document.getElementById('share').onclick = function() {
+				var target = "../zhuanqian/share.html"
+				switch_child(target);
+			}
+			/*获取当前页的webview id*/
+			//plus.webview.currentWebview().id
+
+			function pullDownAction() {
+				setTimeout(function() {
+					$.ajax({
+						type: 'post',
+						url: 'https://api.jfwlicai.com/mobile/init.php' + dateKey,
+						dataType: 'json',
+						success: function(rt) {
+							if(rt.response_code == 1) {
+								data = rt.data;
+								/*1.渲染上面的圆环内容*/
+								var circle_data = data[0];
+								$('.top_news span').html(circle_data.name);
+								$('.rate_circle').attr('list_id', circle_data.id);
+								$('#myCanvas').html(circle_data.progress_point + '%');
+								if(circle_data.deal_status >= 4) {
+									$('#myCanvas').html('100%');
+								}
+								$('.income .year_rate').html(circle_data.rate + '%');
+								$('#min_invest').html(circle_data.min_loan_money + '元起投,' + circle_data.loantype_format)
+								var c_repay_time;
+								if(circle_data.repay_time_type == 0) {
+									c_repay_time = circle_data.repay_time + '天';
+								} else {
+									c_repay_time = circle_data.repay_time + '月';
+								}
+								$('#limit .invest_numb').html(c_repay_time);
+								$('#total .invest_numb').html(circle_data.borrow_amount_format);
+								/*可投金额*/
+								$('.ca_money font').html(circle_data.need_money);
+								/*投资倒计时*/
+								$('.invest_stop span:nth-of-type(3)').html(circle_data.remain_time_format);
+								/*画圆环*/
+								drawProcess();
+								/*banner*/
+								$('.swiper-wrapper').html('');
+								$.each(rt.adv_list, function(index, item) {
+									var imgArr = [];
+									imgArr.push("<div class='swiper-slide'>");
+									imgArr.push("<a href='javascript:void(0)' url='" + item.data + "'><img src='" + item.img + "' class='banner' /></a>");
+									imgArr.push("</div>");
+									imgArr = imgArr.join("");
+									$('.swiper-wrapper').append(imgArr);
+								});
+								initSwiper()
+								/*遍历主数据*/
+								$('.load_main').html('');
+								$.each(data, function(index, item) {
+									if(index > 0) {
+										var listArr = [];
+										var status = null;
+										if(item.deal_status == 4) {
+											status = '还款中';
+										}
+										if(item.deal_status == 5) {
+											status = '已还清';
+										}
+										if(item.deal_status == 2) {
+											status = '满标';
+										}
+										if(item.deal_status == 3) {
+											status = '流标';
+										}
+										if(item.deal_status == 1 && item.remain_time <= 0) {
+											status = '已过期';
+										}
+										listArr.push("<div class='money_loan' list_id='" + item.id + "'>");
+										listArr.push("<div class='loan_top'>");
+										listArr.push("<div class='loan_left'>");
+										if(item.name.length > 13) {
+											var list_name = item.name.substr(0, 13) + '...';
+										} else {
+											var list_name = item.name;
+										}
+										listArr.push("<span>" + list_name + "</span>");
+										//								listArr.push("<span>新手专享</span>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_right'>");
+										if(status == null) {
+											listArr.push("<span>投资倒计时</span>");
+											listArr.push("<span>" + item.remain_time_format + "</span>");
+										} else {
+											listArr.push("<span>" + status + "</span>");
+										}
+										listArr.push("</div>");
+										listArr.push("<div class='blank'></div>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_middle'>");
+										listArr.push("<div class='loan_rate loan_active'>");
+										listArr.push("<span>" + item.rate + "%</span>");
+										listArr.push("<span>年化收益</span>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_rate'>");
+										var repay_time;
+										if(item.repay_time_type == 0) {
+											repay_time = item.repay_time + '天';
+										} else {
+											repay_time = item.repay_time + '月';
+										}
+										listArr.push("<span>" + repay_time + "</span>");
+										listArr.push("<span>投资期限</span>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_rate'>");
+										listArr.push("<span>" + item.borrow_amount_format + "</span>");
+										listArr.push("<span>投资总额</span>");
+										listArr.push("</div>");
+										listArr.push("<div class='blank'></div>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_progress'>");
+										listArr.push("<div class='progress_bag'>");
+										if(item.deal_status >= 4) {
+											listArr.push("<div class='progress' rate='100'></div>");
+										} else {
+											listArr.push("<div class='progress' rate='" + item.progress_point + "'></div>");
+										}
+										listArr.push("</div>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_bottom'>");
+										listArr.push("<div class='loan_bottom_left'>");
+										listArr.push("<span><img src='../images/index/moneybag@2x.png'/></span>");
+										listArr.push("<span>" + item.min_loan_money + "元起投</span>");
+										listArr.push("</div>");
+										listArr.push("<div class='loan_bottom_right'>");
+										listArr.push("<span>" + item.loantype_format + "</span>");
+										listArr.push("</div>");
+										listArr.push("<div class='blank'></div>");
+										listArr.push("</div>");
+										listArr.push("</div>");
+										listArr = listArr.join("");
+										/*将list数据append到界面上*/
+										$('.load_main').append(listArr);
+									}
+								})
+
+								getList_id();
+								progress();
+								toPage();
+								myScroll.refresh()
+							}
+						},
+						error: function(e) {
+							mui.toast('网络无连接')
+						}
+					})
+				}, 1000);
+			}
+
+			function pullUpAction() {
+				setTimeout(function() {
+					myScroll.refresh()
+				}, 1000);
+			}
+		</script>
+	</body>
+
+</html>

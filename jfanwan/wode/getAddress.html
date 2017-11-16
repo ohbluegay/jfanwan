@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>选择地址</title>
+	</head>
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" href="../css/common_header.css" />
+	<link rel="stylesheet" href="../css/mine.css" />
+	<style>
+		#allmap {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			font-family: "微软雅黑";
+		}
+		
+		#l-map {
+			height: 1px;
+			width: 100%;
+			visibility: hidden;
+		}
+		
+		#r-result {
+			width: 100%;
+			position: absolute;
+			top: 32px;
+			background: #FFFFFF;
+			font-size: 12px;
+		}
+		
+		#r-result ul {
+			list-style: none;
+			padding: 0 10px;
+		}
+		
+		li {
+			border-bottom: 1px solid #F0F0F0;
+			padding: 5px 40px;
+			background: url(../images/ad_icon.png) no-repeat 10px;
+		}
+		
+		li:last-of-type {
+			border: none;
+		}
+		
+		#r-result abbr {
+			display: block;
+			font-size: 14px;
+		}
+		
+		#r-result font {
+			color: #999999;
+		}
+	</style>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">选择地址</span>
+			</div>
+		</header>
+		<section style="position: relative;" class="top2">
+			<div class="search">
+				<input type="text" placeholder="查找小区 /大厦/学校" id="key" oninput="getAddress()" />
+				<span>请输入关键字：</span>
+			</div>
+			<div id="l-map"></div>
+			<div id="r-result">
+				<ul>
+					<!--<li>
+						<abbr>徐汇国际大厦</abbr>
+						<font>上海徐汇区肇嘉浜路1033号</font>
+					</li>-->
+				</ul>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=hW1Gd8LFDU9Dsann1Hf2uGApjfHzByxS"></script>
+		<script>
+			var lat = localStorage.getItem('lat');
+			var lng = localStorage.getItem('lng');
+			var state = localStorage.getItem('state');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(function() {
+				//init_address()
+			})
+			// 百度地图API功能
+			function getAddress() {
+				var key = $.trim($('#key').val());
+				// 百度地图API功能
+				var map = new BMap.Map("l-map"); // 创建Map实例
+				map.centerAndZoom(new BMap.Point(lng, lat), 11);
+				var options = {
+					onSearchComplete: function(results) {
+						// 判断状态是否正确
+						if(local.getStatus() == BMAP_STATUS_SUCCESS) {
+							var s = [];
+							for(var i = 0; i < results.getCurrentNumPois(); i++) {
+								s.push("<li><abbr>" + results.getPoi(i).title + "</abbr><font>" + results.getPoi(i).address + "</font></li>");
+							}
+							$("#r-result").find('ul').html(s.join(""));
+							choose_address();
+						}
+					}
+				};
+				var local = new BMap.LocalSearch(map, options);
+				local.search(key);
+			}
+
+			/*点击地址*/
+			function choose_address() {
+				$('#r-result li').click(function() {
+					var title = $(this).find('abbr').text();
+					localStorage.setItem('ch_ad', title);
+					window.history.go(-1)
+				})
+			}
+
+			/*默认定位*/
+			lockPage();
+			$.ajax({
+				type: "post",
+				url: "http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location=" + lat + "," + lng + "&output=json&pois=1&ak=hW1Gd8LFDU9Dsann1Hf2uGApjfHzByxS",
+				dataType: 'jsonp',
+				async: true,
+				success: function(data) {
+					var addressList = data.result.pois;
+					var add_li = [];
+					$.each(addressList, function(index, item) {
+						add_li.push("<li><abbr>" + item.name + "</abbr><font>" + item.addr + "</font></li>")
+					})
+					$("#r-result").find('ul').html(add_li.join(""));
+					choose_address();
+					unlockPage()
+				},
+				error: function(e) {
+					unlockPage()
+					mui.toast('获取地址失败');
+				}
+			});
+
+			function init_address() {
+				$.ajax({
+					type: "post",
+					url: "http://api.map.baidu.com/highacciploc/v1?qterm=pc&ak=i3IPpXCQI4lzLklqG6D2TLR3aro5wc7c&coord=bd09ll&callback_type=jsonp&callback=test",
+					dataType: 'jsonp',
+					async: true,
+					success: function(data) {
+						$.ajax({
+							type: "post",
+							url: "http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location=" + data.content.location.lat + "," + data.content.location.lng + "&output=json&pois=1&ak=i3IPpXCQI4lzLklqG6D2TLR3aro5wc7c",
+							dataType: 'jsonp',
+							async: true,
+							success: function(data) {
+								var addressList = data.result.pois;
+								var add_li = [];
+								$.each(addressList, function(index, item) {
+									add_li.push("<li><abbr>" + item.name + "</abbr><font>" + item.addr + "</font></li>")
+								})
+								$("#r-result").find('ul').html(add_li.join(""));
+								choose_address();
+							},
+							error: function(e) {
+								mui.toast('获取地址失败');
+							}
+						});
+					},
+					error: function(e) {
+						mui.toast('定位失败');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

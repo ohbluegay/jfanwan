@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>推广中心</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body style="background: #F8F8F8;">
+		<div class="promote_header">
+			<div class="bar"></div>
+			<div class="promo_back">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">推广中心</span>
+			</div>
+			<div class="member_group">
+				<div class="member_item">
+					<span class="member_single"></span>
+					<label class="member_name">我的推广员</label>
+					<font class="member_numb" id="for_phone">50人</font>
+				</div>
+				<div class="member_item">
+					<span class="member_double"></span>
+					<label class="member_name">我推广的会员</label>
+					<font class="member_numb" id="my_promot">50人</font>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="promote_income">
+				<span class="income_name">累计推广收益</span>
+				<span class="income_numb">
+					<font class="in_money">2560.00</font>
+					<font>元</font>
+				</span>
+			</div>
+		</div>
+		<section>
+			<div class="promote_people">
+				<a href="javascript:void(0)" id="center" class="fri_active">
+					<div class="fri_item">邀请好友</div>
+				</a>
+				<a href="javascript:void(0)" id="data">
+					<div class="fri_item">邀请记录</div>
+				</a>
+				<div class="blank"></div>
+			</div>
+			<div class="break"></div>
+			<div class="tab" tabindex="center" style="background: #FFFFFF;padding-bottom: 25px;">
+				<div class="pro_icon"></div>
+				<div class="promote_submit" onclick="share()">点击立即分享</div>
+			</div>
+			<div class="tab" style="display: none;" tabindex="data">
+				<div class="pro_data">
+					<ul>
+						<li>
+							<span class="pro_data_icon"></span>
+							<span class="pro_data_item">
+							<font class="phone_nuber">13603570224</font>
+							<font>成为您的推广会员</font>
+							<time>2016-09-26 11:00</time>
+						</span>
+							<span class="mb mb_1"></span>
+						</li>
+						<li>
+							<span class="pro_data_icon"></span>
+							<span class="pro_data_item">
+							<font class="phone_nuber">13603570224</font>
+							<font>成为您的推广会员</font>
+							<time>2016-09-26 11:00</time>
+						</span>
+							<span class="mb mb_2"></span>
+						</li>
+						<li>
+							<span class="pro_data_icon"></span>
+							<span class="pro_data_item">
+							<font class="phone_nuber">13603570224</font>
+							<font>成为您的推广会员</font>
+							<time>2016-09-26 11:00</time>
+						</span>
+							<span class="mb mb_2"></span>
+						</li>
+						<li>
+							<span class="pro_data_icon"></span>
+							<span class="pro_data_item">
+							<font class="phone_nuber">13603570224</font>
+							<font>成为您的推广会员</font>
+							<time>2016-09-26 11:00</time>
+						</span>
+							<span class="mb mb_2"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			var phone;
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				tab_exchange()
+				getMember()
+				getList()
+			})
+
+			/*切换tab*/
+			function tab_exchange() {
+				$('.promote_people a').click(function() {
+					$(this).addClass('fri_active').siblings('a').removeClass('fri_active');
+					var id = $(this).attr('id');
+					$(".tab[tabindex='" + id + "']").show().siblings('.tab').hide()
+				})
+			}
+
+			/*获取推广会员人数*/
+			function getMember() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/invite.php"+dateKey,
+					data: {user_id:user_id},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var result = data.data;
+							if(result.my_promoter == ''){
+								$('#for_phone').html('无');
+							}else{
+								$('#for_phone').html(result.my_promoter.substr(0,3)+"****"+result.my_promoter.substr(7));
+							}
+							$('#my_promot').html(result.referral_user_count);
+							$('.in_money').html(result.referral_total_money)
+							phone = data.user_mobile;
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			/*获取推广会员信息*/
+			function getList() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/invite_list.php"+dateKey,
+					data: {'user_id':user_id},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.pro_data ul').html("");
+							$.each(data.data, function(index, item) {
+								var liArr = [];
+								liArr.push("<li>");
+								liArr.push("<span class='pro_data_icon'></span>");
+								liArr.push("<span class='pro_data_item'>");
+								liArr.push("<font class='phone_nuber'>"+item.mobile+"</font>");
+								liArr.push("<font>成为您的推广会员</font>");
+								liArr.push("<time>"+item.register_time_format+"</time>");
+								liArr.push("</span>");
+								//liArr.push("<span class='mb mb_2'></span>");
+								liArr.push("</li>");
+								liArr = liArr.join("");
+								$('.pro_data ul').append(liArr);
+							})
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

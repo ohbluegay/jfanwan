@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>选择银行卡</title>
+		<link rel="stylesheet" href="../css/zhuanqian.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+		<style>
+			ul {
+				list-style: none;
+			}
+			
+			li {
+				padding: 5px 10px;
+				position: relative;
+				border-bottom: 1px solid #F0F0F0;
+			}
+			
+			li:last-of-type {
+				border-bottom: none;
+			}
+			
+			li img {
+				width: 120px;
+				height: 30px;
+			}
+			
+			.li_left {
+				position: absolute;
+				left: 10px;
+				top: 10px;
+			}
+			
+			.li_right {
+				padding: 10px 0 10px 130px;
+			}
+			
+			.li_right p {
+				font-size: 12px;
+				word-break: break-word;
+				color: #999999;
+				padding: 2px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">选择银行卡</span>
+			</div>
+		</header>
+		<section style="background: #FFFFFF;" class="top2">
+			<ul>
+				
+			</ul>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			  dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/choose_bank.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('ul').html('');
+							$.each(data.bank_list, function(index, item) {
+								var liArr = [];
+								liArr.push("<li id='"+item.id+"'>");
+								liArr.push("<div class='li_left'>");
+								liArr.push("<img src='"+item.icon+"' class='p_bank_img'/>");
+								liArr.push("</div>");
+								liArr.push("<div class='li_right'>");
+								liArr.push("<span class='p_bank_name'>"+item.name+"</span>");
+								liArr.push("</div>");
+								liArr.push("</li>");
+								liArr = liArr.join("");
+								$('ul').append(liArr)
+							});
+							getBank()
+						}
+					},
+					error: function(e) {
+
+					}
+
+				});
+			})
+			
+			function getBank() {
+				$('li').bind('click', function() {
+					var b = $(this);
+					var p_bank_id = b.attr('id');
+					var p_bank_name = b.find('.p_bank_name').text();
+					var p_bank_img = b.find('.p_bank_img').attr('src');
+					localStorage.setItem('p_bank_id', p_bank_id);
+					localStorage.setItem('p_bank_name', p_bank_name);
+					localStorage.setItem('p_bank_img', p_bank_img);
+					window.history.go(-1)
+				})
+			}
+		</script>
+	</body>
+
+</html>

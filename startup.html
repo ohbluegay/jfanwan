@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>启动页</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/lock_out.js"></script>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script>
+			mui.init()
+			var topBar = 25;
+			localStorage.setItem('topBar', topBar);
+			var targetUrl;
+			var user_id = window.localStorage.getItem('user_id');
+			if(!user_id) {
+				window.location.href = 'login.html'
+			} else {
+				//targetUrl = "zhuanqian/index.html";
+				//targetId = "zhuanqian/index.html";
+				showGraphical();
+			}
+
+			/*图形解锁*/
+			function showGraphical() {
+				window.webkit.messageHandlers.OOXX.postMessage({ 'type': 'CheckhandPass', 'data': { 'userID': user_id } });
+			}
+
+			function checkHandPass(use, pass) {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/check_lock_pwd.php",
+					data: { 'user_id': user_id, 'lock_pwd': pass, 're_lock_pwd': pass },
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							mui.toast(data.show_err)
+							window.location.href = "zhuanqian/index.html"
+						} else {
+							mui.toast(data.show_err)
+						}
+					},
+					error: function(e) {
+						mui.toast('网络错误');
+					}
+				});
+			}
+
+			var ua = navigator.userAgent.toLowerCase();
+			if(/iphone|ipad|ipod/.test(ua)) {
+				alert("iphone");		
+			}
+			if(/android/.test(ua)) {
+				alert("android");
+			}
+		</script>
+	</body>
+
+</html>

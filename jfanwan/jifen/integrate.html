@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>积分商城</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/integrate.css" />
+		<link rel="stylesheet" href="../css/main.css" />
+		<link rel="stylesheet" href="../css/idangerous.swiper.css" />
+		<style>
+			.swiper-container {
+				height: 150px;
+				overflow: hidden;
+			}
+			
+			.swiper-slide img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: #F8F8F8;">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<!--<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>-->
+				<span class="register_name">积分商城</span>
+				<div class="menu">
+				</div>
+				<div class="bg">
+
+				</div>
+				<div class="blank"></div>
+			</div>
+		</header>
+		<div class="bg">
+
+		</div>
+		<div class="menu_nav">
+			<ul id="menu">
+				<li>所有类别</li>
+				<li class="nav_li_active">不限</li>
+				<li>服装</li>
+				<li>电器</li>
+				<li>食品</li>
+			</ul>
+		</div>
+		<div class="wrap" style="margin-top: 40px;">
+			<div class="nav_inte">
+				<div class="nav_item inte_active">
+					<a href="javascript:void(0)">
+						<span>默认排序</span>
+					</a>
+				</div>
+				<div class="nav_item" index="1">
+					<a href="javascript:void(0)">
+						<span>最新</span>
+					</a>
+				</div>
+				<div class="nav_item" index="2">
+					<a href="javascript:void(0)">
+						<span>热门</span>
+					</a>
+				</div>
+				<div class="nav_item" index="3">
+					<a href="javascript:void(0)">
+						<span>积分</span>
+						<span class="up_down">
+						<img src="../images/integrate/up@2x.png" />
+						<img src="../images/integrate/down@2x.png" />
+					</span>
+					</a>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="../images/integrate/inte_banner@2x.png" alt="banner图" />
+					</div>
+				</div>
+				<div class="pagination"></div>
+			</div>
+			<div class="inte_tips">
+				<div class="inte_tips_left">
+					<span class="inte_mine font-color1">我的积分<span class="font-color3" id="myPoint"></span></span>
+					<a href="javascript:void(0)">
+						<span class="inte_mine scalefont font-color2">如何获取积分?</span>
+					</a>
+				</div>
+				<div class="inte_tips_right">
+					<a href="javascript:void(0)" id="ex_record">
+						<span class="scalefont font-color1">兑换记录</span>
+					</a>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="break"></div>
+			<div class="inte_container">
+				<div class="inte_container_inner">
+					<ul class="ticket">
+					</ul>
+				</div>
+			</div>
+			<div class="break"></div>
+			<div class="fixed_help"></div>
+		</div>
+		<footer>
+			<div class="footer_navigate">
+				<div class="nav_bar" url="../zhuanqian/index.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/home@2x.png" alt="首页"></span>
+						<span class="nav_name">首页</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../chanping/invest_finac.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/moneybag@2x.png" alt="赚钱"/></span>
+						<span class="nav_name">赚钱</span>
+					</a>
+				</div>
+				<div class="nav_bar">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/integra_active@2x.png" alt="积分"/></span>
+						<span class="nav_name nav_active">积分</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../wode/center.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/mine@2x.png" alt="我的"/></span>
+						<span class="nav_name">我的</span>
+					</a>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/index_go_back.js"></script>
+		<script type="text/javascript" src="../js/immerse_navigate.js"></script>
+		<script type="text/javascript" src="../js/idangerous.swiper.min.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/bottom_switch.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			/*var topBar = localStorage.getItem('topBar')
+			$('.bar').css('height', topBar);
+			$('.wrap').css('top', topBar + 40 + 'px');*/
+			$(document).ready(function(e) {
+				var mySwiper = new Swiper('.swiper-container', {
+					pagination: '.pagination',
+					grabCursor: true,
+					loop: true,
+					paginationClickable: true,
+					autoplayDisableOnInteraction: false,
+					autoplay: 4000
+				})
+				main_menu();
+				getCard_list();
+				getPoint();
+			});
+			$(".menu").click(function(e) {
+				if($('.menu_nav').css('display') == 'none') {
+					$('.menu_nav').show();
+					$('.bg').show();
+					$('.bg').click(function() {
+						$('.menu_nav').hide();
+						$('.bg').hide();
+					})
+				} else {
+					$('.menu_nav').hide();
+					$('.bg').hide();
+				}
+			})
+
+			/*我的积分*/
+			function getPoint() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/account_point.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('#myPoint').html(data.score);
+						}
+					}
+				})
+			}
+
+			/*获取积分列表*/
+			function getCard_list() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/integral_mall.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						/*列表*/
+						$('.ticket').html('');
+						if(data.data == null) {
+							right_menu();
+							getTicket()
+							return false
+						}
+						$.each(data.data, function(index, item) {
+							var listArr = [];
+							listArr.push("<li id='" + item.id + "'>");
+							listArr.push("<div class='ticket_item'>");
+							listArr.push("<span class='ticket_tips font-color1'>" + item.name + "</span>");
+							listArr.push("<span class='ticket_tips font-color3'>" + item.score + "<span class='scalefont font-color2'>积分</span></span>");
+							listArr.push("<span class='ticket_tips ticket_photo'>");
+							listArr.push("<img src='" + item.img + "' alt='京东券'/>");
+							listArr.push("</span>");
+							listArr.push("</div>");
+							listArr.push("</li>");
+							listArr = listArr.join("");
+							$('.ticket').append(listArr);
+						});
+						$('.ticket').append("<div class='blank'></div>");
+
+						/*菜单*/
+						var menu = data.cates_url;
+						$('#menu').html('');
+						var liArr = '';
+						$.each(menu, function(index, item) {
+							liArr = liArr + "<li index='" + item.id + "'>" + item.name + "</li>";
+						})
+						$('#menu').append(liArr);
+						right_menu();
+						getTicket()
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			/*点击主菜单*/
+			function main_menu() {
+				$('.nav_item').click(function() {
+					$(this).addClass('inte_active').siblings().removeClass('inte_active');
+					var sort = $(this).attr('index');
+					var cates = $("#menu a[class='nav_li_active']").attr('index');
+					getList(sort, cates);
+				})
+			}
+			/*点击侧菜单*/
+			function right_menu() {
+				$('#menu li').click(function() {
+					$(this).addClass('nav_li_active').siblings().removeClass('nav_li_active');
+					var cates = $(this).attr('index');
+					var sort;
+					$('.nav_item').each(function() {
+						if($(this).hasClass('inte_active')) {
+							sort = $(this).attr('index');
+						}
+					})
+					$('.menu_nav').hide();
+					$('.bg').hide();
+					getList(sort, cates);
+				})
+			}
+
+			function getList(sort, cates) {
+				var data = new Object();
+				if(sort) {
+					data.sort = sort;
+				}
+				if(cates && cates != 0) {
+					data.cates = cates;
+				}
+				data.user_id = user_id;
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/integral_mall.php" + dateKey,
+					data: data,
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						/*列表*/
+						$('.ticket').html('');
+						if(data.data == null) {
+							return false
+						}
+						$.each(data.data, function(index, item) {
+							var listArr = [];
+							listArr.push("<li id='" + item.id + "'>");
+							listArr.push("<div class='ticket_item'>");
+							listArr.push("<span class='ticket_tips font-color1'>" + item.name + "</span>");
+							listArr.push("<span class='ticket_tips font-color3'>" + item.score + "<span class='scalefont font-color2'>积分</span></span>");
+							listArr.push("<span class='ticket_tips ticket_photo'>");
+							listArr.push("<img src='" + item.img + "' alt='京东券'/>");
+							listArr.push("</span>");
+							listArr.push("</div>");
+							listArr.push("</li>");
+							listArr = listArr.join("");
+							$('.ticket').append(listArr);
+						});
+						$('.ticket').append("<div class='blank'></div>");
+						getTicket()
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			function getTicket() {
+				$('.ticket li').click(function() {
+					var id = $(this).attr('id');
+					localStorage.setItem('goods_id', id);
+					var target = "integrate_detail.html";
+					switch_child(target);
+				})
+			}
+
+			document.getElementById('ex_record').onclick = function() {
+				var target = "exchange_record.html";
+				switch_child(target);
+			}
+		</script>
+	</body>
+
+</html>

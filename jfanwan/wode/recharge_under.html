@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>充值线下</title>
+		<link rel="stylesheet" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/recharge.css" />
+	</head>
+
+	<body class="re">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="register_name">充值线下</span>
+			</div>
+		</header>
+		<div class="nav_menu top2">
+			<div class="nav_item">
+				<a href="recharge_up.html">
+					<span>线上支付</span>
+				</a>
+			</div>
+			<div class="nav_item2 hidden">
+				<a href="javascript:void(0)">
+					<span>1</span>
+				</a>
+			</div>
+			<div class="nav_item re_active">
+				<a href="recharge_under.html">
+					<span>线下支付</span>
+				</a>
+			</div>
+			<div class="blank"></div>
+		</div>
+		<section class="re_money">
+			<form>
+				<div class="input_money">
+					<input type="number" placeholder="请输入充值金额" id="number" />
+				</div>
+				<div class="input_money">
+					<input type="number" placeholder="银行流水" id="bank_number" />
+				</div>
+				<div class="mode_detail">
+					<div class="detail_inner">
+						<div class="mode_info">
+							<span class="info_title">深圳创屿互联网金融服务有限公司</span>
+							<span class="bank">开户行：招商银行上海肇嘉浜路支行</span>
+							<span class="account">账  户：621***037</span>
+						</div>
+						<div class="mode_check">
+							<img src="../images/mode/checked@2x.png" alt="选中" />
+						</div>
+						<div class="blank"></div>
+					</div>
+				</div>
+				<div class="re_submit" onclick="submit_d();">
+					确认
+				</div>
+			</form>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			var pay_id,bank_id;
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+                initPage()
+			})
+			
+			function initPage(){
+				$.ajax({
+					type:"post",
+					url:"https://api.jfwlicai.com/mobile/incharge.php"+dateKey,
+					data:{'user_id':user_id},
+					dataType:'json',
+					async:true,
+					success:function(data){
+						if(data.response_code == 1){
+							var result = data.below_payment[0];
+							pay_id = result.pay_id;
+							bank_id = result.bank_id;
+							$('.info_title').text(result.pay_name);
+							$('.bank').text("开户行："+result.pay_bank);
+							var account = result.pay_account+'';
+							$('.account').text('账户：'+account);
+						}else{
+							mui.toast(data.show_err);
+						}
+					},
+					error: function(e) {
+                        mui.toast('拉取数据失败');
+					}
+				});
+			}
+
+			function submit_d() {
+				var number = $.trim($("#number").val());
+				var bank_number = $.trim($("#bank_number").val());
+				if(!number || !bank_number){
+					mui.toast('请填写完整')
+					return false
+				}
+				
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/do_incharge.php"+dateKey,
+					data: {user_id:user_id,payment_id:pay_id,bank_id:bank_id,memo:bank_number,money:number},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						mui.toast(data.show_err)
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>帮助中心</title>
+	</head>
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" href="../css/common_header.css" />
+	<link rel="stylesheet" href="../css/mine.css" />
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">帮助中心</span>
+			</div>
+		</header>
+		<div class="help_group top2">
+			<ul>
+				<li class="help_item" help_index="0">逾期还款</li>
+				<li class="help_item" help_index="1">还款</li>
+				<li class="help_item" help_index="2">视屏确认，贷款成功</li>
+				<li class="help_item" help_index="3">信用等级和信用额度</li>
+				<li class="help_item" help_index="4">认证项目说明</li>
+				<li class="help_item" help_index="5">P2P信贷认证</li>
+				<li class="help_item" help_index="6">申请信用额度</li>
+				<li class="help_item" help_index="7">发布借贷列表</li>
+				<li class="help_item" help_index="8">如何申请贷款</li>
+				<li class="help_item" help_index="9">贷款利率、期限、方式</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/help.php" + dateKey,
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						$('.help_group ul').html('');
+						$.each(data.data, function(index, item) {
+							$('.help_group ul').append("<li class='help_item' help_index='" + item.id + "'>" + item.title + "</li>")
+						});
+						$('.help_item').click(function() {
+							var help_index = $(this).attr('help_index');
+							localStorage.setItem('help_index', help_index);
+							goHref("help_intro.html");
+						})
+					},
+					error: function(e) {
+
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

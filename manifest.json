@@ -1,0 +1,2241 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H5435E24F",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "金饭碗理财",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.1",/*应用版本名称*/
+		"code": ""
+	},
+	"description": "",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "startup.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或http://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": ""
+	},
+	"permissions": {
+		"Accelerometer": {
+			"description": "访问加速度感应器"
+		},
+		"Audio": {
+			"description": "访问麦克风"
+		},
+		
+		"Cache": {
+			"description": "管理应用缓存"
+		},
+		"Camera": {
+			"description": "访问摄像头"
+		},
+		"Console": {
+			"description": "跟踪调试输出日志"
+		},
+		"Contacts": {
+			"description": "访问系统联系人信息"
+		},
+		"Device": {
+			"description": "访问设备信息"
+		},
+		"Downloader": {
+			"description": "文件下载管理"
+		},
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"File": {
+			"description": "访问本地文件系统"
+		},
+		"Gallery": {
+			"description": "访问系统相册"
+		},
+		"Geolocation": {
+			"description": "访问位置信息"
+		},
+		"Invocation": {
+			"description": "使用Native.js能力"
+		},
+		"Orientation": {
+			"description": "访问方向感应器"
+		},
+		"Proximity": {
+			"description": "访问距离感应器"
+		},
+		"Storage": {
+			"description": "管理应用本地数据"
+		},
+
+		"Uploader": {
+			"description": "管理文件上传任务"
+		},
+		"Runtime": {
+			"description": "访问运行期环境"
+		},
+		"XMLhttpRequest": {
+			"description": "跨域网络访问"
+		},
+		"Zip": {
+			"description": "文件压缩与解压缩"
+		},
+		"Barcode": {
+			"description": "管理二维码扫描插件"
+		},
+		"Maps": {
+			"description": "管理地图插件"
+		},
+		"Speech": {
+			"description": "管理语音识别插件"
+		},
+		"Webview": {
+			"description": "窗口管理"
+		},
+		"NativeUI": {
+			"description": "原生UI控件"
+		},
+		"Navigator": {
+			"description": "浏览器信息"
+		},
+		"NativeObj": {
+			"description": "原生对象"
+		},
+		"Share": {
+			"description": "分享"
+		}
+	},
+	"plus": {
+		"splashscreen": {
+			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,
+			"delay": "0"
+		},
+		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"plugins": {
+				"share": {
+					"weixin": {
+						"appid": "wxbd49d3306e0d6aaa",
+						"appsecret": "82aaa9b9b761c8fa33616c4845d74750",
+						"description": "可选，微信分享"
+					},
+					"qq": {
+						"appid": "1105783175",
+						"description": "QQ分享"
+					}
+				}
+			},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"UIReserveStatusbarOffset": false,/*IOS打包沉浸式状态栏*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"ImmersedStatusbar": true,/*Android打包沉浸式状态栏*/
+				"permissions": ["<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+			},
+			"orientation": ["portrait-primary","portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png", /*iPhone3/3GS程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png", /*iPhone4程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png", /*iPhone4S/5/6程序图标，分辨率：120x120*/
+						"retina8": "unpackage/res/icons/180x180.png", /*iPhone6 Plus程序图标，分辨率：180x180*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png", /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone4设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png", /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+						"settings-retina8": "unpackage/res/icons/87x87.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
+					}
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						 /*iPhone3启动图片选，分辨率：320x480*/
+						/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						/*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+						/*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+						/*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
+						"retina55l": "","default":"C:/Users/cl/Desktop/桌面/IPHONE3  320X480.png","retina35":"C:/Users/cl/Desktop/桌面/iphone4s 640x960.png"
+					},
+					"ipad": {
+						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {"ldpi":"C:/Users/cl/Desktop/桌面/大屏启动图片320x442.png","mdpi":"C:/Users/cl/Desktop/桌面/普通屏240x282.png"
+					 /*普通屏启动图片，分辨率：240x282*/
+					 /*大屏启动图片，分辨率：320x442*/
+					 /*高分屏启动图片，分辨率：480x762*/
+					 /*720P高分屏启动图片，分辨率：720x1242*/
+					
+				}
+			},
+			"debug": true
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"img/protect@2x.png",
+					"css/index.css",
+					"js/jquery-1.11.1.min.js",
+					"img/fresh@2x.png",
+					"img/clock@2x.png",
+					"img/top_lide@2x.png",
+					"img/share@2x.png",
+					"img/invest@3x.png",
+					"js/unslider.min.js",
+					"img/slide_icon@2x.png",
+					"img/moneybag@2x.png",
+					"img/icon_home@2x.png",
+					"img/integra@2x.png",
+					"img/icon_mine@2x.png",
+					"images/share@2x.png",
+					"images/icon_home@2x.png",
+					"images/protect@2x.png",
+					"images/icon_mine@2x.png",
+					"images/invest@3x.png",
+					"images/top_lide@2x.png",
+					"images/clock@2x.png",
+					"images/integra@2x.png",
+					"images/slide_icon@2x.png",
+					"images/fresh@2x.png",
+					"images/moneybag@2x.png",
+					"images/index/slide_icon@2x.png",
+					"images/index/icon_mine@2x.png",
+					"images/index/fresh@2x.png",
+					"images/index/moneybag@2x.png",
+					"images/index/top_lide@2x.png",
+					"images/index/clock@2x.png",
+					"images/index/invest@3x.png",
+					"images/index/share@2x.png",
+					"images/index/icon_home@2x.png",
+					"images/index/integra@2x.png",
+					"images/index/protect@2x.png",
+					"images/index/home_active@2x.png",
+					"images/index/mine@2x.png",
+					"center.html",
+					"integrate.html",
+					"js/swiper.min.js",
+					"css/swiper.css",
+					"images/pull_icon@2x.png",
+					"js/refresh.js",
+					"js/isscroll.js",
+					"css/scrollbar.css",
+					"invest_finac.html",
+					"js/pullRefresh.js",
+					"css/pullRefresh.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"center.html": {
+				"resources": [
+					"images/center/recharge@2x.png",
+					"images/center/certification@2x.png",
+					"images/center/account_safe@2x.png",
+					"images/center/invest_share@2x.png",
+					"images/center/help@2x.png",
+					"images/index/moneybag@2x.png",
+					"images/center/address@2x.png",
+					"images/center/account_setting@2x.png",
+					"images/center/human@2x.png",
+					"images/center/mine_data@2x.png",
+					"images/center/news@2x.png",
+					"css/index.css",
+					"css/person_center.css",
+					"images/center/sign@2x.png",
+					"images/center/index@2x.png",
+					"images/center/n_invest@2x.png",
+					"js/unslider.min.js",
+					"images/center/withdraw@2x.png",
+					"images/center/con_phone@2x.png",
+					"images/center/active_center@2x.png",
+					"images/center/invest_data@2x.png",
+					"images/index/home@2x.png",
+					"images/index/home_active@2x.png",
+					"images/center/exchange@2x.png",
+					"images/center/service@2x.png",
+					"js/jquery-1.11.1.min.js",
+					"images/center/invest_real@2x.png",
+					"images/center/card_manage@2x.png",
+					"images/index/integra@2x.png",
+					"images/center/red_bag@2x.png",
+					"images/index/mine_active@2x.png",
+					"index.html",
+					"integrate.html",
+					"js/monitor.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"register.html": {
+				"resources": [
+					"images/register/back-icon@2x.png",
+					"images/register/active-tap2@2x.png",
+					"images/register/hidden@2x.png",
+					"images/register/show@2x.png",
+					"css/register.css",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"images/register/back-icon@2x.png",
+					"images/register/logo@2x.png",
+					"images/register/show@2x.png",
+					"css/register.css",
+					"images/register/licai@2x.png",
+					"js/go_back.js",
+					"js/jquery-1.11.1.min.js",
+					"js/XBack.js",
+					"css/layer.css",
+					"js/layer.js",
+					"js/mui.min.js",
+					"js/index_go_back.js",
+					"css/mui.min.css",
+					"zhuanqian/index.html",
+					"wode/center.html",
+					"js/lockpage.js",
+					"js/lock_out.js",
+					"css/loading.css",
+					"js/bottom_switch.js",
+					"wode/forget_pwd.html",
+					"images/register/hidden@2x.png",
+					"js/jQuery.md5.js",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/register.html"
+				],
+				"priority": 0
+			},
+			"integrate.html": {
+				"resources": [
+					"images/integrate/menu@2x.png",
+					"images/integrate/down@2x.png",
+					"images/register/back-icon@2x.png",
+					"css/register.css",
+					"images/index/integra_active@2x.png",
+					"css/integrate.css",
+					"images/integrate/jingdong@2x.png",
+					"images/integrate/inte_banner@2x.png",
+					"images/integrate/up@2x.png",
+					"images/index/home@2x.png",
+					"images/index/moneybag@2x.png",
+					"images/index/mine@2x.png",
+					"css/index.css",
+					"js/jquery-1.11.1.min.js",
+					"js/unslider.min.js",
+					"index.html",
+					"center.html",
+					"js/immerse_navigate.js",
+					"js/refresh.js",
+					"js/isscroll.js",
+					"css/scrollbar.css",
+					"images/pull_icon@2x.png",
+					"js/pullRefresh.js",
+					"css/pullRefresh.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"invest_finac.html": {
+				"resources": [
+					"index.html",
+					"css/invest_finac.css",
+					"css/common_header.css",
+					"images/index/moneybag_active@2x.png",
+					"integrate.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"withdrawal.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"images/register/Shape-down@2x.png",
+					"images/register/back-icon@2x.png",
+					"js/jquery-1.11.1.min.js",
+					"css/recharge.css",
+					"css/common_header.css",
+					"images/mode/weixin@2x.png",
+					"js/mask.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"app_active.html": {
+				"resources": [
+					"images/app_active/p_111@2x.png",
+					"images/app_active/p_158@2x.png",
+					"js/jquery-1.11.1.min.js",
+					"images/app_active/p_268@2x.png",
+					"css/app_active.css",
+					"images/app_active/app_active_bg@2x.png",
+					"images/app_active/p_568@2x.png",
+					"images/app_active/phone@2x.png",
+					"images/app_active/p_30@2x.png",
+					"images/app_active/p_9@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/register.html": {
+				"resources": [
+					"images/register/active-tap2@2x.png",
+					"js/go_back.js",
+					"images/register/hidden@2x.png",
+					"images/register/back-icon@2x.png",
+					"js/jquery-1.11.1.min.js",
+					"images/register/show@2x.png",
+					"css/register.css",
+					"images/register/checked@2x.png",
+					"images/register/no-tap@3x.png",
+					"wode/register.html",
+					"css/layer.css",
+					"js/mui.min.js",
+					"js/layer.js",
+					"js/lockpage.js",
+					"css/loading.css",
+					"css/app.css",
+					"js/jQuery.md5.js",
+					"images/register/no-check@2x.png"
+				],
+				"refer": [
+					"wode/register_identy.html",
+					"wode/aggrement.html"
+				],
+				"priority": 0
+			},
+			"startup.html": {
+				"resources": [
+					"js/jquery-1.11.1.min.js",
+					"login.html",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/lockpage.js",
+					"js/lock_out.js",
+					"css/loading.css",
+					"fonts/mui.ttf"
+				],
+				"refer": [
+					"zhuanqian/index.html"
+				],
+				"priority": 0
+			},
+			"wode/write_receipt_address.html": {
+				"resources": [
+					"js/XBack.js",
+					"css/mine.css",
+					"css/index.css",
+					"images/mine/goright@2x.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"images/mine/address@2x.png",
+					"js/mask.js",
+					"js/mui.min.js",
+					"wode/write_receipt_address.html",
+					"css/app.css",
+					"js/mui.picker.js",
+					"wode/getAddress.html",
+					"js/mui.poppicker.js",
+					"js/city.data.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.css",
+					"wode/center.html",
+					"wode/receipt_address.html",
+					"css/layer.css",
+					"js/layer.js",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/right.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/add_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/share_bg.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/receipt_address.html",
+					"jifen/inte_address.html",
+					"wode/getAddress.html"
+				],
+				"priority": 0
+			},
+			"zhuanqian/index.html": {
+				"resources": [
+					"css/main.css",
+					"js/dragloader.js",
+					"images/index/slide_icon@2x.png",
+					"login.html",
+					"images/index/home_active@2x.png",
+					"css/idangerous.swiper.css",
+					"images/index/fresh@2x.png",
+					"images/index/moneybag@2x.png",
+					"images/index/mine@2x.png",
+					"images/index/top_lide@2x.png",
+					"css/index.css",
+					"js/idangerous.swiper.min.js",
+					"images/index/clock@2x.png",
+					"css/mui.min.css",
+					"images/index/invest@3x.png",
+					"images/index/share@2x.png",
+					"images/index/integra@2x.png",
+					"images/index/protect@2x.png",
+					"css/layer.css",
+					"chanping/invest_finac.html",
+					"js/layer.js",
+					"wode/center.html",
+					"js/index_go_back.js",
+					"js/jquery-1.11.1.min.js",
+					"js/lockpage.js",
+					"js/mui.min.js",
+					"images/pull_icon@2x.png",
+					"js/bottom_switch.js",
+					"zhuanqian/make_money.html",
+					"css/loading.css",
+					"images/index/home@2x.png",
+					"images/index/moneybag_active@2x.png",
+					"js/jQuery.md5.js",
+					"fonts/mui.ttf",
+					"css/pullToRefresh.css",
+					"js/iscroll.js",
+					"js/pullToRefresh.js"
+				],
+				"refer": [
+					"jifen/integrate.html",
+					"zhuanqian/share.html",
+					"zhuanqian/fore_url.html"
+				],
+				"priority": 0
+			},
+			"zhuanqian/share.html": {
+				"resources": [
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"images/mine/share_bg.png",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/right.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/add_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/share_logo@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/register_card.html": {
+				"resources": [
+					"images/register/card_ahead@2x.png",
+					"images/register/card_back@2x.png",
+					"images/register/active-tap2@2x.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"images/register/card_show.png",
+					"css/register.css",
+					"images/register/break@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/center.html": {
+				"resources": [
+					"images/center/recharge@2x.png",
+					"images/center/certification@2x.png",
+					"images/center/account_safe@2x.png",
+					"images/center/invest_share@2x.png",
+					"images/center/help@2x.png",
+					"images/index/moneybag@2x.png",
+					"images/center/address@2x.png",
+					"images/center/account_setting@2x.png",
+					"images/center/human@2x.png",
+					"js/monitor.js",
+					"images/center/mine_data@2x.png",
+					"images/center/news@2x.png",
+					"images/index/mine_active@2x.png",
+					"css/index.css",
+					"css/person_center.css",
+					"images/center/sign@2x.png",
+					"images/center/index@2x.png",
+					"images/center/n_invest@2x.png",
+					"wode/my_points.html",
+					"js/loading.js",
+					"images/center/withdraw@2x.png",
+					"images/center/con_phone@2x.png",
+					"images/center/active_center@2x.png",
+					"images/mine/gift.png",
+					"images/center/invest_data@2x.png",
+					"images/index/home@2x.png",
+					"images/center/exchange@2x.png",
+					"images/center/service@2x.png",
+					"css/loading.css",
+					"images/center/invest_real@2x.png",
+					"images/center/card_manage@2x.png",
+					"js/mask.js",
+					"images/index/integra@2x.png",
+					"images/center/red_bag@2x.png",
+					"wode/recharge_up.html",
+					"login.html",
+					"wode/invest_record_1.html",
+					"wode/ex_invest.html",
+					"zhuanqian/index.html",
+					"css/layer.css",
+					"js/layer.js",
+					"wode/receipt_address.html",
+					"js/mui.min.js",
+					"js/index_go_back.js",
+					"js/jquery-1.11.1.min.js",
+					"wode/withdrawal.html",
+					"wode/trans_record.html",
+					"zhuanqian/my_red_envelope.html",
+					"wode/promote_center.html",
+					"wode/account_safe.html",
+					"wode/bound_phone.html",
+					"images/index/mine@2x.png",
+					"images/index/home_active@2x.png",
+					"js/bottom_switch.js",
+					"js/lockpage.js",
+					"js/go_back.js",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png"
+				],
+				"refer": [
+					"jifen/integrate.html",
+					"chanping/invest_finac.html",
+					"wode/register_identy.html",
+					"wode/help_center.html",
+					"wode/ac_center.html",
+					"wode/bank_manage.html"
+				],
+				"priority": 0
+			},
+			"wode/my_points.html": {
+				"resources": [
+					"css/mine.css",
+					"js/go_back.js",
+					"css/common_header.css",
+					"wode/center.html",
+					"css/index.css",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"jifen/integrate.html"
+				],
+				"priority": 0
+			},
+			"wode/recharge_up.html": {
+				"resources": [
+					"wode/center.html",
+					"css/recharge.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"css/register.css",
+					"css/index.css",
+					"js/jquery-1.11.1.min.js",
+					"wode/recharge_under.html",
+					"css/loading.css",
+					"js/lockpage.js",
+					"images/mine/goright@2x.png",
+					"images/make_money/gongshang_bank.png",
+					"css/mine.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/jQuery.md5.js",
+					"wode/recharge.html",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png"
+				],
+				"refer": [
+					"wode/my_bank.html",
+					"wode/pay.html",
+					"wode/recharge_up.html"
+				],
+				"priority": 0
+			},
+			"wode/invest_record_1.html": {
+				"resources": [
+					"css/mine.css",
+					"css/common_header.css",
+					"wode/center.html",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"js/lockpage.js",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/invest_record_detail.html"
+				],
+				"priority": 0
+			},
+			"wode/ex_invest.html": {
+				"resources": [
+					"images/mine/invest_icon.png",
+					"css/mine.css",
+					"js/go_back.js",
+					"wode/center.html",
+					"css/common_header.css",
+					"css/loading.css",
+					"css/index.css",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/loading.js",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"jifen/integrate.html",
+					"wode/my_points.html"
+				],
+				"priority": 0
+			},
+			"zhuanqian/make_money.html": {
+				"resources": [
+					"images/make_money/make_money.png",
+					"images/make_money/add.png",
+					"images/make_money/profit.png",
+					"images/make_money/right.png",
+					"css/zhuanqian.css",
+					"images/make_money/intro_pt.png",
+					"chanping/invest_finac.html",
+					"images/make_money/reduce.png",
+					"chanping/intro_product.html",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"zhuanqian/pay_get.html",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/make_money/add_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/share_bg.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"chanping/invest_finac.html": {
+				"resources": [
+					"images/integrate/down@2x.png",
+					"css/invest_finac.css",
+					"zhuanqian/make_money.html",
+					"images/index/moneybag_active@2x.png",
+					"images/integrate/up@2x.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"images/index/home@2x.png",
+					"css/common_header.css",
+					"zhuanqian/index.html",
+					"images/index/home_active@2x.png",
+					"images/index/moneybag@2x.png",
+					"js/bottom_switch.js",
+					"images/index/mine@2x.png",
+					"css/index.css",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"images/index/integra@2x.png",
+					"js/lockpage.js",
+					"js/index_go_back.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png"
+				],
+				"refer": [
+					"jifen/integrate.html",
+					"wode/center.html"
+				],
+				"priority": 0
+			},
+			"chanping/intro_product.html": {
+				"resources": [
+					"css/intro_product.css",
+					"chanping/intro_product_borrower.html",
+					"zhuanqian/make_money.html",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"chanping/intro_product_data.html",
+					"images/pull_icon@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"chanping/intro_product_borrower.html": {
+				"resources": [
+					"chanping/intro_product.html",
+					"chanping/intro_product_data.html",
+					"css/index.css",
+					"images/pull_icon@2x.png",
+					"css/common_header.css",
+					"css/intro_product.css",
+					"js/jquery-1.11.1.min.js",
+					"js/mui.min.js",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"chanping/intro_product_data.html": {
+				"resources": [
+					"chanping/intro_product_borrower.html",
+					"chanping/intro_product.html",
+					"js/jQuery.md5.js",
+					"css/index.css",
+					"images/pull_icon@2x.png",
+					"css/common_header.css",
+					"css/intro_product.css",
+					"js/jquery-1.11.1.min.js",
+					"js/mui.min.js",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png"
+				],
+				"refer": [
+					"chanping/intro_product.html",
+					"chanping/intro_product_borrower.html"
+				],
+				"priority": 0
+			},
+			"wode/receipt_address.html": {
+				"resources": [
+					"css/mine.css",
+					"js/go_back.js",
+					"wode/center.html",
+					"css/common_header.css",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"wode/write_receipt_address.html",
+					"css/layer.css",
+					"css/index.css",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/layer.js",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/getAddress.html",
+					"wode/write_receipt_address.html"
+				],
+				"priority": 0
+			},
+			"wode/getAddress.html": {
+				"resources": [
+					"images/ad_icon.png",
+					"wode/write_receipt_address.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/write_receipt_address.html"
+				],
+				"priority": 0
+			},
+			"wode/withdrawal.html": {
+				"resources": [
+					"css/mine.css",
+					"images/mine/goright@2x.png",
+					"js/go_back.js",
+					"images/make_money/close_pwd.png",
+					"css/recharge.css",
+					"css/common_header.css",
+					"images/mode/weixin@2x.png",
+					"wode/center.html",
+					"css/index.css",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/mask.js",
+					"wode/bound_card.html",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/address@2x.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/my_bank.html",
+					"wode/forget_pay_pwd.html"
+				],
+				"priority": 0
+			},
+			"wode/trans_record.html": {
+				"resources": [
+					"images/mine/address_no.png",
+					"wode/center.html",
+					"css/recharge.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/register.css",
+					"js/jQuery.md5.js",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png",
+					"images/pull_icon@2x.png",
+					"images/mine/goright@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"zhuanqian/my_red_envelope.html": {
+				"resources": [
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/coupon_bg.png",
+					"wode/center.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"zhuanqian/pay_get.html"
+				],
+				"priority": 0
+			},
+			"wode/promote_center.html": {
+				"resources": [
+					"images/mine/m_d@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/promote_bg@2x.png",
+					"wode/center.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"images/mine/mb_2@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png",
+					"images/share_logo@2x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/bound_phone.html": {
+				"resources": [
+					"wode/center.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"wode/update_bound_phone.html",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/update_bound_phone.html"
+				],
+				"priority": 0
+			},
+			"wode/set_pay_pwd.html": {
+				"resources": [
+					"wode/account_safe.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/account_safe.html": {
+				"resources": [
+					"wode/set_pay_pwd.html",
+					"wode/modify_login_password.html",
+					"wode/center.html",
+					"css/mine.css",
+					"css/index.css",
+					"images/mine/goright@2x.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/forget_pay_pwd.html",
+					"wode/modify_pay_password.html",
+					"wode/modify_login_password.html",
+					"wode/set_pay_pwd.html"
+				],
+				"priority": 0
+			},
+			"wode/forget_pwd.html": {
+				"resources": [
+					"wode/modify_login_password.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"css/common_header.css",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/modify_login_password.html": {
+				"resources": [
+					"wode/forget_pwd.html",
+					"wode/account_safe.html",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/forget_pwd.html"
+				],
+				"priority": 0
+			},
+			"jifen/integrate.html": {
+				"resources": [
+					"images/integrate/menu@2x.png",
+					"images/integrate/down@2x.png",
+					"css/main.css",
+					"images/register/back-icon@2x.png",
+					"js/dragloader.js",
+					"css/idangerous.swiper.css",
+					"images/index/home_active@2x.png",
+					"css/integrate.css",
+					"images/index/moneybag@2x.png",
+					"images/integrate/jingdong@2x.png",
+					"images/integrate/inte_banner@2x.png",
+					"js/bottom_switch.js",
+					"images/index/mine@2x.png",
+					"images/integrate/up@2x.png",
+					"css/index.css",
+					"js/idangerous.swiper.min.js",
+					"js/go_back.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/register.css",
+					"js/mask.js",
+					"images/index/integra@2x.png",
+					"js/immerse_navigate.js",
+					"images/index/integra_active@2x.png",
+					"images/index/home@2x.png",
+					"js/index_go_back.js",
+					"images/pull_icon@2x.png",
+					"js/lockpage.js",
+					"jifen/exchange_record.html",
+					"jifen/integrate_detail.html",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png"
+				],
+				"refer": [
+					"wode/center.html",
+					"chanping/invest_finac.html",
+					"zhuanqian/index.html"
+				],
+				"priority": 0
+			},
+			"zhuanqian/pay_get.html": {
+				"resources": [
+					"js/mask.js",
+					"images/make_money/gongshang_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"images/make_money/right.png",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"zhuanqian/pay_method_choose.html",
+					"js/lockpage.js",
+					"css/loading.css",
+					"css/layer.css",
+					"js/layer.js",
+					"js/jQuery.md5.js",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/add_bank.png",
+					"images/mine/share_bg.png"
+				],
+				"refer": [
+					"zhuanqian/my_red_envelope.html",
+					"wode/forget_pwd.html",
+					"wode/recharge_up.html",
+					"wode/forget_pay_pwd.html",
+					"wode/center.html"
+				],
+				"priority": 0
+			},
+			"zhuanqian/pay_method_choose.html": {
+				"resources": [
+					"images/make_money/add_bank.png",
+					"zhuanqian/pay_get.html",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"js/mask.js",
+					"images/make_money/gongshang_bank.png",
+					"wode/bound_card.html",
+					"js/lockpage.js",
+					"wode/register_identy.html",
+					"css/loading.css",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/right.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/share_bg.png",
+					"js/jQuery.md5.js"
+				],
+				"refer": [
+					"wode/bound_card.html",
+					"zhuanqian/pay_get.html",
+					"wode/register_identy.html"
+				],
+				"priority": 0
+			},
+			"jifen/exchange_record.html": {
+				"resources": [
+					"images/integrate/slide_down.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/exchange_record.css",
+					"css/register.css",
+					"images/integrate/jingdong@2x.png",
+					"js/jQuery.md5.js",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png",
+					"images/integrate/slide_up.png",
+					"images/make_money/right.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"jifen/integrate_detail.html": {
+				"resources": [
+					"js/go_back.js",
+					"css/index.css",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/register.css",
+					"css/integrate.css",
+					"images/integrate/jingdong@2x.png",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png",
+					"images/integrate/menu@2x.png"
+				],
+				"refer": [
+					"jifen/exchange.html"
+				],
+				"priority": 0
+			},
+			"jifen/exchange.html": {
+				"resources": [
+					"images/make_money/right.png",
+					"css/exchange_record.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/register.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png",
+					"images/integrate/slide_down.png",
+					"images/integrate/slide_up.png"
+				],
+				"refer": [
+					"jifen/inte_address.html",
+					"jifen/integrate_detail.html"
+				],
+				"priority": 0
+			},
+			"jifen/inte_address.html": {
+				"resources": [
+					"css/mine.css",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/common_header.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/write_receipt_address.html",
+					"jifen/exchange.html"
+				],
+				"priority": 0
+			},
+			"wode/register_identy.html": {
+				"resources": [
+					"css/layer.css",
+					"images/register/active-tap2@2x.png",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/layer.js",
+					"css/register.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png"
+				],
+				"refer": [
+					"wode/center.html"
+				],
+				"priority": 0
+			},
+			"wode/help_center.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"wode/help_intro.html",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"images/register/no-tap@3x.png",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/ac_center.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"images/integrate/jingdong@2x.png",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/help_intro.html": {
+				"resources": [
+					"css/help_article.css",
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png",
+					"wode/help_intro_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/recharge_under.html": {
+				"resources": [
+					"images/mode/checked@2x.png",
+					"wode/recharge_up.html",
+					"css/register.css",
+					"images/register/active-tap2@2x.png",
+					"images/register/no-tap@3x.png",
+					"images/register/show@2x.png",
+					"images/register/hidden@2x.png",
+					"css/index.css",
+					"images/pull_icon@2x.png",
+					"css/recharge.css",
+					"images/mine/goright@2x.png",
+					"js/jquery-1.11.1.min.js",
+					"js/jQuery.md5.js",
+					"js/mui.min.js",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png"
+				],
+				"refer": [
+					"wode/recharge_up.html",
+					"wode/recharge_under.html"
+				],
+				"priority": 0
+			},
+			"wode/bound_card.html": {
+				"resources": [
+					"images/make_money/right.png",
+					"images/make_money/gongshang_bank.png",
+					"css/mine.css",
+					"css/index.css",
+					"wode/bound_card.html",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/lockpage.js",
+					"css/loading.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/bank_list.html",
+					"wode/bank_manage.html",
+					"zhuanqian/pay_method_choose.html"
+				],
+				"priority": 0
+			},
+			"wode/update_bound_phone.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png",
+					"js/jQuery.md5.js",
+					"js/lockpage.js"
+				],
+				"refer": [
+					"wode/center.html"
+				],
+				"priority": 0
+			},
+			"wode/my_bank.html": {
+				"resources": [
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"js/mask.js",
+					"images/make_money/gongshang_bank.png",
+					"js/lockpage.js",
+					"images/delete@2x.png",
+					"css/layer.css",
+					"js/layer.js",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/right.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/add_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/share_bg.png",
+					"images/pull_icon@2x.png",
+					"js/jQuery.md5.js"
+				],
+				"refer": [
+					"wode/bound_card.html",
+					"wode/withdrawal.html"
+				],
+				"priority": 0
+			},
+			"wode/bank_list.html": {
+				"resources": [
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"js/mask.js",
+					"images/make_money/gongshang_bank.png",
+					"js/lockpage.js",
+					"js/jQuery.md5.js",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/right.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/add_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/share_bg.png",
+					"images/pull_icon@2x.png"
+				],
+				"refer": [
+					"wode/bound_card.html"
+				],
+				"priority": 0
+			},
+			"wode/pay.html": {
+				"resources": [
+					"js/go_back.js",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"js/lockpage.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/bank_manage.html": {
+				"resources": [
+					"css/layer.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"js/layer.js",
+					"css/common_header.css",
+					"css/zhuanqian.css",
+					"js/mask.js",
+					"js/lockpage.js",
+					"js/jQuery.md5.js",
+					"images/mine/delete.png",
+					"images/make_money/make_money.png",
+					"images/make_money/profit.png",
+					"images/make_money/intro_pt.png",
+					"images/make_money/right.png",
+					"images/make_money/reduce.png",
+					"images/make_money/add.png",
+					"images/make_money/add_bank.png",
+					"images/make_money/tips_icon.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/share_bg.png",
+					"images/pull_icon@2x.png"
+				],
+				"refer": [
+					"wode/bound_card.html"
+				],
+				"priority": 0
+			},
+			"wode/invest_record_detail.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png",
+					"js/jQuery.md5.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/forget_pay_pwd.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/common_header.css",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/modify_pay_password.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"css/common_header.css",
+					"js/lockpage.js",
+					"js/jQuery.md5.js",
+					"images/pull_icon@2x.png",
+					"images/make_money/right.png",
+					"images/mine/update.png",
+					"images/mine/delete.png",
+					"images/mine/goright@2x.png",
+					"images/mine/address@2x.png",
+					"images/make_money/close_pwd.png",
+					"images/mine/promote_bg@2x.png",
+					"images/mine/m_s@2x.png",
+					"images/mine/m_d@2x.png",
+					"images/mine/pro_icon@2x.png",
+					"images/mine/pro_data_icon@2x.png",
+					"images/mine/mb_1@2x.png",
+					"images/mine/mb_2@2x.png",
+					"images/mine/cash_bg.png",
+					"images/mine/ecperience_bg.png",
+					"images/mine/coupon_bg.png",
+					"images/mine/ev_disabled.png",
+					"images/mine/invest_icon.png",
+					"images/register/no-tap@3x.png"
+				],
+				"refer": [
+					"wode/forget_pay_pwd.html"
+				],
+				"priority": 0
+			},
+			"zhuanqian/fore_url.html": {
+				"resources": [
+					"css/mine.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"css/common_header.css",
+					"css/index.css",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"js/lockpage.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/aggrement.html": {
+				"resources": [
+					"css/mine.css",
+					"css/index.css",
+					"css/common_header.css",
+					"js/go_back.js",
+					"images/register/back-icon@2x.png",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"css/loading.css",
+					"js/lockpage.js",
+					"wode/aggrement_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/help_intro_sub.html": {
+				"resources": [
+					"css/help_article.css",
+					"css/mine.css",
+					"css/index.css",
+					"js/mui.min.js",
+					"js/jquery-1.11.1.min.js",
+					"js/jQuery.md5.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"wode/aggrement_sub.html": {
+				"resources": [
+					"css/help_article.css",
+					"js/jQuery.md5.js"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"images/app_active/rule_1.png",
+				"images/pc_active/card_9@2x.png",
+				"images/pc_active/double_11@2x.png",
+				"images/pc_active/rule_1@2x.png",
+				"images/pc_active/tips@2x.png",
+				"css/scroll.css",
+				"fonts/mui-icons-extra.ttf",
+				"wode/promote_center_data.html",
+				"images/double12/ev_pc/li_118@2x.png",
+				"images/integrate/safe_pr@2x.png",
+				"images/double12/ev_pc/li_158@2x.png",
+				"images/double12/ev_app/li_58@2x.png",
+				"css/activity.css",
+				"none.html",
+				"images/app_active/P_50@2x.png",
+				"images/integrate/ac_submit@2x.png",
+				"images/index/price@2x.png",
+				"images/double12/ev_app/li_158@2x.png",
+				"css/pc_activity.css",
+				"images/index/iocn_slide_active@2x.png",
+				"images/app_active/tips_intro.png",
+				"pc_ev_active.html",
+				"css/pc_active.css",
+				"js/md5.js",
+				"images/integrate/ac_into@2x.png",
+				"images/pc_active/icon_11@2x.png",
+				"images/double12/ev_app/li_28@2x.png",
+				"images/share/weibo@2x.png",
+				"images/double12/ev_pc/li_58@2x.png",
+				"images/double12/ev_pc/zhuce@2x.png",
+				"images/pc_active/tips_intro@2x.png",
+				"images/double12/ev_app/li_118@2x.png",
+				"images/pc_active/phone@2x.png",
+				"app_ev_active.html",
+				"images/pc_active/card_50@2x.png",
+				"images/mode/share_gift@2x.png",
+				"images/app_active/title2.png",
+				"images/integrate/zhuce@2x.png",
+				"images/double12/ev_pc/li_258@2x.png",
+				"images/double12/ev_app/li_60@2x.png",
+				"css/pc_ev_active.css",
+				"images/app_active/middle.png",
+				"images/share/pengyou@2x.png",
+				"pc_activity.html",
+				"images/integrate/activity_bg@2x.png",
+				"images/double12/ev_pc/li_668@2x.png",
+				"images/in@2x.png",
+				"images/double12/ev_app/li_330@2x.png",
+				"images/center/intel@2x.png",
+				"images/pc_active/card_111@2x.png",
+				"images/integrate/pc_ac_submit@2x.png",
+				"images/double12/ev_pc/li_28@2x.png",
+				"images/double12/ev_pc/li_330@2x.png",
+				"images/double12/ev_app/shou.png",
+				"js/off-canvas.js",
+				"images/pc_active/pc_active_bg.png",
+				"images/double12/ev_app/shou@2x.png",
+				"images/pc_active/youhui@2x.png",
+				"images/double12/ev_app/li_258@2x.png",
+				"images/double12/ev_app/top_bar@2x.png",
+				"images/pc_active/trash_bg@2x.png",
+				"css/app_ev_active.css",
+				"images/double12/ev_pc/shou@2x.png",
+				"images/app_active/rule_2.png",
+				"images/integrate/tips@2x.png",
+				"js/touche.js",
+				"images/pc_active/title@2x.png",
+				"images/none@3x.png",
+				"images/share/QQ@2x.png",
+				"images/double12/ev_app/li_1680@2x.png",
+				"images/register/active-tap@3x.png",
+				"images/double12/ev_app/li_10@2x.png",
+				"images/app_active/tips.png",
+				"images/integrate/plat_adg@2x.png",
+				"images/index/iocn_slide@2x.png",
+				"images/pc_active/card_30@2x.png",
+				"images/integrate/adv@2x.png",
+				"js/zepto.min.js",
+				"images/app_active/cp2.png",
+				"images/app_active/app_active_bg.png",
+				"js/navigate_topBar.js",
+				"images/integrate/pc_activity_bg.png",
+				"images/double12/ev_app/zhuce@2x.png",
+				"images/pc_active/rule_2@2x.png",
+				"images/double12/ev_pc/top_bar.png",
+				"images/double12/ev_pc/li_60@2x.png",
+				"images/pc_active/card_158@2x.png",
+				"images/pc_active/youhui2@2x.png",
+				"js/jquery.js",
+				"wode/map.html",
+				"images/integrate/about@2x.png",
+				"js/jquery.min.js",
+				"wode/Graphics_unlock.html",
+				"images/share/duanxin@2x.png",
+				"images/double12/ev_pc/li_1680@2x.png",
+				"images/share/konag@2x.png",
+				"images/double12/ev_pc/li_10@2x.png",
+				"phone_activity.html",
+				"images/pc_active/card_268@2x.png",
+				"invest_record.html",
+				"images/pc_active/card_568@2x.png",
+				"pc_active.html",
+				"js/dropload.min.js",
+				"images/app_active/top.png",
+				"images/share/wei@2x.png",
+				"images/un@2x.png",
+				"images/double12/ev_app/li_668@2x.png"
+			]
+		}
+	},
+	"unpackage": [
+		"js/jquery.js"
+	],"fullscreen":false
+}

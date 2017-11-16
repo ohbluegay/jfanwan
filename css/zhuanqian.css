@@ -1,0 +1,776 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin: 0;
+	padding: 0;
+}
+*{
+	outline: none;
+}
+body {
+	font-family: "微软雅黑";
+	font-size: 16px;
+	background: #F8F8F8;
+}
+
+.blank {
+	height: 0px;
+	line-height: 0px;
+	clear: both;
+	visibility: hidden;
+	font-size: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.back {
+	margin-left: 15px;
+	text-decoration: none;
+	width: 9px;
+	float: left;
+	line-height: 35px;
+	height: 100%;
+}
+
+.back_icon {
+	display: block;
+	margin-top: 5px;
+}
+
+.back_icon img {
+	width: 8.5px;
+	height: 16px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.common_name {
+	margin-left: 10px;
+	font-size: 18px;
+	line-height: 40px;
+	color: #333333;
+}
+
+.make_n_index {
+	background: url(../images/make_money/make_money.png);
+	background-size: 100% 100%;
+	top: 20px;
+}
+
+.make_profit {
+	text-align: center;
+	background: url(../images/make_money/profit.png) no-repeat center;
+	height: 200px;
+}
+
+.make_profit span {
+	display: block;
+	color: #FFC000;
+}
+
+.profit_year {
+	padding-top: 50px;
+	font-size: 14px;
+}
+
+.profit_rate {
+	font-size: 26px;
+	margin-top: 5px;
+}
+
+.main_rate {
+	padding: 0 20px 0 40px;
+	color: #FFFFFF;
+}
+
+.rate {
+	width: 78%;
+	border: 1px solid #FFFFFF;
+	padding: 1px 1%;
+	border-radius: 4px;
+	float: left;
+}
+
+.rate_inner {
+	height: 2px;
+	background: #FFFFFF;
+}
+
+.rate_numb {
+	width: 17%;
+	float: left;
+	margin-top: -6px;
+	text-align: center;
+	font-size: 12px;
+}
+
+.make_item {
+	width: 33%;
+	float: left;
+	color: #FFFFFF;
+	text-align: center;
+	padding-top: 12px;
+}
+
+.make_item span {
+	display: block;
+}
+
+.make_item span:nth-of-type(1) {
+	padding: 5px 10px;
+	font-size: 12px;
+}
+
+.make_item span:nth-of-type(2) {
+	font-size: 16px;
+}
+
+.make_item:nth-of-type(1):after,
+.make_item:nth-of-type(2):after {
+	height: 26px;
+	width: 1px;
+	border-left: 1px solid #F0F0F0;
+	content: '';
+	float: right;
+	display: block;
+	position: relative;
+	bottom: 33px;
+}
+
+.profit_tips {
+	background: #FFFFFF;
+	padding: 0 15px;
+	font-size: 12px;
+}
+
+.tips_item:nth-of-type(1) {
+	padding: 10px 0;
+}
+
+.tips_item:nth-of-type(2) {
+	padding-bottom: 10px;
+}
+
+.tips_item div:nth-of-type(1) {
+	width: 28%;
+	float: left;
+	color: #999999;
+}
+
+.tips_item div:nth-of-type(2) {
+	width: 72%;
+	float: left;
+	color: #333333;
+}
+
+.intro_prodt {
+	background: #FFFFFF;
+	margin-top: 10px;
+	padding: 12px;
+	position: relative;
+}
+
+.intro_prodt span {
+	display: inline-block;
+}
+
+.intro_icon {
+	width: 20px;
+	height: 20px;
+	background: url(../images/make_money/intro_pt.png) 100% 100%;
+	position: absolute;
+	top: 15px;
+}
+
+.intro_name {
+	vertical-align: top;
+	margin-left: 40px;
+	font-size: 14px;
+}
+
+.intro_right {
+	width: 9px;
+	height: 16px;
+	background: url(../images/make_money/right.png) 100% 100%;
+	position: absolute;
+	right: 15px;
+	top: 15px;
+}
+
+.invest_amount {
+	background: #FFFFFF;
+	margin-top: 10px;
+}
+
+.amount_title {
+	text-align: center;
+	font-size: 14px;
+	padding: 11px 0;
+}
+input{
+	-webkit-appearance: none;
+}
+.invest_input {
+	padding: 3px 12px;
+}
+
+.amount_reduce {
+	display: inline-block;
+	height: 40px;
+	background: url(../images/make_money/reduce.png);
+	background-size: 100% 100%;
+	width: 12%;
+	float: left;
+}
+
+.amount_add {
+	display: inline-block;
+	height: 40px;
+	background: url(../images/make_money/add.png);
+	background-size: 100% 100%;
+	width: 12%;
+	float: left;
+}
+
+.main_input {
+	width: 76%;
+	float: left;
+	text-align: center;
+}
+
+.main_input input {
+	width: 90%;
+	height: 38px;
+	border: 1px solid #F0F0F0;
+	outline: none;
+	text-align: center;
+}
+
+@media only screen and (min-width: 320px) {
+	.amount_reduce,
+	.amount_add {
+		height: 35px;
+		background-size: 100% 100%;
+		float: left;
+	}
+	.main_input input {
+		height: 33px;
+	}
+}
+
+@media only screen and (min-width: 360px) {
+	.amount_reduce,
+	.amount_add {
+		height: 41px;
+		background-size: 100% 100%;
+		float: left;
+	}
+	.main_input input {
+		height: 39px;
+	}
+}
+
+@media only screen and (min-width: 400px) {
+	.amount_reduce,
+	.amount_add {
+		height: 46px;
+		background-size: 100% 100%;
+		float: left;
+	}
+	.main_input input {
+		height: 44px;
+	}
+}
+
+::-moz-placeholder {
+	font-size: 12px;
+	text-align: center;
+}
+
+::-webkit-input-placeholder {
+	font-size: 12px;
+	text-align: center;
+}
+
+.pro_bottom {
+	color: #999999;
+	padding: 10px 12px;
+}
+
+.pro_item {
+	width: 50%;
+	float: left;
+	font-size: 12px;
+}
+
+.pro_item:nth-of-type(2) {
+	text-align: right;
+}
+
+.numb {
+	color: #FFC000 !important;
+}
+
+.profit_submit {
+	margin: 12px 24px;
+	background: #FFC000;
+	border-radius: 8px;
+	font-size: 12px;
+	text-align: center;
+	padding: 12px 0;
+	color: #333333;
+}
+
+.header_tips {
+	float: right;
+	margin: 12px 12px 0 0;
+	font-size: 14px;
+}
+
+a {
+	color: #121212;
+	text-decoration: none;
+}
+
+
+.account_balance {
+	background: #FFFFFF;
+	border-bottom: 1px solid #F0F0F0;
+	font-size: 12px;
+	color: #333333;
+	padding: 20px 12px;
+}
+
+.account_money {
+	color: #FFC000;
+}
+
+.bank_group {
+	background: #FFFFFF;
+}
+
+.bank_item {
+	padding: 12px 12px 12px 0;
+	font-size: 15px;
+	border-bottom: 1px solid #F0F0F0;
+	position: relative;
+}
+
+.bank_icon {
+	display: inline-block;
+}
+
+.bank_icon img {
+	
+}
+
+.bank_tips {
+	position: absolute;
+	left: 150px;
+	top: 22px;
+}
+
+.bank_tips dd:nth-of-type(2) {
+	color: #999999;
+	font-size: 10px;
+}
+
+.add_bank {
+	font-size: 12px;
+	text-align: center;
+	padding: 20px 0;
+	background: #FFFFFF;
+}
+
+.add_click {
+	color: #121212;
+	display: inline-block;
+	line-height: 20px;
+	vertical-align: top;
+	margin-left: 5px;
+}
+
+.bank_add_icon {
+	display: inline-block;
+	width: 19px;
+	height: 19px;
+	background: url(../images/make_money/add_bank.png);
+	background-size: 100% 100%;
+}
+
+.select_method {
+	background: #FFFFFF;
+	padding: 14px 0;
+}
+
+.method_item {
+	width: 50%;
+	float: left;
+	text-align: center;
+	font-size: 12px;
+	color: #999999;
+}
+
+.select_active {
+	color: #FFC000;
+}
+
+.mark {
+	background: #FFFFFF;
+	margin-top: 10px;
+	color: #333333;
+}
+
+.mark_title {
+	margin-left: 10px;
+	padding: 15px 0;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.mark_title_name {
+	font-size: 14px;
+}
+
+.money {
+	color: #FFC000;
+}
+
+.yang {
+	font-size: 10px;
+}
+
+.mark_money {
+	font-size: 14px;
+	float: right;
+	margin-right: 10px;
+}
+
+.mark_intro {
+	padding: 5px 10px;
+	font-size: 12px;
+}
+
+.mark_intro dd {
+	padding: 5px 0;
+}
+
+.mark_intro dd span:nth-of-type(1) {
+	display: inline-block;
+	width: 60px;
+	color: #999999;
+}
+
+.pay_money_choose {
+	background: #FFFFFF;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #333333;
+}
+
+.pay_money_choose ul {
+	list-style: none;
+}
+
+.choose_name {
+	width: 50%;
+	float: left;
+}
+
+.choose_go {
+	width: auto;
+	float: right;
+	text-align: right;
+	position: relative;
+}
+
+.pay_disabled {
+	color: #999999;
+}
+
+.choose_item {
+	padding: 15px 12px 15px 0;
+	margin-left: 10px;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.choose_item:nth-of-type(3) {
+	border: none;
+}
+
+.choose_bank_icon {
+	margin-right: 5px;
+}
+
+.go_right {
+	display: inline-block;
+	width: 9px;
+	height: 16px;
+	background: url(../images/make_money/right.png);
+	vertical-align: bottom;
+	z-index: 2;
+}
+
+.choose_go img {
+	height: 40px;
+	position: absolute;
+	top: -11px;
+	left: -156px;
+}
+
+#account {
+	color: #ffc000;
+}
+
+.bank_name {
+	display: inline-block;
+	line-height: 20px;
+	vertical-align: top;
+	margin-right: 10px;
+	z-index: 2;
+}
+
+.no_ticket {
+	vertical-align: top;
+}
+
+.show_tips {
+	font-size: 10px;
+	padding: 10px 25px;
+	background: url(../images/make_money/tips_icon.png) no-repeat 10px;
+}
+
+.bottom_help {
+	width: 100%;
+	height: 80px;
+}
+
+.pay_footer {
+	position: fixed;
+	background: #FFFFFF;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	color: #333333;
+}
+
+.should_pay {
+	padding: 12px 14px;
+	font-size: 12px;
+}
+
+.should_pay span:nth-of-type(2) {
+	float: right;
+}
+
+.button_submit {
+	margin: 0 15px 10px 15px;
+	text-align: center;
+	font-size: 14px;
+	padding: 13px 0;
+	background: #FFC000;
+	border-radius: 6px;
+}
+
+
+/*输入支付密码*/
+
+.pwd-box {
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	border-radius: 3px;
+	overflow: hidden;
+	z-index: 1000;
+	background: #F8F8F8;
+	visibility: hidden;
+}
+
+.title {
+	position: relative;
+	padding: 12px;
+	border-bottom: 1px solid #dddddd;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+}
+
+.close_pwd {
+	float: left;
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: url(../images/make_money/close_pwd.png);
+	background-size: 100% 100%;
+}
+
+.pwd-box input[type="number"] {
+	color: transparent;
+	width: 1px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	border: none;
+	font-size: 18px;
+	letter-spacing: 35px;
+	z-index: 1001;
+	opacity: 0;
+}
+
+.fake-box {
+	padding: 10px 0;
+}
+
+.fake-box input {
+	width: 12%;
+	border: none;
+	border: 1px solid #e5e5e5;
+	text-align: center;
+	font-size: 35px;
+	margin-left: 2.5%;
+	border-radius: 4px;
+	color: #666666;
+}
+
+@media only screen and (min-width:290px) {
+	.fake-box input {
+		font-size: 30px;
+	}
+}
+@media only screen and (min-width:350px) {
+	.fake-box input {
+		font-size: 35px;
+	}
+}
+@media only screen and (min-width:410px) {
+	.fake-box input {
+		font-size: 40px;
+	}
+}
+
+.forget_pwd_input {
+	text-align: right;
+	font-size: 12px;
+	padding: 0 10px 10px 0;
+}
+
+.forget_pwd_input a {
+	color: #555555;
+}
+
+
+/*背景mask*/
+
+.bg {
+	background-color: #000;
+	background-color: rgba(0, 0, 0, .4);
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+
+.sure_quit {
+	width: 280px;
+	border-radius: 4px;
+	background: #FFFFFF;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	margin-top: -80px;
+	margin-left: -140px;
+	z-index: 10000;
+	color: #333333;
+	display: none;
+}
+
+.sure_authentic {
+	padding: 42px 80px;
+	text-align: center;
+	font-size: 13px;
+	color: #999999;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.quit_title {
+	font-size: 14px;
+	color: #999999;
+	text-align: center;
+	padding: 40px 0 55px 0;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.quit_item {
+	width: 49.5%;
+	float: left;
+	height: 43px;
+	line-height: 43px;
+	text-align: center;
+	font-size: 14px;
+	cursor: pointer;
+	color: #999999;
+}
+
+.next {
+	color: #FFC000 !important;
+}
+
+.quit_item:nth-of-type(1) {
+	border-right: 1px solid #F0F0F0;
+}
+
+.share_friend {
+	width: 100%;
+	background: url(../images/mine/share_bg.png);
+	background-size: 100% 100%;
+	position: relative;
+}
+
+.share_to_friend {
+	position: absolute;
+	color: #FFC000;
+	bottom: 22%;
+	font-size: 12px;
+	right: 15%;
+}
+
+.to_share {
+	position: absolute;
+	bottom: 5%;
+	width: 84%;
+	margin-left: 8.5%;
+	background: #FFFFFF;
+	padding: 12px 0;
+	border-radius: 5px;
+	font-size: 14px;
+	color: #ffb10b;
+	text-align: center;
+	cursor: pointer;
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>设置支付密码</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+		<link rel="stylesheet" href="../css/layer.css" />
+		<style>
+			.address_ul li {
+				padding-left: 0;
+			}
+		</style>
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">收货地址</span>
+				<a href="javascript:void(0)" class="adm adm_hide">
+					管理
+				</a>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="mine_address">
+				<form>
+					<ul class="address_ul">
+						<!--<li>
+							<div class="address_left">
+								<div class="address_content gray3">
+									<span class="ad2">徐汇区肇嘉浜路1033号徐汇国际大厦10楼</span>
+								</div>
+								<div class="custom gray3">
+									<span class="ad1">施先生</span>
+									<span class="ad2">13856524142</span>
+								</div>
+							</div>
+							<div class="choose_update">
+								<span class="address_update"></span>
+								<span class="address_delete"></span>
+							</div>
+							<div class="blank"></div>
+						</li>
+						<li>
+							<div class="address_left">
+								<div class="address_content gray3">
+									<span class="ad2">徐汇区肇嘉浜路1033号徐汇国际大厦10楼</span>
+								</div>
+								<div class="custom gray3">
+									<span class="ad1">施先生</span>
+									<span class="ad2">13556524142</span>
+								</div>
+							</div>
+							<div class="choose_update">
+								<span class="address_update"></span>
+								<span class="address_delete"></span>
+							</div>
+							<div class="blank"></div>
+						</li>-->
+					</ul>
+				</form>
+			</div>
+			<div style="height: 40px;"></div>
+			<a href="javascript:void(0)" id='ad_address'>
+				<div class="replace_address gray3">
+					添加地址
+				</div>
+			</a>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/layer.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			lockPage()
+			var user_id = window.localStorage.getItem('user_id');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			localStorage.removeItem('ch_ad');
+			var address_id;
+			$(function() {
+				get_address_list();
+			})
+
+			/*获取地址列表*/
+			function get_address_list() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/address.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.address_ul').html('');
+							var result = data.data;
+							$.each(result, function(index, item) {
+								var liArr = [];
+								liArr.push("<li id='" + item.id + "'>");
+								liArr.push("<div class='address_left'>");
+								liArr.push("<div class='address_content gray3'>");
+								liArr.push("<span class='ad2'>" + item.address + "</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='custom gray3'>");
+								liArr.push("<span class='ad1'>" + item.name + "</span>");
+								liArr.push("<span class='ad2'>" + item.phone + "</span>");
+								liArr.push("</div>");
+								liArr.push("</div>");
+								liArr.push("<div class='choose_update'>");
+								liArr.push("<span class='address_update'></span>");
+								liArr.push("<span class='address_delete'></span>");
+								liArr.push("</div>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</li>");
+								liArr = liArr.join("");
+								$('.address_ul').append(liArr);
+							})
+							manage();
+							delete_address();
+							edit_address();
+							unlockPage()
+						}
+					},
+					error: function(e) {
+						mui.toast('获取地址失败');
+					}
+				});
+			}
+
+			function delete_address() {
+				$('.address_delete').click(function() {
+					//询问框
+					var del_id = $(this).closest('li').attr('id');
+					layer.open({
+						content: '您确定删除地址？',
+						btn: ['删除', '取消'],
+						yes: function(index) {
+							lockPage()
+							layer.close(index);
+							$.ajax({
+								type: "post",
+								url: "https://api.jfwlicai.com/mobile/del_address.php" + dateKey,
+								data: {
+									'address_id': del_id
+								},
+								dataType: 'json',
+								async: true,
+								success: function(data) {
+									if(data.response_code == 1) {
+										refresh()
+										unlockPage()
+										mui.toast(data.show_err)
+									} else {
+										unlockPage()
+										mui.toast(data.show_err)
+									}
+								},
+								error: function(e) {
+									unlockPage()
+									mui.toast('修改失败')
+								}
+							});
+						}
+					});
+				})
+			}
+
+			/*编辑地址*/
+			function edit_address() {
+				$('.address_update').click(function() {
+					address_id = $(this).closest('li').attr('id');
+					var address = $(this).parent('.choose_update').prev(".address_left").children('.address_content').children('.ad2').html();
+					var name = $(this).parent('.choose_update').prev(".address_left").children('.custom').children('.ad1').html();
+					var phone = $(this).parent('.choose_update').prev(".address_left").children('.custom').children('.ad2').html();
+					layer.open({
+						title: [
+							'修改收货地址',
+							'background-color:#ffc000; color:#fff;'
+						],
+						anim: 'up',
+						content: "<form class='edit_form'><div class='form_input'><label>收货地址</label><input type='text' value='" + address + "' id='edit_address'/></div><div class='form_input'><label>收货人姓名</label><input type='text' value='" + name + "' id='edit_name'/></div><div class='form_input'><label>收货人电话</label><input type='number' value='" + phone + "' id='edit_phone'/></div></form>",
+						btn: ['确认', '取消'],
+						yes: function(index) {
+							address = $.trim($('#edit_address').val());
+							name = $.trim($('#edit_name').val());
+							phone = $.trim($('#edit_phone').val());
+							layer.close(index);
+							lockPage()
+							$.ajax({
+								type: "post",
+								url: "https://api.jfwlicai.com/mobile/save_address.php" + dateKey,
+								data: {
+									'user_id': user_id,
+									'address_id': address_id,
+									'user_name': name,
+									'user_address': address,
+									'user_phone': phone
+								},
+								dataType: 'json',
+								async: true,
+								success: function(data) {
+									if(data.response_code == 1) {
+										refresh()
+										unlockPage()
+										mui.toast(data.show_err)
+									} else {
+										unlockPage()
+										mui.toast(data.show_err)
+									}
+								},
+								error: function(e) {
+									mui.toast('修改失败')
+								}
+							});
+						}
+					});
+				})
+			}
+
+			/*点击管理*/
+			function manage() {
+				$('.adm').click(function() {
+					if($(this).hasClass('adm_hide')) {
+						$(this).text('取消').removeClass('adm_hide');
+						$('.choose_update').show();
+					} else {
+						$(this).text('管理').addClass('adm_hide');
+						$('.choose_update').hide();
+					}
+				})
+			}
+
+			function refresh() {
+				get_address_list();
+				manage();
+				$('.adm').text('管理').addClass('adm_hide');
+				$('.choose_update').hide();
+			}
+
+			$("#ad_address").click(function() {
+				var target = "write_receipt_address.html"
+				switch_child(target);
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>帮助中心</title>
+	</head>
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" href="../css/mine.css" />
+	<link rel="stylesheet" href="../css/help_article.css" />
+    <style>
+    	#article{
+    		margin-top: 65px;
+    	}
+    </style>
+	<body class="mine_body">
+		<div style="background: #FFFFFF;" id="article">
+			<div class="tab" tabindex="4">
+				<article>
+					<div class="article_show">
+						<!--<h2>认证项目说明</h2>
+						<p class="show_detail">
+						</p>
+						<div class="b">p2p信贷对资料的认证仅限于如下方式：</div>
+						<div> 1. 对用户提交的书面资料的照片文件进行真实性审查。</div>
+						<div> 2. 对用户上传的照片资料的内容与其申报的信息的一致性审查。 </div>
+						<div> 3. p2p信贷贷承诺在认证中保持中立、审慎的态度，但P2P借贷不对借款人的行为提供任何保证。</div>
+						<div> 4. p2p信贷的认证不能避免出贷款项出现违约的风险，亦不免除借款人应当承担的各种责任。</div>
+						<p></p>-->
+					</div>
+				</article>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script>
+			var help_index = localStorage.getItem('should');
+			var dateTime = Math.round(new Date().getTime() / 1000);
+			var dateKey = "jfwlc.com20161219" + dateTime;
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/show_article.php" + dateKey,
+					data: {
+						id: help_index
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						$('.article_show').html('');
+						$('.article_show').append('<h2>' + data.title + '</h2>');
+						$('.article_show').append(data.content);
+					},
+					error: function(e) {
+
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

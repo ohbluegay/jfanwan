@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>购买</title>
+		<link rel="stylesheet" href="../css/zhuanqian.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/layer.css" />
+		<style>
+			a {
+				outline: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">购买</span>
+				<!--<a href="#"><span class="header_tips">限额说明</span></a>-->
+			</div>
+		</header>
+		<section class="top2">
+			<div class="mark">
+				<div class="mark_title">
+					<span class="mark_title_name">体验宝一期</span>
+					<span class="mark_money"><font class="yang money">￥</font><font class="mark_money_number money">3000.00</font>元</span>
+				</div>
+				<div class="mark_intro">
+					<dl>
+						<dd><span>预计年化</span><span id="rate">15.00%</span></dd>
+						<dd><span>投资期限</span><span id="time">15天</span></dd>
+						<dd><span>预期收益</span><span class="money" id="profit">18.49</span>元</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="pay_money_choose">
+				<ul>
+					<li class="choose_item" id="pay_method">
+						<a href="javascript:void(0)" id="pay_mode">
+							<div class="choose_name">付款方式</div>
+							<div class="choose_go">
+								<abbr class="choose_account"><span id="for_account" style="margin-right: 10px;">账户余额支付</span><span class="go_right"></span></abbr>
+								<abbr class="choose_bank" style="display: none;"><img src="../images/make_money/gongshang_bank.png"/><span class="bank_name">中国工商银行(2506)</span><span class="go_right"></span></abbr>
+							</div>
+							<div class="blank"></div>
+						</a>
+					</li>
+					<li class="choose_item">
+						<a href="javascript:void(0)" id="red_bag">
+							<div class="choose_name pay_disabled">现金券</div>
+							<div class="choose_go">
+								<span class="money" id="tk" style="margin-right: 15px;display: inline-block;">选择现金券</span>
+								<span class="go_right"></span>
+							</div>
+							<div class="blank"></div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<div class="bottom_help"></div>
+		<footer class="pay_footer">
+			<div class="should_pay">
+				<span>待支付金额</span>
+				<span><font class="yang money">￥</font><font class="mark_money_number money" id="need"></font>元</span>
+			</div>
+			<div class="button_submit" onclick="pay_get()">确认支付</div>
+		</footer>
+		<!--支付输入框-->
+		<div class="pwd-box">
+			<div class="title">
+				<span class="close_pwd"></span> 输入支付密码
+			</div>
+			<input type="number" maxlength="6" class="pwd-input" id="pwd-input">
+			<div class="fake-box">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+			</div>
+			<div class="forget_pwd_input">
+				<a href="javascript:void(0)">忘记密码?</a>
+			</div>
+		</div>
+		<div class="sure_quit">
+			<div class="quit_title">离成功只差一步之遥，确定放弃吗?</div>
+			<div class="quit_bottom">
+				<div class="quit_item" id="quit">放弃</div>
+				<div class="quit_item next" id="continue">继续</div>
+				<div class="blank"></div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/layer.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			var list = JSON.parse(window.localStorage.getItem('list'));
+			var list_id = window.localStorage.getItem('list_id');
+			var money = window.localStorage.getItem('money'),
+				deal_property;
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			var bag_id = 0,
+				bank_id, my_money;
+			/*子页面*/
+			function switch_child(url) {
+				goHref(url)
+			}
+
+			function formatLimit(time, type) {
+				var formatTime;
+				if(type == 0) {
+					formatTime = time + '天';
+				} else {
+					formatTime = time + '个月';
+				}
+				return formatTime;
+			}
+			$(document).ready(function() {
+				/*填充数据*/
+				$('.mark_title_name').html(list.name);
+				$('.mark_money_number').html(money);
+				$('#need').html(money);
+				$('#rate').html(list.rate + '%');
+				var limitTime = formatLimit(list.repay_time, list.repay_time_type);
+				$('#time').html(limitTime);
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/calculator.php" + dateKey,
+					data: {
+						'deal_id': list_id,
+						'money': money,
+						'deal_number': list.min_loan_money
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('#profit').html(data.profit);
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+				pay_mode()
+                if(localStorage.getItem('bag_money')){
+				   refresh();
+				}
+			})
+			/*判断显示那条付款方式*/
+			function pay_mode() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/bank.php" + dateKey,
+					data: {
+						'user_id': user_id,
+						'deal_id': list_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('#for_account').html('');
+							var list = data.data;
+							deal_property = data.property;
+							if(deal_property == 2) {
+								$('#pay_method').hide();
+								return;
+							}
+							$.each(list, function(index, item) {
+								if(item.is_bank == '0') {
+									$('#for_account').html("余额支付（" + item.user_money + "）");
+									my_money = item.user_account;
+									if(my_money < money * 1) {
+										layer.open({
+											content: '余额不足，去充值?',
+											btn: ['充值', '取消'],
+											yes: function(index) {
+												layer.close(index);
+												var target = "../wode/recharge_up.html";
+												switch_child(target)
+											},
+											no: function(index) {
+												window.history.go(-1)
+											}
+										});
+									}
+								}
+							})
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			/*确认支付*/
+			function pay_get() {
+				if(deal_property == 1) {
+					pay()
+				} else {
+					if(bag_id != 0) {
+						//选择了红包
+						var bheight = $(document).height()
+						$('.pay_footer').hide();
+						$('.fake-box input').val('');
+						mask.show();
+						$('.pwd-input').val('');
+						$('.pwd-box').css('visibility', 'visible');
+						$('.pwd-input').focus();
+						var $input = $(".fake-box input");
+						$("#pwd-input").on("input", function() {
+							var pwd = $(this).val().trim();
+							for(var i = 0, len = pwd.length; i < len; i++) {
+								$input.eq("" + i + "").val(pwd[i]);
+							}
+							$input.each(function() {
+								var index = $(this).index();
+								if(index >= len) {
+									$(this).val("");
+								}
+							});
+							if(pwd.length == 6) {
+								mask.hide();
+								$('.pwd-box').css('visibility', 'hidden');
+								$('.pay_footer').show();
+								window.location.href="http://www.jfwlicai.com/index.php?ctl=collocation&act=RegisterCreditor&deal_id="+list_id+"&user_id="+user_id+"&bid_money="+money+"&bid_paypassword="+pwd+"&ecv_id="+bag_id;
+							}
+						});
+					} else {
+						//没有选红包
+						$.ajax({
+							type: "post",
+							url: "https://api.jfwlicai.com/mobile/ipsBidding.php" + dateKey,
+							data: {
+								user_id: user_id,
+								deal_id: list_id,
+								trd_amt: money
+							},
+							dataType: 'json',
+							async: true,
+							success: function(data) {
+								if(data.status == 0) {
+									mui.toast(data.msg)
+								} else {
+									var result = data.data;
+									result.number = money;
+									var pt = {
+										"type": "pay",
+										"data": result
+									}
+									console.log(pt)
+									if(/iphone|ipad|ipod/.test(ua)) {
+										JFWModel.tenderWithParameters(JSON.stringify(result));	
+									}
+									if(/android/.test(ua)) {
+										window.BID.postMessage(JSON.stringify(pt));
+									}
+								}
+							},
+							error: function(e) {
+
+							}
+						});
+					}
+				}
+			}
+			/*输入密码_汇潮*/
+			function pay() {
+				if(my_money < money * 1) {
+					mui.toast('余额不足')
+					return false
+				}
+				var bheight = $(document).height()
+				$('.pay_footer').hide();
+				$('.fake-box input').val('');
+				mask.show();
+				$('.pwd-input').val('');
+				$('.pwd-box').css('visibility', 'visible');
+				$('.pwd-input').focus();
+				var $input = $(".fake-box input");
+				$("#pwd-input").on("input", function() {
+					var pwd = $(this).val().trim();
+					for(var i = 0, len = pwd.length; i < len; i++) {
+						$input.eq("" + i + "").val(pwd[i]);
+					}
+					$input.each(function() {
+						var index = $(this).index();
+						if(index >= len) {
+							$(this).val("");
+						}
+					});
+					if(pwd.length == 6) {
+						mask.hide();
+						$('.pwd-box').css('visibility', 'hidden');
+						$('.pay_footer').show();
+						$.ajax({
+							type: "post",
+							url: "https://api.jfwlicai.com/mobile/pay_deal.php" + dateKey,
+							data: {
+								user_id: user_id,
+								deal_id: list_id,
+								pay_money: money,
+								ecv_id: bag_id,
+								pay_password: pwd
+							},
+							dataType: 'json',
+							async: true,
+							success: function(data) {
+								if(data.response_code == 1) {
+									mui.toast(data.show_err)
+									window.history.go(-1)
+								} else {
+									mui.toast(data.show_err)
+								}
+							},
+							error: function(e) {
+
+							}
+						});
+					}
+				});
+			}
+
+			$('.close_pwd').click(function() {
+				$('.pwd-box').css('visibility', 'hidden');
+				$('.pay_footer').show();
+				mask.hide();
+			})
+
+			$('.pwd-box').click(function() {
+				$('.pwd-input').focus();
+			})
+
+			$('.bg').click(function() {
+				$('.pwd-box').css('visibility', 'hidden');
+				$('.pay_footer').show();
+				$('.sure_quit').hide();
+				mask.hide();
+			})
+
+			/*点击返回按钮显示是否放弃*/
+			$('.back').click(function() {
+				$('.sure_quit').show();
+				$('.bg').show();
+			})
+			/*点击继续*/
+			$('#continue').click(function() {
+				$('.sure_quit').hide();
+				$('.bg').hide();
+			})
+
+			/*点击取消*/
+			$('#quit').click(function() {
+				window.history.go(-1)
+			})
+
+			document.getElementById('red_bag').onclick = function() {
+				var target = "../zhuanqian/my_red_envelope.html";
+				switch_child(target)
+			}
+			$('.forget_pwd_input').click(function() {
+				$('.close_pwd').click();
+				var target = "../wode/forget_pay_pwd.html";
+				switch_child(target);
+			})
+
+			function refresh() {
+				bag_id = localStorage.getItem('bag_id');
+				var bag_money = localStorage.getItem('bag_money');
+				var bag_name = localStorage.getItem('bag_name');
+				if(!bag_id) {
+					$('#tk').text('暂无可用的现金券');
+				} else {
+					$('#tk').text(bag_name + ' ￥' + bag_money);
+					var index = (bag_money + '').indexOf('.');
+					bag_money = (bag_money + '').substr(0, index);
+					$('#need').text(money - bag_money * 1);
+				}
+				localStorage.removeItem('bag_money');
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>提现</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/recharge.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">提现</span>
+			</div>
+		</header>
+		<div class="nav_menu top2">
+			<div class="nav_item re_active" tabindex="1">
+				<a href="javascript:void(0)">
+					<span>汇潮</span>
+				</a>
+			</div>
+			<div class="nav_item2 hidden">
+				<a href="javascript:void(0)">
+					<span>1</span>
+				</a>
+			</div>
+			<div class="nav_item" tabindex="2">
+				<a href="javascript:void(0)">
+					<span>环迅</span>
+				</a>
+			</div>
+			<div class="blank"></div>
+		</div>
+		<section style="margin-top: 10px;">
+			<div class="mine_content">
+				<div class="widthd_money">
+					<span style="margin-left: 10px;color: #666666;">账户可提现余额</span>
+					<span class="orange" style="float: right;" id="account"><font>0.00</font><font style="color: #333333;">元</font></span>
+				</div>
+				<div class="widthd_mode">
+					<div class="mode_pay">
+						<div class="mode_inner" id="ch_bk" style="position: relative;">
+							<a href="javascript:void(0)" id="bank" style="color: #999999;">
+								<div class="mode_item1">
+									<img src="" alt="支付" class="mode_icon" />
+								</div>
+								<div class="mode_item2">
+									<span class="mode_name">
+								
+							</span>
+								</div>
+							</a>
+							<a href="javascript:void(0)" id="mine" style="display: none;color: #333333;position: absolute;top: 14px;">
+								无绑定银行卡
+							</a>
+							<div class="mode_item3">
+								<span class="go_right" style="right: 0;top: 6px;"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="width_numb">
+					<div class="pay_password">
+						<input type="number" name="password" placeholder="请输入提现金额" class="wid_hc" />
+						<span class="pwd_name gray2">金额(元)</span>
+					</div>
+				</div>
+				<div class="widthd_submit">
+					<div onclick="widthdraw_hc()">提现</div>
+				</div>
+			</div>
+			<div class="mine_content" style="display: none;">
+				<div class="width_numb">
+					<div class="pay_password">
+						<input type="number" name="password" placeholder="请输入提现金额" class="wid_hx" />
+						<span class="pwd_name gray2">金额(元)</span>
+					</div>
+				</div>
+				<div class="widthd_submit">
+					<div onclick="widthdraw_hx()">提现</div>
+				</div>
+			</div>
+		</section>
+		<div class="pwd-box">
+			<div class="title">
+				<span class="close_pwd"></span> 输入支付密码
+			</div>
+			<input type="tel" maxlength="6" class="pwd-input" id="pwd-input">
+			<div class="fake-box">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+				<input type="password" readonly="">
+			</div>
+			<div class="forget_pwd_input">
+				<a href="#">忘记密码?</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/mask.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(function() {
+				var width = $('.fake-box input').width();
+				$('.fake-box input').css('height', width + 'px');
+
+				initPage()
+			})
+
+			/*初始化页面内容*/
+			function initPage() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/bank.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var bankList = data.data;
+							$.each(bankList, function(index, item) {
+								if(item.is_bank == 0) {
+									var account = item.user_account + '';
+									var index = account.indexOf('.');
+									if(index != -1) {
+										$('#account font:nth-of-type(1)').text((account*100).toFixed(2)/100);
+									} else {
+										$('#account font:nth-of-type(1)').text(item.user_account + '.00')
+									}
+									if(item.user_account == null) {
+										$('#account font:nth-of-type(1)').text('0.00')
+									}
+								}
+							});
+							var bank = bankList[0];
+							if(bank.is_bank != 0) {
+								$('.mode_inner').attr('id', bank.id);
+								$('.mode_item1 img').attr('src', bank.img);
+								$('.mode_name').html(bank.bank_name)
+							} else {
+								$('#bank').hide();
+								$('#mine').show();
+							}
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+			/*输入密码*/
+			function widthdraw_hc() {
+				$('.fake-box input').val('');
+				var bank_id = $('.mode_inner').attr('id'),
+					amount = $.trim($('.wid_hc').val());
+				var bheight = $(document).height()
+				$('.pwd-box').css('bottom', bheight / 2 - 25);
+				if(amount == '') {
+					mui.toast('请输入提现金额')
+					return false
+				}
+				mask.show();
+				$('.pwd-input').val('');
+				$('.pwd-box').css('visibility', 'visible');
+				$('.pwd-input').focus();
+				var $input = $(".fake-box input");
+				$("#pwd-input").on("input", function() {
+					var pwd = $(this).val().trim();
+					for(var i = 0, len = pwd.length; i < len; i++) {
+						$input.eq("" + i + "").val(pwd[i]);
+					}
+					$input.each(function() {
+						var index = $(this).index();
+						if(index >= len) {
+							$(this).val("");
+						}
+					});
+					if(pwd.length == 6) {
+						mask.hide();
+						$('.pwd-box').css('visibility', 'hidden');
+						$.ajax({
+							type: "post",
+							url: "https://api.jfwlicai.com/mobile/withdraw_cash.php" + dateKey,
+							data: { 'user_id': user_id, 'bankcard_id': bank_id, 'amount': amount, 'paypassword': pwd },
+							dataType: 'json',
+							async: true,
+							success: function(data) {
+								initPage();
+								if(data.response_code == 1) {
+									mui.toast(data.show_err);
+									var last = plus.webview.getWebviewById('../wode/center.html');
+									last.evalJS("getUserMsg()");
+									plus.webview.currentWebview().close('slide-out-right', 200)
+								} else {
+									mui.toast(data.show_err);
+								}
+							},
+							error: function() {
+								mui.toast('提现失败');
+							}
+						});
+					}
+				});
+			}
+
+			/*输入密码*/
+			function widthdraw_hx() {
+				$('.fake-box input').val('');
+				var bank_id = $('.mode_inner').attr('id'),
+					amount = $.trim($('.wid_hx').val());
+				if(!amount) {
+					mui.toast('请输入金额');
+					return false
+				}
+				$.ajax({
+					type: "get",
+					url: 'https://api.jfwlicai.com/mobile/ipsWithdraw.php',
+					data: {
+						'user_id': user_id,
+						'pTrdAmt': amount
+					},
+					async: true,
+					dataType: 'json',
+					success: function(data) {
+						if(data.status == 0){
+							mui.toast(data.msg)
+						}else{
+							var result = data.data;
+							result.number = amount;
+							var pt = {
+								"type": "Withdraw",
+								"data": result
+							}
+							window.webkit.messageHandlers.OOXX.postMessage(JSON.stringify(pt));
+						}
+					},
+					error: function(e) {
+						mui.toast('网络错误')
+					}
+				});
+
+			}
+
+			function withdrawResult(msg) {
+				/*处理提现信息*/
+				mui.toast(msg)
+			}
+
+			/*获取选择的银行信息*/
+			function getBank() {
+				var my_bank_id = localStorage.getItem('my_bank_id');
+				var my_bank_name = localStorage.getItem('my_bank_name');
+				var my_bank_img = localStorage.getItem('my_bank_img');
+				$('.mode_inner').attr('id', my_bank_id);
+				$('.mode_item1 img').attr('src', my_bank_img);
+				$('.mode_name').html(my_bank_name)
+			}
+
+			$('.close_pwd').click(function() {
+				$('.pwd-box').css('visibility', 'hidden');
+				mask.hide();
+			})
+
+			$('.pwd-box').click(function() {
+				$('.pwd-input').focus();
+			})
+
+			$('.bg').click(function() {
+				$('.pwd-box').css('visibility', 'hidden');
+				mask.hide();
+			})
+
+			/*选择提现银行卡*/
+			$('#ch_bk').click(function() {
+				var target = "my_bank.html";
+				switch_child(target)
+			})
+
+			/*忘记支付密码*/
+			$('.forget_pwd_input').click(function() {
+				var target = "../wode/forget_pay_pwd.html";
+				switch_child(target);
+			})
+			//点击切换tab
+			$('.nav_item').click(function() {
+				var index = $(this).attr('tabindex');
+				$(this).addClass('re_active').siblings().removeClass('re_active');
+				$('.mine_content:nth-of-type(' + index + ')').show().siblings().hide()
+			})
+		</script>
+	</body>
+
+</html>

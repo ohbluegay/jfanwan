@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>启动页</title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/lock_out.js"></script>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				font-family: "微软雅黑";
+			}
+			.banner img{
+				width: 100%;
+			}
+			.top_bar{
+				position: fixed;
+				top: 10px;
+				right: 20px;
+				background: rgba(0,0,0,.3);
+				border-radius: 5px;
+				font-size: 12px;
+				color: #FFFFFF;
+				padding: 5px 10px;
+			}
+			#v_time{
+				padding: 0 2px;
+				color: #FFC000 !important; 
+			}
+		</style>
+	</head>
+
+	<body>
+	    <div class="banner">
+			<img src="images/start.png" />
+		</div>
+		<div class="top_bar">
+			跳过(<span id="v_time">4</span>)
+		</div>
+		<script>
+		    dateKey = "?timestamp=" + dateTime + "&token=" + jQuery.md5(dateKey);
+			mui.init()
+			$('.banner').click(function(){
+			   window.location.href = "hx_introduce.html"
+			})
+		    var bHeight = window.screen.height;
+			$('.banner img').css('height',bHeight)
+			window.onscroll = function(){
+			    $('body').scrollTop(0)
+			}
+			var v_t = 4;
+			var user_id = window.localStorage.getItem('user_id');
+			if(!user_id) {
+				window.location.href = 'login.html'
+			} else {
+			    $.ajax({
+					type:"post",
+					url:"https://api.jfwlicai.com/mobile/isSet_lock_password.php"+dateKey,
+					data:{'user_id':localStorage.getItem('user_id')},
+					dataType:'json',
+					async:true,
+					success:function(data){
+						var t = setInterval(function(){
+						    v_t--;
+							if(v_t == -1){
+							    clearInterval(t)
+								if(data.status == 1 && data.response_code == 1){
+								    window.location.href = "lock.html";
+								}else{
+								    window.location.href = "zhuanqian/index.html";
+								} 
+							}
+							if(v_t >= 0){
+								$('#v_time').text(v_t)
+							}
+						},1000)
+						$('.top_bar').click(function(){
+							if(data.status == 1 && data.response_code == 1){
+							    window.location.href = "lock.html";
+							}else{
+							    window.location.href = "zhuanqian/index.html";
+							} 
+						})
+					},
+					error:function(e){
+						
+					}
+				});
+			}
+
+		</script>
+	</body>
+
+</html>

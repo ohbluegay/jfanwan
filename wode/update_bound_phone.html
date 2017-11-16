@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>更换绑定手机</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">绑定手机</span>
+			</div>
+		</header>
+		<div class="forg_sec top2">
+			<form>
+				<div class="forg_item">
+					<input type="text" placeholder="请输入要绑定的手机号" name="phone" id="phone" />
+				</div>
+				<div class="forg_item">
+					<input type="text" placeholder="请输入验证码" name="code" class="input_code" />
+					<span class="getcode" style="background: #ffc000;">发送验证码</span>
+				</div>
+				<div class="forg_item">
+					<div class="s_button" onclick="submit_d()">去验证</div>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function() {
+				getCode();
+			})
+
+			/*获取验证码*/
+			function getCode() {
+				var repet = false;
+				$('.getcode').click(function() {
+					var phone = $.trim($('#phone').val());
+					if(!rep_phone(phone)) {
+						return false;
+					}
+					if(repet) {
+						mui.toast('正在发送中');
+						return false;
+					}
+					var tm = 60;
+					$.ajax({
+						type: "post",
+						url: "https://api.jfwlicai.com/mobile/send_register_code.php" + dateKey,
+						data: {
+							'phone': phone
+						},
+						dataType: 'json',
+						async: true,
+						success: function(data) {
+							if(data.response_code == 1) {
+								mui.toast(data.show_err);
+								repet = true;
+								var t = setInterval(function() {
+									tm--;
+									$('.id_code').text('' + tm + 's后重发');
+									if(tm == 0) {
+										$('.id_code').text('发送验证码');
+										clearInterval(t);
+										repet = false;
+									}
+								}, 1000);
+							} else {
+								mui.toast(data.show_err);
+							}
+						},
+						error: function(e) {
+
+						}
+					});
+				})
+			}
+
+			/*验证手机号*/
+			function rep_phone(phone) {
+				if(!phone) {
+					mui.toast('请输入手机号');
+					return false;
+				}
+				if(!/^((1[3,5,8][0-9])|(14[5,7])|(17[0,1,6,7,8]))\d{8}$/.test(phone)) {
+					mui.toast('手机号格式不正确');
+					return false;
+				}
+				return true;
+			}
+
+			/*去验证*/
+			function submit_d() {
+				var phone = $.trim($('#phone').val());
+				var code = $.trim($('#input_code').val());
+				if(!phone) {
+					mui.toast('请输入手机号');
+					return false;
+				}
+				if(!/^((1[3,5,8][0-9])|(14[5,7])|(17[0,1,6,7,8]))\d{8}$/.test(phone)) {
+					mui.toast('手机号格式不正确');
+					return false;
+				}
+				if(!code) {
+					mui.toast('请输入验证码');
+					return false;
+				}
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/change_mobile.php" + dateKey,
+					data: {
+						'user_id': user_id,
+						'mobile': phone,
+						'mobile_code':code
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1 && data.status == 1) {
+							mui.toast('已修改绑定手机');
+							var target = "center.html";
+							switch_child(target)
+						} else {
+							mui.toast(data.show_err);
+						}
+					},
+					error: function(e) {
+						mui.toast('绑定失败');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

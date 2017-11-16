@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>体验金投资</title>
+	</head>
+	<link rel="stylesheet" href="../css/index.css" />
+	<link rel="stylesheet" href="../css/common_header.css" />
+	<link rel="stylesheet" href="../css/mine.css" />
+	<link rel="stylesheet" href="../css/loading.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">体验金投资</span>
+			</div>
+		</header>
+		<nav class="ex_nav top2">
+			<a href="javascript:void(0)" class="ex_active" tabindex="ex">体验金</a>
+			<a href="javascript:void(0)" tabindex="data">投资记录</a>
+			<div class="ex_line"></div>
+			<div class="blank"></div>
+		</nav>
+		<!--体验金-->
+		<div id="ex" class="tab_item">
+			<div class="ex_income">
+				<dl>
+					<dd class="add">
+						<span id="lead">￥0.00</span>
+						<small>已领取收益</small>
+					</dd>
+					<dd class="reduce">
+						<span id="send">￥0.00</span>
+						<small>待领取收益</small>
+					</dd>
+					<dd>
+						<button onclick="getIncome()" class="getProfit" style="padding-top: 5px;">领取收益</button>
+					</dd>
+					<div class="blank"></div>
+				</dl>
+			</div>
+			<section style="margin-top: 10px;background: #FFFFFF;position: relative;" id="main">
+				<div class="in_fresh_title">新手体验金理财产品</div>
+				<span class="invest_icon"></span>
+				<div class="rate_circle">
+					<div class="circle">
+						<canvas width="184px" height="184px" id="myCanvas">0%</canvas>
+						<div class="income">
+							<div class="year_income" style="padding: 0;">
+								<span class="year_name">年化收益</span>
+								<span class="year_rate"></span>
+							</div>
+						</div>
+						<div class="rate_invest" style="top: 75px;">
+							<div class="invest_bottom" style="padding: 0;">
+								<div id="limit">
+									<span class="invest_name">投资期限</span>
+									<span class="invest_numb"></span>
+								</div>
+								<div id="total">
+									<span class="invest_name">投资总额</span>
+									<span class="invest_numb"></span>
+								</div>
+								<div class="blank"></div>
+							</div>
+							<div class="invest_label">
+								<span>您有体验金<font style="color: #FFC000;" id="load_money"></font>元</span>
+							</div>
+						</div>
+						<div class="rate_bottom">
+							<div style="font-size: 12px;color: #666666;"><span>预计收益<font style="color: #FFC000;" id="four">360</font>元</span></div>
+							<div class="invest_button" style="margin-top: 15px;" onclick="submit_d()">
+								<span>立即投资</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!--投资记录-->
+		<div id="data" class="tab_item" style="background: #FFFFFF;padding: 0 15px;display: none;margin-top: 10px;">
+			
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+            var learn_id;
+            var invest_money,no_lead_interest,learn_balance;
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			function drawProcess() {
+				$('canvas#myCanvas').each(function() {
+					var text = $(this).text();
+					var process = text.substring(0, text.length - 1);
+					var canvas = this;
+					var context = canvas.getContext('2d');
+					context.clearRect(0, 0, 48, 48);
+					context.beginPath();
+					context.moveTo(92, 92);
+					context.arc(92, 92, 92, 0, Math.PI * 2, false);
+					context.closePath();
+					context.fillStyle = '#ddd';
+					context.fill();
+					context.beginPath();
+					context.moveTo(92, 92);
+					if(process == 100) {
+						context.arc(92, 92, 92, Math.PI * 2 * (15 / 36), (Math.PI * 2 - Math.PI * 2 * (1 / 3)) * process / 100 + Math.PI * 2 * (15 / 36) + 2, false);
+					} else {
+						context.arc(92, 92, 92, Math.PI * 2 * (15 / 36), (Math.PI * 2 - Math.PI * 2 * (1 / 3)) * process / 100 + Math.PI * 2 * (15 / 36), false);
+					}
+					context.closePath();
+					context.fillStyle = '#FFD700';
+					context.fill();
+					context.beginPath();
+					context.moveTo(92, 92);
+					context.arc(92, 92, 85, 0, Math.PI * 2, true);
+					context.closePath();
+					context.fillStyle = 'rgba(255,255,255,1)';
+					context.fill();
+				})
+			}
+			drawProcess();
+
+			$(document).ready(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/learn.php"+dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$("#lead").text(data.has_lead_interest + "元");
+							$("#send").text(data.no_lead_interest + "元");
+						    no_lead_interest = data.no_lead_interest;
+						    if(no_lead_interest == 0){
+						    	$('.getProfit').css('background','#999999')
+						    }
+							var index = (data.uc_interest + '').indexOf('.');
+							$('#four').text((data.uc_interest + '').substr(0, index));
+							/*1.渲染上面的圆环内容*/
+							if(!data.learn_info){
+								$('#main').hide()
+							}
+							var circle_data = data.learn_info;
+							invest_money = data.learn_balance;
+							$('.invest_button').attr('list_id', circle_data.id);
+							learn_id = circle_data.id;
+							$('.in_fresh_title').text(circle_data.name);
+							var circle_rate = data.has_send_money / data.learn_info.load_money;
+							$('.myCanvas').html(circle_rate);
+							$('.income .year_rate').html(circle_data.rate + '.00%');
+							$('#limit .invest_numb').html(circle_data.time_limit + '天');
+							var load_money = circle_data.load_money;
+							load_money = load_money / 10000;
+							$('#total .invest_numb').html(load_money + '万');
+							learn_balance = data.learn_balance;
+							$('#load_money').text(data.learn_balance);
+							/*画圆环*/
+							drawProcess();
+						}
+					}
+				});
+				/*投资记录*/
+				//getSouce();
+			})
+			
+			/*去投资*/
+			function submit_d(){
+				if(learn_balance == 0){
+					mui.toast('无体验金')
+                    return false;
+				}
+				$.ajax({
+					type:"post",
+					url:"https://api.jfwlicai.com/mobile/do_learn_invest.php"+dateKey,
+					data:{'user_id':user_id,'learn_id':learn_id,'money':invest_money},
+					dataType:'json',
+					async:true,
+					success:function(data){
+						if(data.response_code == 1 && data.status == 1){
+            				mui.toast(data.show_err);
+            				window.history.go(-1)
+            			}else{
+            				mui.toast(data.show_err);
+            			}
+					},
+					error:function(e){
+						mui.toast('投资失败')
+					}
+				});
+			}
+			
+			/*领取收益*/
+            function getIncome(){
+            	if(no_lead_interest == 0){
+            		mui.toast('暂无收益')
+            		return false
+            	}
+            	$.ajax({
+            		type:"post",
+            		url:"https://api.jfwlicai.com/mobile/do_learn_interest.php"+dateKey,
+            		data:{'user_id':user_id},
+            		dataType:'json',
+            		async:true,
+            		success:function(data){
+            			if(data.response_code == 1){
+            				mui.toast('领取成功');
+            				location.reload()
+            			}else{
+            				mui.toast('领取失败');
+            			}
+            		},
+            		error:function(e){
+            			mui.toast('领取失败');
+            		}
+            	});
+            }
+
+			/*点击切换tab*/
+			$('.ex_nav a').click(function() {
+				$(this).addClass('ex_active').siblings().removeClass('ex_active');
+				var tabindex = $(this).attr('tabindex');
+				$(".tab_item[id='" + tabindex + "']").show().siblings('.tab_item').hide();
+                if(tabindex == 'data'){
+                	getSouce();
+                }
+			})
+
+			function getSouce() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/learn.php"+dateKey+"&t=load",
+					data:{'user_id':user_id},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						$('#data').html("");
+						if(data.response_code == 1) {
+							var result = data.learn_load_list;
+							$.each(result, function(index, item) {
+								var liArr = [];
+								liArr.push("<div class='money_loan' id='" + item.id + "'>");
+								liArr.push("<a href='javascript:void(0)'>");
+								liArr.push("<div class='loan_content'>");
+								liArr.push("<div class='loan_top'>");
+								liArr.push("<span>" + item.name + "</span>");
+								liArr.push("<span>" + item.state + "</span>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</div>");
+								liArr.push("<div class='loan_middle'>");
+								liArr.push("<div class='loan_rate loan_active'>");
+								liArr.push("<span>" + item.money + "</span>");
+								liArr.push("<span>订单金额</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='loan_rate'>");
+								liArr.push("<span>" + item.time_limit + "天</span>");
+								liArr.push("<span>投资期限</span>");
+								liArr.push("</div>");
+								liArr.push("<div class='loan_rate'>");
+								/*liArr.push("<span>0/223.00</span>");
+								liArr.push("<span>已获/预期收益(元)</span>");*/
+								liArr.push("</div>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</div>");
+								liArr.push("</div>");
+								liArr.push("</a>");
+								liArr.push("</div>");
+								liArr = liArr.join("");
+								$('#data').append(liArr);
+							});
+						}
+					},
+					error: function(e) {
+						mui.toast('获取数据失败');
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

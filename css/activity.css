@@ -1,0 +1,153 @@
+.activity_body{
+	background-image: url(../images/integrate/activity_bg@2x.png);
+	background-size:100% 100% ;
+	position: relative;
+}
+.activity_form-input{
+	padding: 10px 15px;
+	padding-top: 330px;
+}
+.activity_form-input .form_item{
+	padding: 0 35px;
+}
+.activity_form-input .form_item input{
+	border-radius: 30px;
+	border: 1px solid #834d0c;
+	background-color:transparent;
+	text-indent: 2em;
+	-webkit-appearance: none;
+}
+::-moz-placeholder{
+	font-size: 10px;
+	color: #333;
+}
+::-webkit-input-placeholder {
+	font-size: 10px;
+	color: #333;
+}
+.ac_code{
+	font-size: 12px;
+	color: #333333;
+	position: absolute;
+	top: 0px;
+	right: 30px;
+	z-index: 1;
+	padding: 10px 10px;
+	margin-top: 9px;
+	border-left: 1px solid #666666;
+}
+.ac_submit{
+	height: 50px;
+	background: url(../images/integrate/ac_submit@2x.png);
+	background-size:100% 100% ;
+	margin: 15px 0;
+}
+.active_into{
+	padding: 0 20px;
+}
+.ac_top{
+	width: 35%;
+	float: left;
+	padding: 6px 0;
+	border-bottom: 1px solid #999999;
+}
+.ac_top_middle{
+	width: 30%;
+	float: left;
+}
+.ac_item{
+	padding: 5px 0 20px 0;
+}
+.ac_item_title{
+	padding-bottom: 10px;
+}
+.into_bag{
+	padding: 0 8px;
+}
+.into1{
+	background: url(../images/integrate/ac_into@2x.png);
+}
+.into2{
+	background: url(../images/integrate/plat_adg@2x.png);
+}
+.into3{
+	background: url(../images/integrate/safe_pr@2x.png);
+}
+.into_tips{
+	height: 25px;
+	background-size:100% 100% ;
+}
+.ac_item_content{
+	font-size: 10px;
+}
+.ac_item_content p{
+	color: #906617;
+}
+.key_words{
+	padding: 3px 0;
+	font-weight: bolder;
+	color: #333333 !important;
+}
+#share_par{
+	position: relative;
+}
+.share_icon img{
+	width: 45px;
+	height: 45px;
+	position: absolute;
+	top: -10px;
+	right: -12px;
+}
+.share{
+	background-color: #FFFFFF;
+	width: 100%;
+	position: fixed;
+	bottom: -350px;
+	z-index: 300;
+}
+.share ul{
+	list-style: none;
+	padding-left: 2%;
+}
+.share_title{
+	padding: 10px 0;
+	text-align: center;
+	border-bottom: 1px solid #F0F0F0;
+}
+.share_item{
+	width: 33%;
+	float: left;
+	padding: 10px 0;
+	font-size: 12px;
+	color: #666666;
+}
+.share_item span{
+	display: block;
+	text-align: center;
+}
+.share_item img{
+	width: 60px;
+	height: 60px;
+}
+.reset{
+	background-color: #FFC000;
+	margin: 20px 10% 30px 10%;
+	text-align: center;
+	padding: 10px;
+	border-radius: 7px;
+	letter-spacing: 10px;
+	color: #333333;
+	cursor: pointer;
+}
+.mask{
+	position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+	background-color: #333333;
+	opacity:0.7; 
+	-moz-opacity:0.7; 
+	filter:alpha(opacity=70);
+	display: none;
+	z-index: 100;
+}

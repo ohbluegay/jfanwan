@@ -1,0 +1,316 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body{
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+*{
+	outline: none;
+}
+header{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
+.register_header{
+	background-color: #ffc000;
+	height:40px;
+}
+.top_help{
+	width: 100%;
+	height: 60px;
+	background: #FFFFFF;
+}
+.top1{
+	margin-top: 25px;
+}
+.top2{
+	margin-top: 65px;
+}
+input{
+	outline: none;
+	-webkit-appearance: none;
+}
+.back{
+	margin-left: 15px;
+	text-decoration: none;
+	width: 9px;
+	float: left;
+	line-height: 45px;
+	height: 100%;
+}
+.back_icon{
+	line-height: 25px;
+}
+.back_icon img{
+	width: 8.5px;
+	height: 16px;
+}
+a{
+	text-decoration: none;
+}
+.register_name{
+	margin-left: 10px;
+	font-size: 18px;
+	line-height: 40px;
+	color: #333333;
+}
+.register_line{
+	padding: 10px 5px;
+	height: 20px;
+	background-color: #F8F8F8;
+}
+.register_item{
+	list-style: none;
+	font-size: 12px;
+}
+.register_item li{
+	width: 20%;
+	float: left;
+	text-align: center;
+}
+.item_name span{
+	line-height: 20px;
+}
+.next_tap span{
+	padding:1px 3px;
+	line-height: 20px;
+}
+.register_item{
+	color: #999999;
+	font-size: 12px;
+}
+.register_item_active{
+	color: #ffc000;
+}
+.active_tap div{
+	background: url(../images/register/active-tap2@2x.png) no-repeat;
+	width: 6px;
+	height: 11px;
+	background-size: 100% 100%;
+	margin: 0 auto;
+	margin-top: 5px;
+}
+.no_tap div{
+	background: url(../images/register/no-tap@3x.png) no-repeat;
+	width: 6px;
+	height: 11px;
+	background-size: 100% 100%;
+	margin: 0 auto;
+	margin-top: 5px;
+}
+.form_group{
+	padding: 15px;
+}
+.form_item{
+	position: relative;
+}
+.form_item input{
+	width: 100%;
+	border-radius: 5px;
+	height: 45px;
+	border: 1px solid #F0F0F0;
+	margin: 5px 0;
+	text-indent: 1em;
+	-webkit-appearance: none;
+}
+::-moz-placeholder{
+	font-size: 12px;
+	color: #dddddd;
+}
+::-webkit-input-placeholder {
+	font-size: 12px;
+	color: #dddddd;
+}
+.id_code{
+	font-size: 13px;
+	color: #FFC000;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 1;
+	padding: 10px 10px;
+	margin-top: 9px;
+	border-left: 1px solid #F0F0F0;
+}
+.icon_show{
+	position: absolute;
+	top: 22px;
+	right: 10px;
+	width: 20px;
+	height: 13px;
+	background: url(../images/register/show@2x.png);
+	background-size: 100% 100%;
+}
+.icon_hide{
+	position: absolute;
+	top: 22px;
+	right: 10px;
+	width: 20px;
+	height: 13px;
+	background: url(../images/register/hidden@2x.png);
+	background-size: 100% 100%;
+}
+.pwd_icon img{
+	width: 20px;
+	height: 13px;
+	margin: 20px 15px 0 0;
+}
+.register_submit{
+	background-color: #FFD700;
+	font-size: 14px;
+	color: #666666;
+	text-align: center;
+	border-radius: 5px;
+	padding: 13px 0;
+}
+.form_submit{
+	margin-top:15px;
+}
+.login_logo{
+	text-align: center;
+}
+.logo_gold{
+	padding: 20px 0 10px 0;
+}
+.logo_gold img{
+	width: 95px;
+	height: 100px;
+}
+.logo_name{
+	padding-bottom: 13px;
+}
+.logo_name img{
+	width: 147px;
+	height: 29px;
+}
+.login_operate a{
+	text-decoration: none;
+	font-size: 12px;
+}
+.login_operate a:first-of-type{
+	color: #666666;
+}
+.login_operate a:last-of-type{
+	float: right;
+	margin-top: 4px;
+	color: #6699FF;
+}
+.attention_tips{
+    font-size: 12px;
+    color: #999999;
+}
+.scalefont{
+	display: inline-block;
+	transform: scale(0.85);
+	-webkit-transform:scale(0.85);
+	-moz-transform:scale(0.85);
+	-o-transform:scale(0.85);
+	-webkit-transform-origin: 0 0;
+}
+.atten_orange{
+	font-size: 12px;
+	color: #FFD700;
+	display: inline-block;
+	position: absolute;
+	right: 0px;
+	bottom:1.8px;
+}
+.register_sure{
+	font-size: 10px;
+	height: 20px;
+	text-align: right;
+	margin-top: 5px;
+	color: #999999;
+	position: relative;
+}
+.register_sure span:first-of-type{
+	vertical-align: middle;
+}
+.register_check{
+	display: inline-block;
+	width:13px;
+	height: 13px;
+}
+.reg_checked{
+	background: url(../images/register/checked@2x.png);
+	background-size:100% 100%;
+}
+.reg_nochecked{
+	background: url(../images/register/no-check@2x.png);
+	background-size:100% 100%;
+}
+.card-border{
+	padding: 10px 0;
+}
+.card{
+	text-align: center;
+	border-radius: 7px;
+	background-color: #F8F8F8;
+	padding: 20px 0;
+}
+.card span{
+	display: block;
+	font-size: 12px;
+	color: #666666;
+	padding: 5px 0;
+}
+.card img{
+	width: 115px;
+	height: 74px;
+}
+.card_example img{
+	width: 100%;
+	height: 150px;
+}
+.break_up{
+	font-size: 12px;
+	color: #666666;
+}
+.break_icon img{
+	width: 12px;
+	height: 11px;
+	vertical-align: middle;
+}
+.register_tips{
+	font-size: 10px;
+}
+.blank{
+	height: 0px;
+    line-height: 0px;
+    clear: both;
+    visibility: hidden;
+    font-size: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+.bar{
+	width: 100%;
+	height: 0;
+	background: #FFC000;
+}
+.should_use{
+	color: #FFC000;
+	font-size: 10px;
+}
+.mui-toast-container {
+	line-height: 17px;
+	position: fixed;
+	z-index: 9999;
+	bottom: 50px;
+	left: 50%;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	opacity: .8
+}
+
+.mui-toast-message {
+	font-size: 14px;
+	padding: 8px 20px;
+	text-align: center;
+	color: #fff;
+	border-radius: 14px;
+	background-color: #323232
+}

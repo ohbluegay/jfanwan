@@ -1,0 +1,308 @@
+.menu {
+	width: 23px;
+	height: 13px;
+	float: right;
+	background: url(../images/integrate/menu@2x.png);
+	background-size: 100% 100%;
+	margin-right: 15px;
+	margin-top: 15px;
+}
+.disabled{
+	background: #999999 !important;
+	color: #FFFFFF !important;
+}
+.nav_inte {
+	width: 100%;
+	background-color:#FFFFFF;
+}
+
+.nav_item {
+	width: 25%;
+	float: left;
+	text-align: center;
+	padding: 15px 0;
+	font-size: 12px;
+}
+
+.nav_item a {
+	color: #666666;
+}
+
+.up_down {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.up_down img {
+	width: 8px;
+	height: 5px;
+}
+
+.up_down img:first-of-type {
+	display: block;
+	margin: 2px 0 2px 0px;
+}
+
+.up_down img:last-of-type {
+	display: block;
+	margin: 0px 0 2px 0px;
+}
+
+.inte_active a{
+	color: #FFC000 !important;
+}
+
+.inte_tips {
+	padding: 0 8px;
+	background-color: #FFFFFF;
+}
+.inte_tips_left {
+	width: 50%;
+	float: left;
+	text-align: left;
+}
+
+.inte_tips {
+	font-size: 12px;
+}
+
+span.inte_mine {
+	display: block;
+	padding: 2px 0;
+}
+
+.inte_tips_right {
+	width: 50%;
+	float: left;
+	text-align: right;
+	padding: 10px 0;
+}
+
+.font-color1 {
+	color: #333333;
+}
+
+.font-color2 {
+	color: #999999;
+}
+
+.font-color3 {
+	color: #FFC000;
+}
+
+.inte_tips_right span {
+	padding: 5px 15px;
+	background-color: #FFC000;
+	border-radius: 2px;
+}
+
+.ticket {
+	width: 100%;
+	list-style: none;
+	font-size: 12px;
+}
+
+.ticket li {
+	width: 50%;
+	float: left;
+}
+
+.ticket_item {
+	padding: 8px;
+}
+
+.ticket li:nth-child(odd) .ticket_item {
+	border-bottom: 1px solid #F8F8F8;
+	border-right: 1px solid #F8F8F8;
+}
+
+.ticket li:nth-child(even) .ticket_item {
+	border-bottom: 1px solid #F8F8F8;
+}
+
+.ticket_item:nth-last-child(1).ticket_item:nth-last-child(2) {
+	border: none;
+}
+
+.ticket_photo img {
+	width: 100%;
+	height: 88px;
+	margin-top: 10px;
+}
+
+@media only screen and (max-width: 300px) {
+	.ticket_photo img {
+		height: 60px;
+	}
+}
+
+.ticket_tips {
+	display: block;
+}
+.inte_container{
+	background-color: #FFFFFF;
+}
+.ticket_tips span {
+	padding-left: 3px;
+}
+
+.detail_logo img {
+	width: 100%;
+	overflow: hidden;
+}
+
+.ticket_details {
+	font-size: 12px;
+	padding: 2px 15px 5px 15px;
+}
+
+.ticket_details_left {
+	width: 50%;
+	float: left;
+}
+
+.ticket_details_right {
+	width: 50%;
+	float: left;
+	text-align: right;
+}
+
+.ticket_name {
+	display: block;
+	padding: 2px 0;
+}
+
+.font-padd {
+	padding-left: 7px;
+}
+
+.integ_numb {
+	display: inline-block;
+	float: right;
+	padding: 10px 0 10px 15px;
+	margin-right: -2px;
+	font-size: 18px;
+}
+
+.inte_numb_tc {
+	font-size: 10px;
+}
+
+.detail_container {
+	padding: 10px 15px;
+	font-size: 10px;
+}
+
+.detail_title {
+	padding: 10px 0;
+}
+
+.detail_content {
+	font-size: 10px;
+}
+
+.exchange_note {
+	padding-top: 15px;
+}
+
+.important_tips {
+	padding: 10px 15px;
+}
+
+.tips_line {
+	width: 35%;
+	float: left;
+	border-bottom: 1px solid #F0F0F0;
+	padding-top: 7px;
+}
+
+.tips_name {
+	width: 30%;
+	font-size: 12px;
+	float: left;
+	text-align: center;
+}
+
+.tips_content {
+	padding: 7px 0 0 0;
+	font-size: 10px;
+}
+
+.detail_bottom {
+	border-top: 1px solid #F0F0F0;
+}
+
+.bottom_button {
+	background-color: #FFC000;
+	border-radius: 4px;
+	padding: 12px 0;
+	text-align: center;
+}
+
+.menu_nav {
+	position: absolute;
+	top: 40px;
+	right: 0;
+	width: 80%;
+	height: 100%;
+	z-index: 1000;
+	background-color: #FFFFFF;
+	overflow: auto;
+	display: none;
+}
+
+.menu_nav ul {
+	list-style: none;
+	margin-left: 15px;
+}
+
+.menu_nav ul li {
+	padding: 13px 0;
+	border-bottom: 1px solid #F0F0F0;
+	font-size: 12px;
+	color: #333333;
+}
+.nav_li_active{
+	color: #FFC000 !important;
+}
+
+.bg {
+	display: none;
+	position: absolute;
+	top: 40px;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	z-index: 999;
+	-moz-opacity: 0.3;
+	opacity: .3;
+	filter: alpha(opacity=30);
+}
+.fixed_buttom{
+	position: fixed;
+	bottom: 0;
+	width: 94%;
+	left: 3%;
+}
+.mui-toast-container {
+	line-height: 17px;
+	position: fixed;
+	z-index: 9999;
+	bottom: 50px;
+	left: 50%;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	opacity: .8
+}
+
+.mui-toast-message {
+	font-size: 14px;
+	padding: 8px 20px;
+	text-align: center;
+	color: #fff;
+	border-radius: 14px;
+	background-color: #323232
+}

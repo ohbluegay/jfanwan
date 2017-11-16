@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>用户注册</title>
+		<link rel="stylesheet" href="../css/register.css" />
+	</head>
+
+	<body style="position: fixed;top: 0;width: 100%;">
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="register_name">用户注册</span>
+			</div>
+		</header>
+		<div class="register_line top2">
+			<ul class="register_item">
+				<li class="item_name register_item_active">
+					<span>1输入信息</span>
+				</li>
+				<li class="next_tap active_tap">
+					<div></div>
+				</li>
+				<li class="item_name">
+					<span>2身份认证</span>
+				</li>
+				<li class="next_tap no_tap">
+					<div></div>
+				</li>
+				<li class="item_name">
+					<span>3注册成功</span>
+				</li>
+			</ul>
+		</div>
+		<div class="form_group">
+			<form>
+				<div class="form_item">
+					<input type="text" placeholder="请输入手机号码" id="phone" name="phone" />
+				</div>
+				<div class="form_item">
+					<input type="text" placeholder="请输入验证码" id="code" name="mobile_code" />
+					<span class="id_code">发送验证码</span>
+				</div>
+				<div class="form_item">
+					<input type="text" placeholder="请设置登录密码" id="pwd" name="pwd" />
+					<span class="icon_show eye">
+				    </span>
+				</div>
+				<div class="form_item">
+					<input type="password" placeholder="请再次确认登陆密码" id="re_pwd" name="user_pwd_confirm" />
+					<span class="icon_hide eye">
+				    </span>
+				</div>
+				<div class="form_item">
+					<div type="submit" class="register_submit form_submit">注册</div>
+				</div>
+				<div class="register_sure">
+					<span class="register_check reg_checked"></span>
+					<span class="register_tips">我已阅读并同意</span>
+					<a href="javascript:void(0)" index="113" class="should_use">《用户协议》</a>和
+					<a href="javascript:void(0)" index="114" class="should_use">《投资说明》</a>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			var ip = window.localStorage.getItem('ip');
+			var _body = document.querySelector("body");
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			var pwd = $('#pwd').offset().top;
+			var re_pwd = $('#re_pwd').offset().top;
+			$('#pwd').focus(function() {
+				_body.style.top = ($(document).height() / 2 - 120 - pwd - $(this).height()) + 'px';
+			})
+			$('#pwd').blur(function() {
+				_body.style.top = '0px';
+			})
+			$('#re_pwd').focus(function() {
+				_body.style.top = ($(document).height() / 2 - 120 - re_pwd - $(this).height()) + 'px';
+			})
+			$('#re_pwd').blur(function() {
+				_body.style.top = '0px';
+			})
+
+			/*点击用户协议和投资协议*/
+			$('.should_use').click(function() {
+				var index = $(this).attr('index');
+				localStorage.setItem('should', index);
+				goHref('aggrement.html')
+			})
+			
+			/*点击check*/
+			$('.register_check').click(function(){
+				if($(this).hasClass('reg_checked')){
+					$(this).removeClass('reg_checked').addClass('reg_nochecked');
+				}else{
+					$(this).removeClass('reg_nochecked').addClass('reg_checked');
+				}
+			})
+			$(function() {
+				/*点击获取验证码*/
+				var repet = false;
+				$('.id_code').click(function() {
+						var phone = $.trim($('#phone').val());
+						if(!rep_phone(phone)) {
+							return false;
+						}
+						if(repet) {
+							mui.toast('正在发送中');
+							return false;
+						}
+						var tm = 60;
+						$.ajax({
+							type: "post",
+							url: "https://api.jfwlicai.com/mobile/send_register_code.php" + dateKey,
+							data: {
+								'phone': phone
+							},
+							dataType: 'json',
+							async: true,
+							success: function(data) {
+								if(data.response_code == 1) {
+									mui.toast(data.show_err);
+									repet = true;
+									var t = setInterval(function() {
+										tm--;
+										$('.id_code').text('' + tm + 's后重发');
+										if(tm == 0) {
+											$('.id_code').text('发送验证码');
+											clearInterval(t);
+											repet = false;
+										}
+									}, 1000);
+								} else {
+									mui.toast(data.show_err);
+								}
+							},
+							error: function(e) {
+
+							}
+						});
+					})
+					/*点击注册按钮*/
+				$('.register_submit').click(function() {
+					var phone = $.trim($('#phone').val());
+					if(!rep_phone(phone)) {
+						return false;
+					}
+					var code = $.trim($('#code').val());
+					var pwd = $.trim($('#pwd').val());
+					var re_pwd = $.trim($('#re_pwd').val());
+					if(!code || !pwd || !re_pwd) {
+						mui.toast('请填写完整');
+						return false;
+					}
+					if(!/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/.test(pwd)) {
+						mui.toast('密码强度太弱');
+						return false;
+					}
+					if(pwd != re_pwd) {
+						mui.toast('前后密码不一致');
+						return false;
+					}
+					if($('.register_check').hasClass('reg_nochecked')){
+						mui.toast('您未同意用户协议和投资协议');
+						return false
+					}
+					$.ajax({
+						type: "post",
+						url: "https://api.jfwlicai.com/mobile/register.php" + dateKey,
+						data: $('form').serialize(),
+						dataType: 'json',
+						async: true,
+						success: function(data) {
+							if(data.response_code == 1) {
+								var user_id = data.id;
+								window.localStorage.setItem('user_id', user_id);
+								window.localStorage.setItem('phone', data.user_name);
+								mui.toast('注册成功');
+								var target = "register_identy.html";
+								switch_child(target);
+							} else {
+								mui.toast('注册失败');
+							}
+						},
+						error: function(e) {
+
+						}
+					})
+				})
+
+				/*验证手机号*/
+				function rep_phone(phone) {
+					if(!phone) {
+						mui.toast('请输入手机号');
+						return false;
+					}
+					if(!/^((1[3,5,8][0-9])|(14[5,7])|(17[0,1,6,7,8]))\d{8}$/.test(phone)) {
+						mui.toast('手机号格式不正确');
+						return false;
+					}
+					return true;
+				}
+
+				/*验证手机号是否已经注册*/
+				function validate_phone(phone) {
+					var validate = true;
+					$.ajax({
+						type: "post",
+						url: "",
+						data: {
+							'phone': phone
+						},
+						dataType: 'json',
+						async: true,
+						success: function(data) {
+
+						},
+						error: function(e) {
+
+						}
+					});
+					return validate;
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

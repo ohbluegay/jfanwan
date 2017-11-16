@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>投资理财</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/invest_finac.css" />
+		<style>
+			.load_main {
+				padding: 0 15px;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: #F0F0F0;">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<!--<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>-->
+				<span class="common_name">投资理财</span>
+			</div>
+		</header>
+		<div class="nav_inte top2">
+			<div class="nav_item">
+				<a href="javascript:void(0)">
+					<span>默认</span>
+				</a>
+			</div>
+			<div class="nav_item">
+				<a href="javascript:void(0)">
+					<span>期限</span>
+					<span class="up_down">
+						<img src="../images/integrate/up@2x.png" />
+						<img src="../images/integrate/down@2x.png" />
+					</span>
+				</a>
+			</div>
+			<div class="nav_item">
+				<a href="javascript:void(0)">
+					<span>收益</span>
+					<span class="up_down">
+						<img src="../images/integrate/up@2x.png" />
+						<img src="../images/integrate/down@2x.png" />
+					</span>
+				</a>
+			</div>
+			<div class="blank"></div>
+		</div>
+		<div class="loan">
+			<div class="load_main">
+
+			</div>
+		</div>
+		<div class="fixed_help"></div>
+		<footer>
+			<div class="footer_navigate">
+				<div class="nav_bar" url="../zhuanqian/index.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/home@2x.png" alt="首页"></span>
+						<span class="nav_name">首页</span>
+					</a>
+				</div>
+				<div class="nav_bar">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/moneybag_active@2x.png" alt="赚钱"/></span>
+						<span class="nav_name nav_active">赚钱</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../jifen/integrate.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/integra@2x.png" alt="积分"/></span>
+						<span class="nav_name">积分</span>
+					</a>
+				</div>
+				<div class="nav_bar" url="../wode/center.html">
+					<a href="javascript:void(0)">
+						<span class="nav_icon"><img src="../images/index/mine@2x.png" alt="我的"/></span>
+						<span class="nav_name">我的</span>
+					</a>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/index_go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/bottom_switch.js"></script>
+		<script>
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function() {
+					getSouce();
+				})
+				/*获取所有数据*/
+			function getSouce() {
+				$.ajax({
+					type: 'post',
+					url: 'https://api.jfwlicai.com/mobile/init.php' + dateKey,
+					dataType: 'json',
+					success: function(data) {
+						$('.load_main').html('');
+						$.each(data.data, function(index, item) {
+							var listArr = [];
+							var status = null;
+							if(item.deal_status == 4) {
+								status = '还款中';
+							}
+							if(item.deal_status == 5) {
+								status = '已还清';
+							}
+							if(item.deal_status == 2) {
+								status = '满标';
+							}
+							if(item.deal_status == 3) {
+								status = '流标';
+							}
+							if(item.deal_status == 1 && item.remain_time <= 0) {
+								status = '已过期';
+							}
+							listArr.push("<div class='money_loan' list_id='" + item.id + "'>");
+							listArr.push("<div class='loan_top'>");
+							listArr.push("<div class='loan_left'>");
+							var list_name = item.name.substr(0, 8) + '...';
+							listArr.push("<span>" + list_name + "</span>");
+							//								listArr.push("<span>新手专享</span>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_right'>");
+							if(status == null) {
+								listArr.push("<span>投资倒计时</span>");
+								listArr.push("<span>" + item.remain_time_format + "</span>");
+							} else {
+								listArr.push("<span>" + status + "</span>");
+							}
+							listArr.push("</div>");
+							listArr.push("<div class='blank'></div>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_middle'>");
+							listArr.push("<div class='loan_rate loan_active'>");
+							listArr.push("<span>" + item.rate + "%</span>");
+							listArr.push("<span>年化收益</span>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_rate'>");
+							var repay_time;
+							if(item.repay_time_type == 0) {
+								repay_time = item.repay_time + '天';
+							} else {
+								repay_time = item.repay_time + '月';
+							}
+							listArr.push("<span>" + repay_time + "</span>");
+							listArr.push("<span>投资期限</span>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_rate'>");
+							listArr.push("<span>" + item.borrow_amount_format + "</span>");
+							listArr.push("<span>投资总额</span>");
+							listArr.push("</div>");
+							listArr.push("<div class='blank'></div>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_progress'>");
+							listArr.push("<div class='progress_bag'>");
+							if(item.deal_status >= 4) {
+								listArr.push("<div class='progress' rate='100'></div>");
+							} else {
+								listArr.push("<div class='progress' rate='" + item.progress_point + "'></div>");
+							}
+							listArr.push("</div>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_bottom'>");
+							listArr.push("<div class='loan_bottom_left'>");
+							listArr.push("<span><img src='../images/index/moneybag@2x.png'/></span>");
+							listArr.push("<span>" + item.min_loan_money + "元起投</span>");
+							listArr.push("</div>");
+							listArr.push("<div class='loan_bottom_right'>");
+							listArr.push("<span>" + item.loantype_format + "</span>");
+							listArr.push("</div>");
+							listArr.push("<div class='blank'></div>");
+							listArr.push("</div>");
+							listArr.push("</div>");
+							listArr = listArr.join("");
+							/*将list数据append到界面上*/
+							$('.load_main').append(listArr);
+						})
+						progress();
+						getList_id();
+					},
+					error: function(e) {
+
+					}
+				})
+			}
+			/*填充progress长度*/
+			function progress() {
+				$('.progress').each(function(i) {
+					$(this).css('width', $(this).attr('rate')+'%');
+				})
+			}
+			/*点击标获取标id并跳转*/
+			function getList_id() {
+				$('.rate_circle,.money_loan').click(function() {
+					var list_id = $(this).attr('list_id');
+					window.localStorage.setItem('list_id', list_id);
+					var target = "../zhuanqian/make_money.html";
+					switch_child(target);
+				})
+			}
+		</script>
+	</body>
+
+</html>

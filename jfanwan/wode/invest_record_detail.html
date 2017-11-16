@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>投资记录</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">投资记录</span>
+			</div>
+		</header>
+		<div class="detail_container top2">
+			<div class="loan_content">
+				<div class="loan_top" style="padding:10px;border-bottom: 1px solid #F0F0F0;background: #FFFFFF;">
+					<span style="font-size: 14px;color: #000000;display: inline-block;" id="name">月月贷新客专享</span>
+					<span id="status">持有中</span>
+					<div class="blank"></div>
+				</div>
+				<div class="detail_income" style="background: #FFFFFF;">
+					<ul>
+						<li>
+							<div class="li_it"><span>订单金额</span></div>
+							<div class="li_it"><span class="li_money">1000.00</span>元</div>
+							<div class="blank"></div>
+						</li>
+						<li>
+							<div class="li_it"><span>预期年化</span></div>
+							<div class="li_it"><span id="rate">14.00%</span></div>
+							<div class="blank"></div>
+						</li>
+						<li>
+							<div class="li_it"><span>预期收益</span></div>
+							<div class="li_it"><span class="li_money">223.00</span>元</div>
+							<div class="blank"></div>
+						</li>
+						<li>
+							<div class="li_it"><span>已获收益</span></div>
+							<div class="li_it"><span class="li_money">0</span>元</div>
+							<div class="blank"></div>
+						</li>
+						<li>
+							<div class="li_it"><span>投资期限</span></div>
+							<div class="li_it"><span id="time">3个月</span></div>
+							<div class="blank"></div>
+						</li>
+						<!--<li>
+							<div class="li_it"><span>到期时间</span></div>
+							<div class="li_it"><span id="limit">2016-09-28</span></div>
+							<div class="blank"></div>
+						</li>-->
+					</ul>
+				</div>
+				<div class="invest_time">
+					<div class="in_title">投资时间</div>
+					<div class="in_content">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var deal_id = window.localStorage.getItem('deal_id');
+			var user_id = localStorage.getItem('user_id');
+			dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				getSouce();
+			})
+
+			/*获取标基本信息*/
+			function getSouce() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/deal_detail.php"+dateKey,
+					data: {
+						'user_id': user_id,
+						'deal_id': deal_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var result = data.deal;
+							$("#name").html(result.name);
+							var status;
+							if(result.deal_status == 1 && result.remain_time > 0) {
+								status = '进行中';
+							}
+							if(result.deal_status == 4) {
+								status = '还款中';
+							}
+							if(result.deal_status == 5) {
+								status = '已还清';
+							}
+							if(result.deal_status == 2) {
+								status = '满标';
+							}
+							if(result.deal_status == 3) {
+								status = '流标';
+							}
+							if(result.deal_status == 1 && result.remain_time <= 0) {
+								status = '已过期';
+							}
+							$("#status").html(status);
+							$(".detail_income li:nth-of-type(1) .li_money").html(result.load_sum_money);
+							$(".detail_income li:nth-of-type(2) #rate").html(result.rate_foramt_w);
+							$(".detail_income li:nth-of-type(3) .li_money").html(result.sum_profit);
+							if(result.deal_status == 5){
+								$(".detail_income li:nth-of-type(4) .li_money").html(result.sum_profit);
+							}else{
+								$(".detail_income li:nth-of-type(4) .li_money").html('0');
+							}
+							var limit = formatLimit(result.repay_time, result.repay_time_type);
+							$("#time").html(limit);
+							$("#limit").html();
+							
+							/*获取投资时间list*/
+							var list = data.load_list;
+							$('.in_content').html("");
+							$.each(list, function(index, item) {
+								var liArr = [];
+								liArr.push("<div class='in_list'>");
+								liArr.push("<div class='in_li'>"+item.create_time_format+"</div>");
+								liArr.push("<div class='in_li'>");
+								liArr.push("<div><span class='li_money'>"+item.money+"</span>元</div>");
+								if(!item.ecv_money){
+									liArr.push("<span class='in_tips'>未使用红包</span>");
+								}else{
+									liArr.push("<span class='in_tips'>使用"+item.ecv_money+"元现金红包</span>");
+								}
+								liArr.push("</div>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</div>");
+								liArr = liArr.join("");
+								$('.in_content').append(liArr);
+							});
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+		</script>
+	</body>
+
+</html>

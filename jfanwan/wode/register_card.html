@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>身份认证</title>
+		<link rel="stylesheet" href="../css/register.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="register_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png"/>
+						</span>
+					</a>
+				</div>
+				<span class="register_name">身份认证</span>
+			</div>
+		</header>
+		<div class="register_line top2">
+			<ul class="register_item">
+				<li class="item_name register_item_active">
+					<span>1输入信息</span>
+				</li>
+				<li class="next_tap active_tap">
+					<div></div>
+				</li>
+				<li class="item_name register_item_active">
+					<span>2身份认证</span>
+				</li>
+				<li class="next_tap active_tap">
+					<div></div>
+				</li>
+				<li class="item_name">
+					<span>3注册成功</span>
+				</li>
+			</ul>
+		</div>
+		<div class="form_group">
+			<div class="upload_card">
+				<div class="card-border">
+					<div class="card">
+						<span>
+							<img src="../images/register/card_ahead@2x.png" onclick="downloadImage('../images/register/card_ahead@2x.png')"/>
+						</span>
+						<span>请上传身份证正面</span>
+					</div>
+					<div class="card-border">
+						<div class="card">
+							<span>
+							<img src="../images/register/card_back@2x.png" />
+						</span>
+							<span>请上传身份证背面</span>
+						</div>
+					</div>
+				</div>
+				<div class="card_example">
+					<img src="../images/register/card_show.png" />
+				</div>
+				<div class="form_item">
+					<input type="submit" class="register_submit" value="上传身份证照片" />
+				</div>
+				<div class="register_sure">
+					<a href="javascript:void(0)">
+						<span class="break_up">跳过</span>
+						<span class="break_icon">
+						<img src="../images/register/break@2x.png"/>
+					</span>
+					</a>
+				</div>
+			</div>
+			<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+			<script type="text/javascript" src="../js/mui.min.js"></script>
+			<script type="text/javascript" src="../js/go_back.js"></script>
+			<script>
+				function downloadImage(src) {
+				    var a = $("<a></a>").attr("href", src).attr("download", "img.png").appendTo("body");
+				    a[0].click();
+				    a.remove();
+				}
+			</script>
+	</body>
+
+</html>

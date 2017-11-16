@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>产品介绍</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/intro_product.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">产品介绍</span>
+			</div>
+		</header>
+		<section class="top2">
+			<nav class="nav_menu">
+				<div class="menu_item">
+					<a href="intro_product.html">
+						<span>投资描述</span>
+					</a>
+				</div>
+				<div class="menu_item">
+					<a href="intro_product_borrower.html">
+						<span>借款者信息</span>
+					</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)">
+						<span class="menu_active">投资记录</span>
+					</a>
+				</div>
+				<div class="blank"></div>
+			</nav>
+			<div class="break"></div>
+			<div class="intro_data">
+				<ul>
+					
+				</ul>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var list_id = window.localStorage.getItem('list_id');
+			 dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(document).ready(function() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/deal_investor.php"+dateKey,
+					data: {
+						'deal_id': list_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var result = data.data;
+							$('.intro_data ul').html('');
+							$.each(result, function(index, item) {
+								var listArr = [];
+								listArr.push("<li>");
+								listArr.push("<div class='data_item'>");
+								var phone = (item.user_name+'').substr(0,3)+'****'+(item.user_name+'').substr(8);
+								listArr.push("<span class='data_phone'>"+phone+"</span>");
+								listArr.push("<span class='data_time'>"+item.create_time_format+"</span>");
+								listArr.push("</div>");
+								listArr.push("<div class='data_item right'>");
+								listArr.push("<span class='data_money'>￥"+item.money+"</span>");
+								listArr.push("</div>");
+								listArr.push("<div class='blank'></div>");
+								listArr.push("</li>");
+								listArr = listArr.join("");
+								$('.intro_data ul').append(listArr);
+							})
+
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

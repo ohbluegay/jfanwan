@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>赚钱</title>
+		<link rel="stylesheet" href="../css/zhuanqian.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<style>
+			header {
+				position: relative;
+			}
+			
+			body {
+				position: relative;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="bar fixed_bar"></div>
+		<header class="make_n_index">
+			<div class="common_header" style="position: relative !important;background: transparent;">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">体验宝1期</span>
+			</div>
+			<div class="make_profit">
+				<span class="profit_year">预计年化收益</span>
+				<span class="profit_rate"></span>
+			</div>
+			<div class="main_rate">
+				<div class="rate">
+					<div class="rate_inner"></div>
+				</div>
+				<div class="rate_numb"></div>
+				<div class="blank"></div>
+			</div>
+			<div class="make_menu">
+				<div class="make_item">
+					<span>项目金额(元)</span>
+					<span></span>
+				</div>
+				<div class="make_item">
+					<span>项目期限</span>
+					<span></span>
+				</div>
+				<div class="make_item">
+					<span>起投金额(元)</span>
+					<span></span>
+				</div>
+				<div class="blank"></div>
+			</div>
+		</header>
+		<section class="top1">
+			<div class="profit_tips">
+				<div class="tips_item">
+					<div>收益说明</div>
+					<div></div>
+					<div class="blank"></div>
+				</div>
+				<div class="tips_item">
+					<div>投资到期时间</div>
+					<div></div>
+					<div class="blank"></div>
+				</div>
+			</div>
+			<a href="javascript:void(0)" id="intro_goods">
+				<div class="intro_prodt">
+					<span class="intro_icon"></span>
+					<span class="intro_name">产品介绍</span>
+					<span class="intro_right"></span>
+				</div>
+			</a>
+			<div class="invest_amount">
+				<div class="amount_title">投资金额</div>
+				<div class="invest_input">
+					<div class="input_group">
+						<div class="amount_reduce"></div>
+						<div class="main_input"><input type="number" placeholder="" id="number" onblur="getProfit()" /></div>
+						<div class="amount_add"></div>
+						<div class="blank"></div>
+					</div>
+				</div>
+				<div class="pro_bottom">
+					<div class="pro_item">
+						<span>预期收益:</span><span class="numb">0.00</span>元
+					</div>
+					<div class="pro_item">
+						<span>剩余可投:</span><span class="numb">0.00</span>元
+					</div>
+					<div class="blank"></div>
+				</div>
+			</div>
+			<a href="javascript:void(0)" onclick="submit_d()" id="sub">
+				<div class="profit_submit">100元起投 到期还息付利</div>
+			</a>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			var list_id = window.localStorage.getItem('list_id');
+			localStorage.removeItem('bag_id');
+			localStorage.removeItem('money');
+			//			localStorage.removeItem('repay_type');
+			//			localStorage.removeItem('repay_time');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			var _body = document.querySelector("body");
+			var n = $('#number').offset().top;
+			$('#number').focus(function() {
+				_body.style.top = ($(document).height() / 2 - 100 - n - $(this).height()) + 'px';
+			})
+			$('#number').blur(function() {
+				_body.style.top = '0px';
+			})
+			$(document).ready(function() {
+				reduce_add();
+				getMessage();
+			})
+
+			/*获取主信息*/
+			var limit_invest, max_invest, need_money, rate, deal_number;
+
+			function getMessage() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/deal.php" + dateKey,
+					data: {
+						'user_id': user_id,
+						'deal_id': list_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							var list = data.data.deal;
+							window.localStorage.setItem('list', JSON.stringify(list));
+							if(list.name.length > 15) {
+								$('.common_name').html(list.name.substr(0, 15) + '...');
+							} else {
+								$('.common_name').html(list.name);
+							}
+							rate = list.rate;
+							$('.profit_rate').html(rate + '%');
+							var status = null;
+							if(list.deal_status == 4) {
+								status = '还款中';
+							}
+							if(list.deal_status == 5) {
+								status = '已还清';
+							}
+							if(list.deal_status == 2) {
+								status = '满标';
+							}
+							if(list.deal_status == 3) {
+								status = '流标';
+							}
+							if(list.deal_status == 1 && list.remain_time <= 0) {
+								status = '已过期';
+							}
+							var index = (list.progress_point + '').indexOf('.');
+							var progress;
+							if(index != -1) {
+								progress = (list.progress_point + '').substr(0, index + 2);
+							} else {
+								progress = list.progress_point;
+							}
+							$('.rate_numb').html(progress + '%');
+							$('.rate_inner').css('width', progress + '%');
+							if(list.deal_status >= 4) {
+								$('.rate_numb').html('100%');
+								$('.rate_inner').css('width', '100%');
+							}
+							$('.make_item:nth-of-type(1) span:nth-of-type(2)').html(list.borrow_amount_format);
+							var repay_time;
+							if(list.repay_time_type == 0) {
+								repay_time = list.repay_time + '天';
+							} else {
+								repay_time = list.repay_time + '月';
+							}
+							localStorage.setItem('repay_type', list.repay_time_type);
+							localStorage.setItem('repay_time', list.repay_time);
+							$('.make_item:nth-of-type(2) span:nth-of-type(2)').html(repay_time);
+							deal_number = list.min_loan_money;
+							$('.make_item:nth-of-type(3) span:nth-of-type(2)').html(list.min_loan_money + '.00');
+							$('.tips_item:nth-of-type(1) div:nth-of-type(2)').html(list.loantype_format);
+							if(status == null) {
+								$('.tips_item:nth-of-type(2) div:nth-of-type(2)').html(list.remain_time_format);
+							} else {
+								$('.tips_item:nth-of-type(2) div:nth-of-type(2)').html(status);
+								$('.invest_amount,#sub').css('display', 'none');
+							}
+							if(list.progress_point == 100) {
+								$('.invest_amount,#sub').css('display', 'none');
+							} else {
+								min_invest = list.min_loan_money;
+								max_invest = list.max_loan_money;
+								if(max_invest == 0) {
+									$('#number').attr('placeholder', list.min_loan_money + '元起投,100的倍数');
+								} else {
+									$('#number').attr('placeholder', list.min_loan_money + '起投，最大投标金额' + list.max_loan_money + '元');
+								}
+								need_money = list.need_money;
+								var i = need_money.indexOf('.');
+								need_money = need_money.substr(1, i - 1);
+								need_money = need_money.replace(',', '');
+								$('.pro_item:nth-of-type(2) .numb').html(need_money);
+							}
+							$('.profit_submit').text(list.min_loan_money + '元起投 ' + list.loantype_format);
+
+						} else {
+							mui.toast(data.show_err)
+						}
+					},
+					error: function(e) {
+						mui.toast('网络问题')
+					}
+				});
+			}
+
+			/*获取收益*/
+			function getProfit() {
+				var money = $.trim($('#number').val()) * 1;
+				var last_money = money;
+				/**if(money < min_invest) {
+					mui.toast('最小投标金额为' + min_invest)
+					$('#number').val('');
+					$('.pro_item:nth-of-type(1) .numb').html('0.00');
+					return false;
+				}
+				if(max_invest != 0) {
+					if(money > max_invest) {
+						money = max_invest;
+					}
+				} else {
+					if(money > need_money) {
+						money = need_money;
+					}
+				}
+				if(!/^[1-9]\d*00$/.test(money)) {
+					mui.toast('投资额为100的倍数');
+					$('#number').val('');
+					return false;
+				}
+				if(last_money != money) {
+					return false;
+				}**/
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/calculator.php" + dateKey,
+					data: {
+						'deal_id': list_id,
+						'money': money,
+						'number': deal_number
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.pro_item:nth-of-type(1) .numb').html(data.profit);
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			function reduce_add() {
+				var number;
+				$('.amount_reduce').click(function() {
+					number = $.trim($('#number').val()) * 1;
+					if(number <= limit_invest) {
+						number = limit_invest;
+					} else {
+						number = number - 100;
+					}
+					$('#number').val(number);
+					getProfit();
+				})
+				$('.amount_add').click(function() {
+					number = $.trim($('#number').val()) * 1;
+					number = number + 100;
+					if(max_invest != 0) {
+						if(number >= max_invest) {
+							number = max_invest;
+						}
+					} else {
+						if(number > need_money) {
+							number = need_money;
+						}
+					}
+					$('#number').val(number);
+					getProfit();
+				})
+			}
+
+			/*投资*/
+			function submit_d() {
+				var money = $.trim($('#number').val()) * 1;
+				/**if(money < min_invest) {
+					mui.toast('最小投标金额为' + min_invest)
+					return false;
+				}
+				if(max_invest != 0) {
+					if(money > max_invest) {
+						mui.toast('最大投资金额' + max_invest + '元');
+						return false;
+					}
+				} else {
+					if(money > need_money) {
+						mui.toast('剩余可投' + need_money + '元');
+						return false;
+					}
+				}
+				if(!/^[1-9]\d*00$/.test(money)) {
+					mui.toast('投资额为100的倍数');
+					return false;
+				}**/
+				if(money != '') {
+					window.localStorage.setItem('money', money);
+					var target = "pay_get.html";
+					switch_child(target)
+				} else {
+					mui.toast('请输入投标金额');
+				}
+			}
+
+			document.getElementById('intro_goods').onclick = function() {
+				var target = "../chanping/intro_product.html"
+				switch_child(target);
+			}
+		</script>
+	</body>
+
+</html>

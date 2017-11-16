@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>现金红包</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body class="mine_body">
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">现金红包</span>
+			</div>
+		</header>
+		<section class="top2">
+			<div class="ev_menu" style="display: none;">
+				<div class="menu_item ev_active">
+					<a href="javascript:void(0)">全部</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)">现金红包</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)">加息券</a>
+				</div>
+				<div class="menu_item">
+					<a href="javascript:void(0)">体验金</a>
+				</div>
+				<div class="blank"></div>
+			</div>
+			<div class="ev_mode">
+				<ul>
+
+				</ul>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = window.localStorage.getItem('user_id');
+			var invest_money = window.localStorage.getItem('money');
+			var repay_type = localStorage.getItem('repay_type');
+			var repay_time = localStorage.getItem('repay_time');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function() {
+				get_envelope_list();
+			})
+
+			/*获取红包列表*/
+			function get_envelope_list() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/voucher.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.ev_mode ul').html('');
+							var result = data.data;
+							$.each(result, function(index, item) {
+								var liArr = [];
+								var index = item.limit_time.indexOf('至');
+								var end_time = item.limit_time.substr(index + 1),
+									start_time = item.limit_time.substr(0, index);
+								var date = new Date().toDateString();
+								if(item.status == 2 || item.status == 1) {
+									liArr.push("<li class='ev_item ev_disabled' bag_id='" + item.id + "'>");
+								} else {
+									liArr.push("<li class='ev_item cash' bag_id='" + item.id + "'>");
+								}
+								liArr.push("<div class='ev_left'>");
+								liArr.push("<span class='cash_money'>￥<font class='ev_money'>" + item.money + "</font></span>");
+								if(item.use_money != 0) {
+									liArr.push("<span class='cash_tips' id='limit_time' start='"+item.deal_start_time+"' end='"+item.deal_end_time+"' can_use='" + item.use_money + "'>单笔投资金额满<font>" + item.use_money + "</font>元时抵扣<br/>限投资" + item.deal_start_time + "-" + item.deal_end_time + "个月标</span>");
+								}
+								liArr.push("</div>");
+								liArr.push("<div class='ev_right'>");
+								liArr.push("<span class='ev_name'>现金红包</span>");
+								if(item.limit_time == '无限' && item.status == 0) {
+									liArr.push("<span class='ev_tips'>使用期限:<time>无限时</time></span>");
+								}
+								if(item.limit_time != '无限' && item.status == 0) {
+									liArr.push("<span class='ev_tips'>使用期限:<br/><time>" + start_time + "至" + end_time + "</time></span>");
+								}
+								if(item.status == 1) {
+									liArr.push("<span class='ev_tips'>使用期限:<time>已使用</time></span>");
+								}
+								if(item.status == 2) {
+									liArr.push("<span class='ev_tips'>使用期限:<time>已过期</time></span>");
+								}
+								liArr.push("</div>");
+								liArr.push("<div class='blank'></div>");
+								liArr.push("</li>");
+								liArr = liArr.join("");
+								$('.ev_mode ul').append(liArr);
+							})
+							choose_ticket()
+						}
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			function choose_ticket() {
+				$('.ev_item').click(function() {
+					if($(this).hasClass('ev_disabled')) {
+						mui.toast('已使用或已过期')
+						return false
+					}
+					/**var can_use = $(this).find('.cash_tips').attr('can_use');
+					can_use = can_use.substr(0, can_use.indexOf('.')) * 1;
+					if(invest_money < can_use) {
+						mui.toast('单笔投资满' + can_use + '可用')
+						return false
+					}**/
+					var bag_id = $(this).attr('bag_id');
+					var money = $(this).find('.ev_money').text();
+					var name = $(this).find('.ev_name').text();
+					localStorage.setItem('bag_id', bag_id);
+					localStorage.setItem('bag_money', money);
+					localStorage.setItem('bag_name', name);
+					window.history.go(-1)
+				})
+			}
+		</script>
+	</body>
+
+</html>

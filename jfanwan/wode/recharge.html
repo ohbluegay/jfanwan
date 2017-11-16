@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>充值</title>
+		<link rel="stylesheet" href="../css/register.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/recharge.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<style>
+			.re_icon {
+				width: 35px;
+				height: 35px;
+			}
+			
+			.address_ul li {
+				position: relative;
+			}
+			
+			.ad2 {
+				position: absolute;
+				top: 23px;
+				font-size: 16px;
+				left: 80px;
+			}
+			
+			.address_content {
+				padding-bottom: 0;
+			}
+			
+			.address_ul li .rd {
+				top: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form>
+			<div class="input_money" style="position: relative;">
+				<input type="number" placeholder="请输入充值金额" id="number" />
+				<span style="position: absolute;right: 30px;color: #666666;">元</span>
+			</div>
+			<label style="margin-left: 15px;display:block;padding: 10px 0;color:#999999;font-size: 12px;">付款方式</label>
+			<div class="mine_address" style="margin: 0 15px;">
+				<form>
+					<ul class="address_ul">
+						<li>
+							<div class="mui-input-row mui-radio mui-left rd">
+								<label></label>
+								<input name="radio1" type="radio">
+							</div>
+							<div class="address_content gray3">
+								<!--<span class="ad1">上海市</span>-->
+								<img src="../images/make_money/gongshang_bank.png" class="re_icon" />
+								<span class="ad2">徐汇区肇嘉浜路103</span>
+							</div>
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="re_submit" onclick="submit_d()">
+				确认
+			</div>
+			<div id="pay"></div>
+		</form>
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/lockpage.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+			var user_id = localStorage.getItem('user_id');
+			dateKey = "?timestamp=" + dateTime + "&token=" + $.md5(dateKey);
+			$(document).ready(function() {
+				recharge_bank();
+			})
+
+			function submit_d() {
+				var number = $.trim($("#number").val());
+				if(!number) {
+					mui.toast('请填写完整')
+					return false
+				}
+				var radio = $(".rd input[type='radio']:checked");
+				id = radio.closest('li').attr('id');
+				/*返回键事件*/
+				plus.key.addEventListener("backbutton", function() {
+					var target = plus.webview.getWebviewById(url);
+					if(target) {
+						target.close('slide-out-right', 200)
+					}
+				})
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/do_incharge.php" + dateKey,
+					data: {
+						user_id: user_id,
+						payment_id: id,
+						money: number
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						var target = data.pay_wap;
+						switch_child(target)
+					},
+					error: function(e) {
+
+					}
+				});
+			}
+
+			function recharge_bank() {
+				$.ajax({
+					type: "post",
+					url: "https://api.jfwlicai.com/mobile/incharge.php" + dateKey,
+					data: {
+						'user_id': user_id
+					},
+					dataType: 'json',
+					async: true,
+					success: function(data) {
+						if(data.response_code == 1) {
+							$('.address_ul').html('');
+							$.each(data.payment_list, function(index, item) {
+								var liArr = [];
+								liArr.push("<li id='" + item.id + "'>");
+								liArr.push("<div class='mui-input-row mui-radio mui-left rd'>");
+								liArr.push("<label></label>");
+								liArr.push("<input name='radio1' type='radio'>");
+								liArr.push("</div>");
+								liArr.push("<div class='address_content gray3'>");
+								liArr.push("<img src='" + item.img + "' class='re_icon'/>");
+								liArr.push("<span class='ad2'>" + item.class_name + "</span>");
+								liArr.push("</div>");
+								liArr.push("</li>");
+								$('.address_ul').append(liArr.join(""));
+							});
+							$(".address_ul li:eq(0) input[type='radio']").prop('checked', true)
+							$('.address_ul li').click(function() {
+								$("input[type='radio']").prop('checked', false)
+								$(this).find("input[type='radio']").prop('checked', true)
+							})
+						} else {
+							mui.toast(data.show_err);
+						}
+					},
+					error: function(e) {
+						mui.toast('拉取数据失败');
+					}
+
+				});
+			}
+
+			/*获取选择的银行信息*/
+			function getBank() {
+				var my_bank_id = localStorage.getItem('my_bank_id');
+				var my_bank_name = localStorage.getItem('my_bank_name');
+				var my_bank_img = localStorage.getItem('my_bank_img');
+				$('#recharge_bank').attr('id', bank.id);
+				$('#bank_img').attr('src', bank.img);
+				$('#bank_name').html(bank.bank_name)
+			}
+
+			$('#recharge_bank').click(function() {
+				var target = "my_bank.html";
+				switch_child(target)
+			})
+		</script>
+	</body>
+
+</html>

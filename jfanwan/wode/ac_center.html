@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>活动中心</title>
+		<link rel="stylesheet" href="../css/index.css" />
+		<link rel="stylesheet" href="../css/common_header.css" />
+		<link rel="stylesheet" href="../css/mine.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="bar"></div>
+			<div class="common_header">
+				<div class="back">
+					<a href="javascript:void(0)">
+						<span class="back_icon">
+							<img src="../images/register/back-icon@2x.png" />
+						</span>
+					</a>
+				</div>
+				<span class="common_name">活动中心</span>
+			</div>
+		</header>
+			<!--<div class="ac_center top2">
+		      <ul>
+				<li>
+					<span>我的花样理财！活动现场</span>
+					<span>2016-10-08</sapn>
+					<div class="ac_img">
+						<img src="../images/integrate/jingdong@2x.png"/>
+					</div>
+				</li>
+				<li>
+					<span>我的花样理财！活动现场</span>
+					<span>2016-10-08</sapn>
+					<div class="ac_img">
+						<img src="../images/integrate/jingdong@2x.png"/>
+					</div>
+				</li>
+				<li>
+					<span>我的花样理财！活动现场</span>
+					<span>2016-10-08</sapn>
+					<div class="ac_img">
+						<img src="../images/integrate/jingdong@2x.png"/>
+					</div>
+				</li>
+			</ul>
+		</div>-->
+		<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/go_back.js"></script>
+		<script>
+		    dateKey = "?timestamp="+dateTime+"&token="+$.md5(dateKey);
+			$(function() {
+				$('.ac_center').load("https://api.jfwlicai.com/mobile/none.php"+dateKey);
+			})
+		</script>
+	</body>
+
+</html>
